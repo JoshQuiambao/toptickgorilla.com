@@ -825,7 +825,7 @@
   .btn-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; position:relative; z-index:1; }
   .dashboard-overlay { position:fixed; inset:0; overflow:hidden; background:rgba(4,6,10,0.97); backdrop-filter:blur(24px); z-index:5000; display:flex; flex-direction:column; opacity:0; pointer-events:none; transition:opacity 0.4s ease; }
   .dashboard-overlay.active { opacity:1; pointer-events:all; }
-  .dash-panel { width:100%; height:100%; display:flex; flex-direction:column; transform:translateY(24px); transition:transform 0.4s ease; overflow:hidden; }
+  .dash-panel { width:100%; height:100%; display:flex; flex-direction:column; transform:translateY(24px); transition:transform 0.4s ease; overflow-y:auto: }
   .dashboard-overlay.active .dash-panel { transform:translateY(0); }
   .dash-header { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid var(--border); background:rgba(8,12,18,0.9); flex-shrink:0; }
   .dash-header-left { display:flex; align-items:center; gap:14px; }
@@ -838,9 +838,9 @@
   .dash-time { font-family:'Space Mono',monospace; font-size:13px; color:var(--white); }
   .close-btn { width:34px; height:34px; border:1px solid var(--border); background:transparent; color:var(--muted); font-size:16px; cursor:none; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
   .close-btn:hover { border-color:var(--red); color:var(--red); }
-  .dash-body { flex:1; display:grid; grid-template-columns:1fr 300px; overflow:hidden; min-height:0; }
-  .dash-main { display:flex; flex-direction:column; overflow-y:auto; min-height:0; }
-  .dash-sidebar { border-left: none; border-top: 1px solid var(--border); overflow: visible; height: auto; }}
+  .dash-body { flex:1; display:grid; grid-template-columns:1fr 300px; overflow:hidden; }
+  .dash-main { display:flex; flex-direction:column; overflow-y:auto; }
+  .dash-sidebar { border-left:1px solid var(--border); display:flex; flex-direction:column; overflow:visible; }
   .dash-section { padding:20px 28px; border-bottom:1px solid var(--border); }
   .dash-section-title { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
   .dash-section-title::after { content:''; flex:1; height:1px; background:var(--border); }
@@ -884,7 +884,7 @@
   .cal-impact { display:flex; gap:3px; }
   .idot { width:5px; height:5px; border-radius:50%; background:var(--border); }
   .idot.h { background:var(--red); } .idot.m { background:var(--gold); } .idot.l { background:var(--green); }
-  @media (max-width:900px) }
+  @media (max-width:900px) { .dash-body { grid-template-columns:1fr; } .price-grid { grid-template-columns:repeat(2,1fr); } .sessions-grid { grid-template-columns:repeat(2,1fr); } .levels-grid { grid-template-columns:repeat(2,1fr); } }
 
  @media (max-width: 768px) {
     nav { padding: 16px 24px; gap: 8px; }
@@ -894,7 +894,7 @@
     .hero-name { font-size: 13vw; letter-spacing: -1px; }
     .hero-tag { white-space: normal; font-size: 8px; letter-spacing: 0.05em; }
     .hero { padding: 100px 24px 60px; }
-    .hero-stats { position: absolute; display: flex; gap: 20px; bottom: 24px; right: 16px; }
+    .hero-stats { display: flex; gap: 20px; bottom: 24px; right: 16px; }
     .stat-value { font-size: 20px; }
     .stat-label { font-size: 8px; }
     .hero-chart { display: none; }
@@ -916,10 +916,11 @@
     .dash-subtitle { display: none; }
     .dash-logo { font-size: 13px; }
     .dash-time { font-size: 11px; }
-    .dash-body { grid-template-columns: 1fr; overflow: visible; height: auto; }
-    .dash-panel { overflow-y: auto; height: 100%; }
-    .dash-main { overflow: visible; height: auto; min-height: 0; }
-    .dash-sidebar { border-left: none; border-top: 1px solid var(--border); overflow-y: visible; height: auto; }
+    .dash-body { grid-template-columns: 1fr; }
+    .dash-panel { overflow-y: auto; }
+    .dash-main { overflow: visible; }
+    .dash-body { overflow: visible; height: auto; }
+    .dash-sidebar { border-left: none; border-top: 1px solid var(--border); }
     .price-grid { grid-template-columns: repeat(2, 1fr); }
     .sessions-grid { grid-template-columns: repeat(2, 1fr); }
     .levels-grid { grid-template-columns: repeat(2, 1fr); }
@@ -929,17 +930,6 @@
     .sparkline { height: 18px; }
     .dash-section { padding: 16px; }
 }
-.earnings-item { padding:10px 0; border-bottom:1px solid var(--border); }
-  .earnings-item:last-child { border-bottom:none; }
-  .earnings-sym { font-family:'Syne',sans-serif; font-weight:800; font-size:14px; color:var(--white); margin-bottom:2px; }
-  .earnings-name { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em; }
-  .earnings-date { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); margin-bottom:8px; }
-  .earnings-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
-  .earnings-stat { background:var(--panel); padding:8px; }
-  .earnings-stat-label { font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; }
-  .earnings-stat-val { font-family:'Space Mono',monospace; font-size:12px; color:var(--white); }
-  .earnings-stat-val.beat { color:var(--green); }
-  .earnings-stat-val.miss { color:var(--red); }  
 </style>
 </head>
 <body>
@@ -993,9 +983,8 @@
       Former process engineer turned full-time trading cowboy. Combining technical discipline with market structure
       to execute strictly high probability setups in any session.
     </p>
-    <p class="hero-desc">A seamless central point for daily updated intraday <strong>Key Levels</strong>, weekly updated <strong>Economic Calendar/Data</strong>, weekly updated <strong>Earnings Calendar/Reports</strong>, live updated <strong>Futures Ticker Prices</strong>, & a trading <strong>Resource Valley</strong>
-       for all levels.</p> 
-    <p class="hero-desc"><strong>Tap in to "Live Dashboard" on the top of the page.</strong></p>
+    <p class="hero-desc">A seamless central point for daily updated intraday <strong>Key Levels</strong>, weekly updated <strong>Economic Calendar/Data</strong>, weekly updated <strong>Earnings Calendar/Reports</strong>, live updated <strong>Ticker Prices</strong>, & a trading <strong>Resource Valley</strong>
+       for all levels.</p>
       <p></p>
     <div class="hero-ctas" style="margin-bottom: 60px;">
       <a href="#setups" class="btn-primary">View Setups</a>
@@ -1086,13 +1075,13 @@
         Meanwhile the tech job market was suffocating. Oversaturated. Getting an interview was starting to feel like winning a lottery. After one of my favorite & interesting work experieces, the connectetions 
         I've bridged with GC's, subcontractors, vendors, architects, designers, building managments & certain family members, under those two men - has opened endless doors for me til I die. Will hold that era near to my heart. But one Tuesday afternoon while I was quantifying receptacles, 
         fixtures & measuring some conduits from this beautiful floor plan, I recieved a call. The job I've applyed for a half year before.
-        I just landed a seat in the finance department at <strong>Equinox Corporate</strong> as a <strong>Dispute Processor</strong>,
+        I just landed a seat in the finance department at <strong>Equinox Corporate</strong> as a <strong>Electrical Estimator</strong>,
         Midtown Manhattan. Back in corporate America, but now a mix of all the worlds of mine. Tech/Fitness/Finance. This was my dream company. Employee access across all clubs around the globe. Hybrid. & had a young team working on my side.
         Eleven months in, best time I've had in New York so far; the whispers started. Layoffs. You could feel it in the air before anyone said a word. I already knew, I'd been through this before. So I locked in on trading harder,
         treating it less like a hobby & more like my exit plan. Then it happened. Half the team got cut. Including me.
       </p>
       <p>
-        Between jobs I kept applying pressure in the job market & doing freelance <strong>Front-End Development</strong> & <strong>Estimating</strong> gigs through Fiverr & Gun.io in the mean time. As Digital Nomad, working in a good cafe or lobby with damn good WiFi was essiantial for our livelyhoods. All remote New Yorkers & implants knew about ACE Hotel Lobby, with their amazing whiskey/cognac list & an amazing work space. A good WeWork office is always a great fall back when all seat are taken. My personal favotites were MidTown & the one by Dumbo in Brooklyn. Talera Beer was a vibe, espically ending your work day towards happy hour. The buns. & last but not least, Freehold Brooklyn, the night the led to after working; Anywho, I landed an assignment with DevOps contract at <strong>GitHub</strong> I landed through Robert Half Technology Staffing Agency. Worked on internal tools, worse assignment I have ever took.
+        Between jobs I kept applying pressure in the job market & doing freelance <strong>Front-End Development</strong> & <strong>Estimating</strong> gigs through Fiverr & Gun.io. As Digital Nomad, find a good cafe or lobby with good WiFi was essiantial for our livelyhoods. All remote New Yorkers & Implants knew about ACE Hotel Lobby, with the bar & an amazing work space. I good WeWork office, my personal favotites were MidTown & the one by Dumbo in Brooklyn. Talera Beer was a vibes espically ending your day towards happy hour. The buns. & last but not least, Freehold Brooklyn was my go-to.; Anywho, I landed an assignment with DevOps contract at <strong>GitHub</strong> I landed through Robert Half Technology Staffing Agency. Worked on internal tools, worse assignment I have ever took.
         Then from sheer irony; one Saturday night vibing & having a heck of a time at The Delancey, I end up talking shop with this randon guy. <strong>TLDR</strong>; he got me a <strong>Marketing & Social Media Specialist</strong> role at <strong>Joonbug Presents</strong>, a nightlife company
         in Midtown, Manhattan . Just from a dude I vibed with at The Delancey Rooftop. It's who you know at the end of the day. It paid the bills & the lifestyle. New York doesn't come cheap.
         But I knew it wasn't where I was meant to be. Too much motion. Too much wickedness, in the NY nightlife scene. I saw self destruction a borough away. At that time I knew, Corporate America was a rat race that I knew I had to stray away from.
@@ -1535,13 +1524,6 @@
           <div class="orb-lbl" id="orbLbl">Loading...</div>
         </div>
         <div class="cal-wrap">
-          <!-- EARNINGS CALENDAR -->
-<div style="padding:16px 20px; border-bottom:1px solid var(--border);">
-  <div class="dash-section-title" style="padding:0;margin-bottom:12px;">// Earnings This Week</div>
-  <div id="earningsCalendar" style="display:flex; flex-direction:column; gap:8px;">
-    <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--muted);">Loading...</div>
-  </div>
-</div>
           <div class="cal-wrap">
           <div class="dash-section-title" style="padding:0;margin-bottom:12px;">// Economic Calendar</div>
           <iframe 
@@ -1554,8 +1536,6 @@
             marginheight="0"
             style="border:none; background:transparent;">
           </iframe>
-  </div>
-</div>
         </div>
         </div>
         </div>
@@ -1730,79 +1710,6 @@ function updateTicker(sym, price, prev) {
   // Fetch real prices immediately then every 30 seconds
   fetchPrices();
   setInterval(fetchPrices, 30000);
-  const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
-
-  async function fetchEarnings() {
-    try {
-      const today = new Date();
-      const fromDate = today.toISOString().split('T')[0];
-      const toDate = new Date(today.getTime() + 7*24*60*60*1000).toISOString().split('T')[0];
-
-      const url = `https://finnhub.io/api/v1/calendar/earnings?from=${fromDate}&to=${toDate}&token=${FINNHUB_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      const container = document.getElementById('earningsCalendar');
-      if(!container) return;
-
-      const earnings = data.earningsCalendar;
-
-      if(!earnings || earnings.length === 0) {
-        container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">No earnings this week</div>';
-        return;
-      }
-
-      const major = earnings
-        .filter(e => e.symbol && e.revenueEstimate > 1000000000)
-        .sort((a,b) => new Date(a.date) - new Date(b.date))
-        .slice(0, 10);
-
-      container.innerHTML = major.map(e => {
-        const epsEst  = e.epsEstimate  ? '$'+parseFloat(e.epsEstimate).toFixed(2)  : '--';
-        const epsAct  = e.epsActual    ? '$'+parseFloat(e.epsActual).toFixed(2)    : '--';
-        const revEst  = e.revenueEstimate ? '$'+(e.revenueEstimate/1e9).toFixed(1)+'B' : '--';
-        const beat    = e.epsActual && e.epsEstimate && e.epsActual > e.epsEstimate;
-        const miss    = e.epsActual && e.epsEstimate && e.epsActual < e.epsEstimate;
-        const dateStr = new Date(e.date).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-
-        return `
-          <div class="earnings-item">
-            <div class="earnings-sym">${e.symbol}</div>
-            <div class="earnings-date">${dateStr} ${e.hour === 'bmo' ? '· Pre-Market' : e.hour === 'amc' ? '· After Close' : ''}</div>
-            <div class="earnings-grid">
-              <div class="earnings-stat">
-                <div class="earnings-stat-label">EPS Est</div>
-                <div class="earnings-stat-val">${epsEst}</div>
-              </div>
-              <div class="earnings-stat">
-                <div class="earnings-stat-label">EPS Actual</div>
-                <div class="earnings-stat-val ${beat?'beat':miss?'miss':''}">${epsAct}</div>
-              </div>
-              <div class="earnings-stat">
-                <div class="earnings-stat-label">Rev Est</div>
-                <div class="earnings-stat-val">${revEst}</div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      console.log('Earnings calendar updated');
-
-    } catch(err) {
-      console.log('Earnings fetch failed:', err);
-      const container = document.getElementById('earningsCalendar');
-      if(container) container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Earnings unavailable</div>';
-    }
-  }
-
-  fetchEarnings();
-  setInterval(fetchEarnings, 3600000);
-
-  fetchPrices();
-  setInterval(fetchPrices, 30000);
-   fetchEarnings();
-  setInterval(fetchEarnings, 3600000);
 </script>
 <script>
   // Bible Verses
