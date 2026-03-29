@@ -1838,6 +1838,10 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
   });
 
   showVerse(0);
+  setInterval(() => {
+    currentVerse = (currentVerse + 1) % verses.length;
+    showVerse(currentVerse);
+}, 4000);
 
   // Custom Cursor
   const cursor = document.getElementById('cursor');
