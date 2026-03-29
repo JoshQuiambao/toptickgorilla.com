@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZxvwA6cAAAG5SURBVFiF7ZaxSgNBEIa/SyIEUlgIFkJIYyGkCFqJkFJ8Bx9BfAGfwFewFEtLsbGxSCqxSCrBQtBGBEEQjIWFhYWFhYWF7p3FwJHLZS+XvWRhB+Y/9mZ2Zn7+mYUMGTJkyJDhH6BpGs45ADzPw3VdAIQQKKWQUiKlRAiBlJIQAiEEWmuUUhhjyPOcPM8JIaBSSqSUGGOMMYQQUEqhlEIpZRBCGGMIIfDee++99957770HgBCCiCAigoggIoiIMCKIiAgigoggIoKIICKICCKCiCAiiAgigojYBxFBRBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFERBARRIQQERFE7AkiIoiIICKIiA==">
+<title>No Dents</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #080C12;
+    --bg2:       #0D1117;
+    --panel:     #141C26;
+    --border:    rgba(255,255,255,0.06);
+    --gold:      #C9A84C;
+    --cyan:      #00D4FF;
+    --green:     #00FF88;
+    --red:       #FF4466;
+    --white:     #F0F4FF;
+    --muted:     #5A6478;
+    --text:      #B8C4D8;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { max-width: 100%; overflow-x: hidden; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.12s ease;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid var(--border);
+    background: rgba(8,12,18,0.85);
+    backdrop-filter: blur(20px);
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .gorilla-logo { width: 32px; height: 32px; opacity: 0.9; }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+ .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.05em;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 340px;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,212,255,0.04) 0%, transparent 60%);
+  }
+
+  .hero-chart {
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 55%; height: 70%;
+    opacity: 0.15;
+  }
+
+  .chart-line {
+    fill: none; stroke: var(--gold); stroke-width: 1.5;
+    stroke-dasharray: 1200; stroke-dashoffset: 1200;
+    animation: drawLine 3s ease forwards;
+  }
+
+  .chart-line-2 {
+    fill: none; stroke: var(--cyan); stroke-width: 1;
+    stroke-dasharray: 800; stroke-dashoffset: 800;
+    animation: drawLine 4s ease 0.5s forwards;
+  }
+
+  @keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(56px, 8vw, 96px);
+    line-height: 0.95;
+    color: var(--white);
+    letter-spacing: -3px;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-name .gold { color: var(--gold); }
+
+  .hero-sub {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--muted);
+    letter-spacing: -0.5px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text);
+    max-width: 520px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--gold);
+    color: var(--bg);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+
+  .btn-primary:hover::after { transform: translateX(0); }
+
+  .btn-secondary {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    cursor: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 48px; right: 48px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+  }
+
+  .stat-item { text-align: right; }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--white);
+    letter-spacing: -1px;
+  }
+
+  .stat-value span { color: var(--gold); }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    overflow: hidden;
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 60px;
+    animation: ticker 35s linear infinite;
+    will-change: transform;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+  }
+
+  .ticker-sym { color: var(--white); font-weight: 700; }
+  .ticker-price { color: var(--text); }
+  .ticker-up { color: var(--green); }
+  .ticker-down { color: var(--red); }
+  .ticker-dot { color: rgba(255,255,255,0.06); }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 48px; position: relative; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 56px);
+    color: var(--white);
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  /* ABOUT */
+  #about { background: var(--bg2); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  .about-text p strong { color: var(--white); font-weight: 400; }
+  .about-text .highlight { color: var(--gold); font-style: italic; }
+
+  .prop-note {
+    background: var(--panel);
+    border-left: 2px solid var(--gold);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .prop-note strong { color: var(--gold); font-style: normal; }
+
+  .about-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
+  }
+
+  .about-card:hover { border-color: rgba(201,168,76,0.3); }
+  .about-card:hover::before { transform: scaleY(1); }
+
+  .card-icon { font-size: 20px; margin-bottom: 10px; }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* SETUPS */
+  #setups { background: var(--bg); }
+
+  .setups-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 60px;
+    border: 1px solid var(--border);
+  }
+
+  .setup-card {
+    background: var(--bg);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .setup-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .setup-card:hover { background: var(--panel); }
+  .setup-card:hover::after { opacity: 1; }
+
+  .setup-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
+  }
+
+  .setup-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+
+  .setup-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .setup-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .tag.gold { border-color: rgba(201,168,76,0.3); color: var(--gold); }
+  .tag.cyan { border-color: rgba(0,212,255,0.2); color: var(--cyan); }
+  .tag.green { border-color: rgba(0,255,136,0.2); color: var(--green); }
+
+  /* TECH */
+  #tech { background: var(--bg2); }
+
+  .tech-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .tech-content p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .tech-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+
+  .stack-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+
+  .stack-item:hover { border-color: rgba(201,168,76,0.3); }
+  .stack-icon { font-size: 18px; width: 36px; text-align: center; }
+  .stack-info { flex: 1; }
+
+  .stack-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .stack-detail { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); }
+  .stack-status { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--green); letter-spacing: 0.05em; }
+
+  /* Terminal */
+  .terminal { background: #0A0E14; border: 1px solid var(--border); overflow: hidden; }
+
+  .terminal-bar {
+    background: var(--panel);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .t-red { background: #FF5F57; }
+  .t-yellow { background: #FEBC2E; }
+  .t-green-dot { background: #28C840; }
+  .terminal-title { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-left: 8px; }
+  .terminal-body { padding: 24px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 2; }
+  .t-comment { color: #4A5568; }
+  .t-key { color: var(--cyan); }
+  .t-val { color: var(--green); }
+  .t-str { color: var(--gold); }
+  .t-info { color: #00FF88; }
+  .t-warn { color: #FF4466; }
+  .t-muted { color: #3A4556; }
+  .t-cursor { display: inline-block; width: 8px; height: 14px; background: var(--gold); animation: blink 1s infinite; vertical-align: middle; margin-left: 2px; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* JOURNAL BANNER */
+  .journal-banner {
+    background: var(--panel);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 40px 48px;
+    margin: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .journal-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  .journal-banner-text { position: relative; }
+
+  .journal-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .journal-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .journal-desc { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 480px; }
+
+  .btn-journal {
+    position: relative;
+    flex-shrink: 0;
+    padding: 14px 32px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .btn-journal:hover { background: var(--gold); color: var(--bg); }
+
+  /* CONTACT */
+  #contact { background: var(--bg); text-align: center; }
+
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-inner .section-label { justify-content: center; }
+  .contact-inner .section-label::after { display: none; }
+
+  .contact-desc { font-size: 16px; line-height: 1.8; color: var(--text); margin: 24px 0 48px; }
+
+  .social-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    cursor: none;
+  }
+
+  .social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.04); }
+
+  .contact-email {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(16px, 5vw, 28px);
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -1px;
+    transition: color 0.2s;
+    display: block;
+    margin-bottom: 12px;
+    cursor: none;
+  }
+
+  .contact-email:hover { color: var(--gold); }
+
+  /* BIBLE VERSE CORNER */
+  .verse-corner {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 50;
+    max-width: 200px;
+    pointer-events: none;
+  }
+
+  .verse-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-style: italic;
+    color: rgba(201,168,76,0.3);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    transition: opacity 1s ease;
+  }
+
+  .verse-ref {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: rgba(201,168,76,0.18);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+    transition: opacity 1s ease;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-logo span { color: var(--gold); }
+  .footer-copy { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+  .footer-disclaimer { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.05em; }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.2;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .open-dashboard-btn { display:flex; align-items:center; gap:10px; padding:10px 20px; background:transparent; border:1px solid rgba(201,168,76,0.4); color:var(--gold); font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; cursor:none; transition:all 0.3s ease; position:relative; overflow:hidden; }
+  .open-dashboard-btn::before { content:''; position:absolute; inset:0; background:var(--gold); transform:translateX(-100%); transition:transform 0.3s ease; z-index:0; }
+  .open-dashboard-btn:hover::before { transform:translateX(0); }
+  .open-dashboard-btn:hover { color:var(--bg); }
+  .open-dashboard-btn span { position:relative; z-index:1; }
+  .btn-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; position:relative; z-index:1; }
+  .dashboard-overlay { position:fixed; inset:0; overflow:hidden; background:rgba(4,6,10,0.97); backdrop-filter:blur(24px); z-index:5000; display:flex; flex-direction:column; opacity:0; pointer-events:none; transition:opacity 0.4s ease; }
+  .dashboard-overlay.active { opacity:1; pointer-events:all; }
+  .dash-panel { width:100%; height:100%; display:flex; flex-direction:column; transform:translateY(24px); transition:transform 0.4s ease; overflow-y:auto: }
+  .dashboard-overlay.active .dash-panel { transform:translateY(0); }
+  .dash-header { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid var(--border); background:rgba(8,12,18,0.9); flex-shrink:0; }
+  .dash-header-left { display:flex; align-items:center; gap:14px; }
+  .dash-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--white); }
+  .dash-logo span { color:var(--gold); }
+  .dash-subtitle { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; border-left:1px solid var(--border); padding-left:14px; }
+  .dash-header-right { display:flex; align-items:center; gap:20px; }
+  .live-badge { display:flex; align-items:center; gap:6px; font-family:'Space Mono',monospace; font-size:10px; color:var(--green); letter-spacing:0.1em; text-transform:uppercase; }
+  .live-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 1.5s infinite; }
+  .dash-time { font-family:'Space Mono',monospace; font-size:13px; color:var(--white); }
+  .close-btn { width:34px; height:34px; border:1px solid var(--border); background:transparent; color:var(--muted); font-size:16px; cursor:none; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+  .close-btn:hover { border-color:var(--red); color:var(--red); }
+  .dash-body { flex:1; display:grid; grid-template-columns:1fr 300px; overflow:hidden; }
+  .dash-main { display:flex; flex-direction:column; overflow-y:auto; }
+  .dash-sidebar { border-left:1px solid var(--border); display:flex; flex-direction:column; overflow:visible; }
+  .dash-section { padding:20px 28px; border-bottom:1px solid var(--border); }
+  .dash-section-title { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .dash-section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+  .price-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+  .price-card { background:#0A0E14; border:1px solid var(--border); padding:14px; position:relative; transition:border-color 0.2s; }
+  .price-card.up { border-bottom:2px solid var(--green); }
+  .price-card.down { border-bottom:2px solid var(--red); }
+  .price-badge { position:absolute; top:10px; right:10px; font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); }
+  .price-sym { font-family:'Syne',sans-serif; font-weight:800; font-size:14px; color:var(--white); margin-bottom:1px; }
+  .price-name { font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); margin-bottom:10px; text-transform:uppercase; }
+  .price-val { font-family:'Space Mono',monospace; font-size:16px; font-weight:700; color:var(--white); letter-spacing:-0.5px; margin-bottom:4px; }
+  .price-chg { font-family:'Space Mono',monospace; font-size:10px; }
+  .price-chg.up { color:var(--green); } .price-chg.down { color:var(--red); }
+  .sparkline { margin-top:8px; height:24px; width:100%; }
+  .sessions-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .sess-card { background:#0A0E14; border:1px solid var(--border); padding:14px; position:relative; }
+  .sess-bar { position:absolute; left:0; top:0; bottom:0; width:2px; }
+  .sess-bar.open { background:var(--green); } .sess-bar.closed { background:var(--muted); opacity:0.3; } .sess-bar.soon { background:var(--gold); }
+  .sess-name { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px; }
+  .sess-hours { font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:var(--white); margin-bottom:4px; }
+  .sess-status { font-family:'Space Mono',monospace; font-size:10px; }
+  .sess-status.open { color:var(--green); } .sess-status.closed { color:var(--muted); } .sess-status.soon { color:var(--gold); }
+  .levels-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .level-card { background:#0A0E14; border:1px solid var(--border); padding:14px; }
+  .level-label { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px; }
+  .level-val { font-family:'Space Mono',monospace; font-size:16px; color:var(--white); border-bottom:1px solid var(--border); outline:none; width:100%; background:transparent; }
+  .fg-wrap { padding:20px; border-bottom:1px solid var(--border); }
+  .fg-num { font-family:'Syne',sans-serif; font-weight:800; font-size:40px; color:var(--white); letter-spacing:-2px; text-align:center; }
+  .fg-lbl { font-family:'Space Mono',monospace; font-size:11px; text-align:center; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px; }
+  .fg-bar { height:6px; background:linear-gradient(90deg,var(--red),var(--gold),var(--green)); border-radius:3px; position:relative; margin:0 0 6px; }
+  .fg-needle { position:absolute; top:50%; transform:translate(-50%,-50%); width:14px; height:14px; background:var(--white); border-radius:50%; border:2px solid var(--bg); }
+  .fg-tags { display:flex; justify-content:space-between; font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); text-transform:uppercase; }
+  .orb-wrap { padding:16px 20px; border-bottom:1px solid var(--border); background:rgba(201,168,76,0.02); }
+  .orb-count { font-family:'Space Mono',monospace; font-size:26px; font-weight:700; color:var(--gold); letter-spacing:-1px; text-align:center; margin:6px 0 4px; }
+  .orb-lbl { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; text-align:center; }
+  .cal-wrap { padding:16px 20px; overflow-y: visible; height: auto; }
+  .cal-item { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+  .cal-item:last-child { border-bottom:none; }
+  .cal-time { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); flex-shrink:0; width:48px; padding-top:2px; }
+  .cal-event { font-size:13px; color:var(--white); margin-bottom:4px; line-height:1.3; }
+  .cal-impact { display:flex; gap:3px; }
+  .idot { width:5px; height:5px; border-radius:50%; background:var(--border); }
+  .idot.h { background:var(--red); } .idot.m { background:var(--gold); } .idot.l { background:var(--green); }
+  @media (max-width:900px) { .dash-body { grid-template-columns:1fr; } .price-grid { grid-template-columns:repeat(2,1fr); } .sessions-grid { grid-template-columns:repeat(2,1fr); } .levels-grid { grid-template-columns:repeat(2,1fr); } }
+
+ @media (max-width: 768px) {
+    nav { padding: 16px 24px; gap: 8px; }
+    .nav-links { display: none; }
+    .nav-status { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-name { font-size: 13vw; letter-spacing: -1px; }
+    .hero-tag { white-space: normal; font-size: 8px; letter-spacing: 0.05em; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-stats { display: flex; gap: 20px; bottom: 24px; right: 16px; }
+    .stat-value { font-size: 20px; }
+    .stat-label { font-size: 8px; }
+    .hero-chart { display: none; }
+    section { padding: 60px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .setups-grid { grid-template-columns: 1fr; }
+    .tech-layout { grid-template-columns: 1fr; gap: 40px; }
+    .journal-banner { flex-direction: column; margin: 0 16px; padding: 24px 20px; }
+    .journal-banner-text { width: 100%; }
+    .journal-title { font-size: 18px; }
+    .btn-journal { width: 100%; text-align: center; padding: 12px 16px; font-size: 10px; box-sizing: border-box; }
+    .contact-inner { padding: 0 16px; }
+    .contact-email { font-size: clamp(14px, 5vw, 28px); }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
+    .verse-corner { display: block; bottom: 16px; left: 16px; max-width: 140px; }
+    #contact { padding-bottom: 40px; }
+   .open-dashboard-btn { font-size: 8px; padding: 6px 8px; letter-spacing: 0.04em; max-width: 120px; overflow: hidden; }
+    .dash-header { padding: 14px 16px; }
+    .dash-subtitle { display: none; }
+    .dash-logo { font-size: 13px; }
+    .dash-time { font-size: 11px; }
+    .dash-body { grid-template-columns: 1fr; }
+    .dash-panel { overflow-y: auto; }
+    .dash-main { overflow: visible; }
+    .dash-body { overflow: visible; height: auto; }
+    .dash-sidebar { border-left: none; border-top: 1px solid var(--border); }
+    .price-grid { grid-template-columns: repeat(2, 1fr); }
+    .sessions-grid { grid-template-columns: repeat(2, 1fr); }
+    .levels-grid { grid-template-columns: repeat(2, 1fr); }
+    .price-card { padding: 10px; }
+    .price-val { font-size: 13px; }
+    .price-sym { font-size: 12px; }
+    .sparkline { height: 18px; }
+    .dash-section { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Bible Verse Corner -->
+<div class="verse-corner" id="verseCorner">
+  <div class="verse-text" id="verseText"></div>
+  <div class="verse-ref" id="verseRef"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <svg class="gorilla-logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="32" cy="28" rx="18" ry="16" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+      <ellipse cx="14" cy="26" rx="5" ry="6" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+      <ellipse cx="50" cy="26" rx="5" ry="6" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+      <path d="M18 20 Q32 15 46 20" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <circle cx="25" cy="26" r="2.5" fill="#C9A84C" opacity="0.8"/>
+      <circle cx="39" cy="26" r="2.5" fill="#C9A84C" opacity="0.8"/>
+      <ellipse cx="32" cy="32" rx="5" ry="3.5" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+      <circle cx="29.5" cy="32" r="1" fill="#C9A84C" opacity="0.6"/>
+      <circle cx="34.5" cy="32" r="1" fill="#C9A84C" opacity="0.6"/>
+      <path d="M26 37 Q32 41 38 37" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M14 44 Q10 50 12 56" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M50 44 Q54 50 52 56" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M14 44 Q32 48 50 44" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    <div class="nav-logo">J<span>.</span>QUIAMBAO</div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#setups">Setups</a></li>
+    <li><a href="#tech">Tech</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+<button class="open-dashboard-btn" onclick="openDash()"><div class="btn-dot"></div><span>Live Dashboard</span></button>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    FUNDED &nbsp;·&nbsp; LUCID TRADING &nbsp;·&nbsp; TOPSTEP &nbsp;·&nbsp; TRADEIFY
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-chart" viewBox="0 0 800 400" preserveAspectRatio="none">
+    <path class="chart-line" d="M0,300 L50,280 L100,290 L150,240 L200,260 L250,200 L300,220 L350,160 L400,180 L450,120 L500,140 L550,80 L600,100 L650,60 L700,40 L750,20 L800,10"/>
+    <path class="chart-line-2" d="M0,350 L80,330 L160,340 L240,290 L320,310 L400,250 L480,270 L560,200 L640,220 L720,160 L800,140"/>
+    <line x1="0" y1="100" x2="800" y2="100" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4,8"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4,8"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4,8"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-tag">|| Futures Trader & Developer - 4+ Years in the Markets</div>
+    <div class="hero-name">YES<span class="gold">HUA</span></div>
+    <div class="hero-sub">Price Action Trader.<br>Building the tools.</div>
+    <p class="hero-desc">
+      Funded futures trader specializing in Gold & ES. 
+      Former process engineer turned full-time trading cowboy. Combining technical discipline with market structure
+      to execute strictly high probability setups in any session.
+    </p>
+    <div class="hero-ctas">
+      <a href="#setups" class="btn-primary">View Setups</a>
+      <a href="#tech" class="btn-secondary">Clanker</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-value">4<span>+</span></div>
+      <div class="stat-label">Years in Markets</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">GC<span>/</span>ES</div>
+      <div class="stat-label">Primary Markets</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value"><span>8x</span></div>
+      <div class="stat-label">Funded Accounts</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="tickerInner">
+    <div class="ticker-item"><span class="ticker-sym">GC</span><span class="ticker-price" id="tick-GC">--</span><span class="ticker-up" id="tick-GC-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">ES</span><span class="ticker-price" id="tick-ES">--</span><span class="ticker-up" id="tick-ES-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">NQ</span><span class="ticker-price" id="tick-NQ">--</span><span class="ticker-up" id="tick-NQ-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">CL</span><span class="ticker-price" id="tick-CL">--</span><span class="ticker-up" id="tick-CL-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">SI</span><span class="ticker-price" id="tick-SI">--</span><span class="ticker-up" id="tick-SI-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">LE</span><span class="ticker-price" id="tick-LE">--</span><span class="ticker-up" id="tick-LE-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">MBT</span><span class="ticker-price" id="tick-MBT">--</span><span class="ticker-up" id="tick-MBT-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">GC</span><span class="ticker-price" id="tick-GC2">--</span><span class="ticker-up" id="tick-GC2-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">ES</span><span class="ticker-price" id="tick-ES2">--</span><span class="ticker-up" id="tick-ES2-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">NQ</span><span class="ticker-price" id="tick-NQ2">--</span><span class="ticker-up" id="tick-NQ2-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">CL</span><span class="ticker-price" id="tick-CL2">--</span><span class="ticker-up" id="tick-CL2-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">SI</span><span class="ticker-price" id="tick-SI2">--</span><span class="ticker-up" id="tick-SI2-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">LE</span><span class="ticker-price" id="tick-LE2">--</span><span class="ticker-up" id="tick-LE2-chg">--</span></div>
+    <div class="ticker-dot">///</div>
+    <div class="ticker-item"><span class="ticker-sym">MBT</span><span class="ticker-price" id="tick-MBT2">--</span><span class="ticker-up" id="tick-MBT2-chg">--</span></div>
+</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 About</div>
+  <h2 class="section-title">The Story<span>.</span></h2>
+
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I didn't come from Wall Street, I came from tech; debugging systems as a Q3 Process Engineer at <strong>Salesforce</strong> while 
+        quietly watching the markets like they owed me something. Turns out, all that obsession with patterns, 
+        automation, & catching problems before they blow up? That's just trading with a different interface.
+        North of two years ago I made the switch to full-time futures trading. No mentor. No Course.
+        Just screen time, journaling, & relentless pattern recognition. Strictly data driven.
+        The technical background helped me see the market differently, as a system with rules, 
+        not a casino with luck.
+      </p>
+      <p>
+        I relocated from San Francisco to New York City for work early 2022. About a year & a half in,
+        the Process Q3 engineering department downsized, which means the reduction in force was including me. Just like that, the whole reason moving 3,000 miles away, was in the drain.
+        Should I move back to California, or double the risk here in NYC? So I pivoted, in-between jobs, my landlord at the time generously told me that she knew a few men that were hiring; I took a position as a Project Estimator
+        at <strong>Monaco Group US</strong> under the Greek big dog himself, Pano Sereti, on the Midtown-East, simultaneously taking a Electrical Estimator position
+        at <strong>Einstein Electrical</strong> under Ivan Butkovic, a Croatian gorilla, in Astoria, Queens. No experience in any construction or electrical, none. But every conversation 
+        with <strong>Pano</strong> & <strong>Ivan</strong> just clicked. They knew my skills were transferable for the direction they wanted to take their companies. Their
+        visions? Their white-collars in the offices: younger, sleeker, actually caught up with updated internal & external communication softwares. Whether it's for newer ways to bid, utlizing newer takeoff softwares, or automating obtaining materials for our guys on the field; I was their guy to
+        assist getting their systems running from the ground up.
+        I've already learned long time ago the construction industry in New York has always had its own rules. Union or non-union, it didn't matter. There's a certain energy to it. Raw. I was initially terrified. 
+        There were handshakes happening before any contract was signed, relationships that went back decades,
+        & certain names you just didn't question. I wasn't naive to it. If anything, it made the whole thing more interesting to navigate.
+        I'll tell you now, the New York M**** families haven't gone anywhere. That world is very much alive. Certain subcontractors get the call. Certain ones don't. Nobody asks why. That's just New York.
+       </p>
+       <p>
+        Meanwhile the tech job market was suffocating. Oversaturated. Getting an interview was starting to feel like winning a lottery. After one of my favorite & interesting work experieces, the connectetions 
+        I've bridged with GC's, subcontractors, vendors, architects, designers, building managments & certain family members, under those two men - has opened endless doors for me til I die. But one Tuesday afternoon while I was quantifying receptacles, 
+        fixtures & measuring some conduits from this beautiful floor plan, I recieved a call. The job I've applyed for a half year before.
+        I just landed a seat in the <strong>finance department at Equinox Corporate as a Dispute Processing Engineer</strong>,
+        Midtown Manhattan. Back in corporate America, but now a mix of all the worlds of mine. Tech/Fitness/Finance. This was my dream company. Employee access across all clubs around the globe. Hybrid. & had a young team working on my side.
+        Eleven months in, best time I've had in New York so far; the whispers started. Layoffs. You could feel it in the air before anyone said a word. I already knew, I'd been through this before. So I locked in on trading harder,
+        treating it less like a hobby & more like my exit plan. Then it happened. Half the team got cut. Including me.
+      </p>
+      <p>
+        Between jobs I kept applying pressure in the job market & doing freelance Front-End Development through Fiverr & Gun.io; I landed an assignment with DevOps contract at <strong>GitHub</strong> I landed through Robert Half Technology Staffing Agency. Worked on internal tools, worse assignment I have ever took.
+        Then from sheer irony; one Saturday night vibing & having a heck of a time at The Delancey, I end up talking shop with this randon guy. <strong>TLDR</strong>; he got me a marketing & social media specialist role at <strong>Joonbug Presents</strong>, a nightlife company
+        in the Midtown. Just from a dude I vibed with at The Delancey Rooftop. It's who you know at the end of the day. It paid the bills & the lifestyle. New York doesn't come cheap.
+        But I knew it wasn't where I was meant to be. Too much wickedness came from the NY nightlife scene. I saw self destruction a borough away. At that time I knew, Corporate America was a rat race that I knew I had to stray away from.
+        The commmute, trading my time for money, working on someone else's dream, then days when my social battery was drained, looking at my watch to tell me when to go to lunch. Almost a decade of this & my I had no fulfillment.
+      </p>
+      <p>
+        The turning point came on a random Sunday in <strong>Chelsea</strong>.
+        Me & some old Equinox coworkers were heading to Hoboken for the day when, my buddy & now one of my best friends, Jared, casually showed me his brockerage P&L on his phone. He knew I was trading, but not really focused on it.
+        I had no experience with Futures at that point. But his numbers were real.
+        His lifestyle was real. What he was doing on random weekdays was real. Dude was paying for all our dinners, drinks, tables everytime we all went out; & probably had the best brownstone apartment I've been in. I was inspired. I looked up to him. My guy has always been good to me, & after this....I owe him everything.
+         "J" then introduced me to the world of <strong>prop firms</strong>.
+      </p>
+
+      <div class="prop-note">
+        <strong>What is a prop firm?</strong> A proprietary trading firm gives traders access to
+        funded accounts, anywhere from $25K to $200K, without risking your own capital.
+        You pass a performance evaluation, prove you can trade consistently, & they fund you.
+        You keep a percentage of the profits. It democratized professional trading for
+        people like me who had the skill but not the starting capital.
+      </div>
+
+      <p>
+        At the time I was already dabbling with <strong>ETF options</strong>. Bought into some discord communities, signal groups, you name it. Trying to use someone else's edge, trying to skip the process.
+        Buying eval after eval. <strong>Blew account after account.</strong> Kept coming back. Kept studying. Kept putting in the screen time through Asia & London session even checking & executing the charts while at the office.
+        One morning, on my TopStep 150k XFA; a two hour Silver Bullet set-up presented itself on NQ during the 10AM killzone.
+        <span class="highlight">$27k. First real hit.</span> I put in my notice the same week.
+      </p>
+      <p>
+        For a few months I was unemployed, trade after trade, sleepless nights, tired mornings, just betting on myself. Like always.
+        Then the numbers started stacking. Payout after payout on my live & express accounts. <strong>$343K year over year</strong> I wanted to expand my horizons. I started investing seed money towards a few buddies of mine to open & operate two Smoke Shops in Jackson Heights, Queens & Propect Park in Brooklen. As well as seeding a cultivation grow-op in Pennyslvania. My first big man investments.
+        When returns was endlessly depositing; I packed my apartment, subletted it to a friend of a friend, & took another risk,
+        moved to <strong>South Beach, Miami</strong>. Airbnb'd for two months while hunting
+        for the right apartment. Finding the right bachelor pad within my budget close to Publix & a Pura Vida in Miami Beach
+        is harder than it sounds. We made it work. 
+      </p>
+      <p>
+        Now I have the <span class="highlight">luxury of time & location.</span>
+        I trade in the any session that presents my set-ups in a A+ manner, travel when I want, & visit family in California whenever I feel like it.
+        The charts don't care where you are. That's the whole point. I'm releasing this site for the love of the game. I will never sell you a course, a community, a strategy or signals. Do what you will with what I'm giving you. Just don't call me lucky, I've failed more times than most people tried.
+      </p>
+    </div>
+
+    <div class="about-cards reveal">
+      <div class="about-card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">8x Funded Accounts</div>
+        <div class="card-desc">Lucid Trading, TopStep, & Tradeify. Trading GC, ES, NQ & micro contracts with disciplined risk management every session.</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">📈</div>
+        <div class="card-title">Options to Futures</div>
+        <div class="card-desc">Started with swinging SPY & QQQ options. Made the switch to futures after one conversation in lower Manhattan changed the trajectory.</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">⚙️</div>
+        <div class="card-title">Former Careered Engineer</div>
+        <div class="card-desc">Process engineering at Salesforce, DevOp at GitHub. Systems thinking & automation mindset applied directly to trading.</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">🤖</div>
+        <div class="card-title">Algo Developer</div>
+        <div class="card-desc">Building an automated 8AM ORB strategy in Python on Rithmic API. Combining proven manual edge with systematic execution.</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">🌴</div>
+        <div class="card-title">Based in Miami</div>
+        <div class="card-desc">Traded my way out of corporate New York to South Beach. The markets don't care where you sit, results do the talking.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SETUPS -->
+<section id="setups">
+  <div class="section-label">02 Setups</div>
+  <h2 class="section-title">The Playbook<span>.</span></h2>
+
+  <div class="setups-grid reveal">
+    <div class="setup-card">
+      <div class="setup-number">// 01</div>
+      <div class="setup-name">Dead Cat Bounce Short</div>
+      <div class="setup-desc">Price drops hard, bounces weakly into a previous breakdown zone, gets rejected, & continues lower. Trap the trapped longs.</div>
+      <div class="setup-tags">
+        <span class="tag gold">SHORT</span>
+        <span class="tag">15m Entry</span>
+        <span class="tag cyan">4H Bias</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 02</div>
+      <div class="setup-name">8AM ORB Breakout</div>
+      <div class="setup-desc">Mark the 8:00–8:15 AM range. Trade the first clean break above or below with confirmation. One trade, disciplined execution.</div>
+      <div class="setup-tags">
+        <span class="tag">LONG / SHORT</span>
+        <span class="tag cyan">Automated</span>
+        <span class="tag">15m</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 03</div>
+      <div class="setup-name">Liquidity Sweep Reversal</div>
+      <div class="setup-desc">Price sweeps equal highs or lows, triggering stop losses, then immediately reverses. The classic smart money move.</div>
+      <div class="setup-tags">
+        <span class="tag gold">SMC</span>
+        <span class="tag">1H / 15m</span>
+        <span class="tag cyan">HIGH PROB</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 04</div>
+      <div class="setup-name">Fair Value Gap Entry</div>
+      <div class="setup-desc">Price creates an imbalance gap during a strong impulse move. Enter on the retest of that gap in the direction of the trend.</div>
+      <div class="setup-tags">
+        <span class="tag">LONG / SHORT</span>
+        <span class="tag gold">ICT</span>
+        <span class="tag">15m / 1H</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 05</div>
+      <div class="setup-name">London Killzone Reversal</div>
+      <div class="setup-desc">2–5 AM EST. Price sweeps the Asian session high or low then reverses. One of the cleanest institutional setups available.</div>
+      <div class="setup-tags">
+        <span class="tag gold">GOLD</span>
+        <span class="tag">NQ</span>
+        <span class="tag cyan">OVERNIGHT</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 06</div>
+      <div class="setup-name">Supply Zone Retest</div>
+      <div class="setup-desc">Previous resistance zone retested after a breakdown. Sellers reload, buyers who missed the first move get trapped again.</div>
+      <div class="setup-tags">
+        <span class="tag gold">SHORT</span>
+        <span class="tag">S&D</span>
+        <span class="tag">4H / 1H</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 07</div>
+      <div class="setup-name">Silver Bullet</div>
+      <div class="setup-desc">The 10AM-11AM killzone setup. Price sweeps liquidity, creates a Fair Value Gap, & reverses with institutional precision. The trade that changed everything.</div>
+      <div class="setup-tags">
+        <span class="tag gold">ICT</span>
+        <span class="tag green">10AM KZ</span>
+        <span class="tag">5m / 15m</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 08</div>
+      <div class="setup-name">The Strat - Rob Smith</div>
+      <div class="setup-desc">Price action framework using candle relationships: inside bars, outside bars, and directional candles. Timeframe continuity drives the bias. No indicators required.</div>
+      <div class="setup-tags">
+        <span class="tag green">THE STRAT</span>
+        <span class="tag">MULTI-TF</span>
+        <span class="tag cyan">PRICE ACTION</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 09</div>
+      <div class="setup-name">Order Block Entry</div>
+      <div class="setup-desc">The last opposing candle before a significant impulse move. Institutions leave their fingerprints here. Enter on the retest with confluence from HTF bias and FVG overlap.</div>
+      <div class="setup-tags">
+        <span class="tag gold">ICT</span>
+        <span class="tag">4H / 15m</span>
+        <span class="tag cyan">HIGH PROB</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TECH -->
+<section id="tech">
+  <div class="section-label">03 Tech</div>
+  <h2 class="section-title">The Bot<span>.</span></h2>
+
+  <div class="tech-layout">
+    <div class="tech-content reveal">
+      <p>
+        The engineering background never left. While most traders are drawing lines on charts,
+        I'm automating the edge I've already proven manually.
+      </p>
+      <p>
+        The <strong>8AM ORB Strategy Bot</strong> is a fully automated trading system
+        built from scratch, connecting directly to Rithmic via API,
+        watching every tick from 8:00 AM, locking the opening range at 8:15,
+        & firing bracket orders the moment a breakout is confirmed.
+      </p>
+      <p>
+        Every trade is automatically logged to CSV & synced with a custom
+        trading journal. Risk management is hardcoded - the bot cannot revenge trade,
+        cannot overtrade, and shuts itself down when the daily loss limit is hit.
+      </p>
+
+      <div class="tech-stack">
+        <div class="stack-item">
+          <div class="stack-icon">🐍</div>
+          <div class="stack-info">
+            <div class="stack-name">Python 3.11</div>
+            <div class="stack-detail">async_rithmic · pandas · asyncio · aiohttp</div>
+          </div>
+          <div class="stack-status">ACTIVE</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-icon">⚡</div>
+          <div class="stack-info">
+            <div class="stack-name">Rithmic API</div>
+            <div class="stack-detail">Direct market access · Protocol Buffers · WebSocket</div>
+          </div>
+          <div class="stack-status">CONNECTING</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-icon">📱</div>
+          <div class="stack-info">
+            <div class="stack-name">Alerts</div>
+            <div class="stack-detail">Real time trade notifications · Entry and exit alerts</div>
+          </div>
+          <div class="stack-status">BUILT</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-icon">📊</div>
+          <div class="stack-info">
+            <div class="stack-name">Auto Trade Journal</div>
+            <div class="stack-detail">CSV logging · Google Sheets compatible</div>
+          </div>
+          <div class="stack-status">ACTIVE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal reveal">
+      <div class="terminal-bar">
+        <div class="terminal-dot t-red"></div>
+        <div class="terminal-dot t-yellow"></div>
+        <div class="terminal-dot t-green-dot"></div>
+        <span class="terminal-title">orb_strategy.py — trading_bot</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-comment"># Yeshua's 8AM ORB Strategy</span></div>
+        <div><span class="t-comment"># MES — Lucid Trading / Rithmic</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-muted">════════════════════════════</span></div>
+        <div><span class="t-info">🚀 STRATEGY STARTING</span></div>
+        <div><span class="t-key">   Symbol    </span><span class="t-val">: MESM6</span></div>
+        <div><span class="t-key">   ORB Window </span><span class="t-val">: 08:00 - 08:15</span></div>
+        <div><span class="t-key">   Stop       </span><span class="t-val">: 15 points ($150)</span></div>
+        <div><span class="t-key">   Target     </span><span class="t-val">: 23 points ($230)</span></div>
+        <div><span class="t-key">   Max Loss   </span><span class="t-val">: $350</span></div>
+        <div><span class="t-muted">════════════════════════════</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-info">✅ Connected to Rithmic</span></div>
+        <div><span class="t-info">📡 Subscribed to MESM6</span></div>
+        <div><span class="t-info">⏳ Waiting for 8:00 AM...</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-key">ORB High </span><span class="t-str">: 6,660.25</span></div>
+        <div><span class="t-key">ORB Low  </span><span class="t-str">: 6,642.75</span></div>
+        <div><span class="t-info">✅ ORB LOCKED — 17.5 pts</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-info">🟢 LONG BREAKOUT at 6,660.50</span></div>
+        <div><span class="t-key">Stop     </span><span class="t-warn">: 6,645.50</span></div>
+        <div><span class="t-key">Target   </span><span class="t-val">: 6,683.50</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-info">✅ TRADE CLOSED — WIN</span></div>
+        <div><span class="t-key">Net P&L  </span><span class="t-val">: +$221.00</span></div>
+        <div><span class="t-muted">════════════════════════════</span></div>
+        <div><span class="t-comment">$ </span><span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FREE JOURNAL BANNER -->
+<div class="journal-banner reveal">
+  <div class="journal-banner-text">
+    <div class="journal-label">|| You want it, you got it.</div>
+    <div class="journal-title">Download my Trading Journal & Futures Beginner's Guide</div>
+    <div class="journal-desc">
+      I don't want your money. The same journal system I use every day, & trading guide that woud keep on my desk if I was just getting into the markets. Covers GC, ES, NQ, all micros, BTC & more.
+      Auto-calculated & formulated P&L, R-multiple, tick & point values, performance dashboard, mindset tracker,
+      edge library, & rules checklist. As well as a Futures guide that may be handy. Yours completely free. No email required.
+    </div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+  <a href="https://drive.google.com/uc?export=download&id=1WFa9E3c3OZyh2j1fsryhlc4XaI8LFKuT" class="btn-journal" target="_blank">↓ Trading Journal</a>
+<div style="display:flex; flex-direction:column; gap:12px; width:100%;"><a href="https://drive.google.com/uc?export=download&id=13Kje25yEWgXvmyuTiGYHMVv6vu1izYlS" class="btn-journal" target="_blank">↓ Trading Guide</a></div>
+</div>
+</div>
+
+<div style="height: 80px;"></div>
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label">04 Contact</div>
+    <h2 class="section-title">Let's Connect<span>.</span></h2>
+    <p class="contact-desc">
+      Whether you're a trader wanting to talk shop, a developer interested in the bot,
+      or just someone starting out who wants to learn; reach out.
+      No lifestyle. No BS. Not selling anything. This is for the love of the game.
+      Just real trading conversation.
+    </p>
+
+    <div class="social-links">
+      <a href="https://instagram.com/toptickgorilla" class="social-link" target="_blank">
+        📸 @toptickgorilla
+      </a>
+      <a href="https://twitter.com/bandypelosi" class="social-link" target="_blank">
+        🐦 @bandypelosi
+      </a>
+      <a href="https://github.com/JoshQuiambao" class="social-link" target="_blank">
+        💻 GitHub
+      </a>
+      <a href="https://discord.com/users/jquiambao" class="social-link" target="_blank">
+        💬 jquiambao
+      </a>
+    </div>
+
+    <a href="mailto:joshmquiambao@gmail.com" class="contact-email">joshmquiambao@gmail.com</a>
+    <p style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.05em; margin-top: 12px;">
+      Not financial advice. For educational purposes only.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
+      <ellipse cx="32" cy="28" rx="18" ry="16" stroke="#C9A84C" stroke-width="1.5"/>
+      <ellipse cx="14" cy="26" rx="5" ry="6" stroke="#C9A84C" stroke-width="1.5"/>
+      <ellipse cx="50" cy="26" rx="5" ry="6" stroke="#C9A84C" stroke-width="1.5"/>
+      <path d="M18 20 Q32 15 46 20" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <circle cx="25" cy="26" r="2.5" fill="#C9A84C" opacity="0.8"/>
+      <circle cx="39" cy="26" r="2.5" fill="#C9A84C" opacity="0.8"/>
+      <ellipse cx="32" cy="32" rx="5" ry="3.5" stroke="#C9A84C" stroke-width="1.2"/>
+      <path d="M26 37 Q32 41 38 37" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    J<span>.</span>QUIAMBAO
+  </div>
+  <div class="footer-copy">© 2026 ALL RIGHTS RESERVED</div>
+  <div class="footer-disclaimer">NFA</div>
+</footer>
+<!-- DASHBOARD OVERLAY -->
+<div class="dashboard-overlay" id="dashOverlay">
+  <div class="dash-panel">
+    <div class="dash-header">
+      <div class="dash-header-left">
+        <div class="dash-logo">TOPTICK<span>GORILLA</span></div>
+        <div class="dash-subtitle">Market Dashboard</div>
+      </div>
+      <div class="dash-header-right">
+        <div class="live-badge"><div class="live-dot"></div>Live</div>
+        <div class="dash-time" id="dashTime">--:--:-- EST</div>
+        <button class="close-btn" onclick="closeDash()">&#10005;</button>
+      </div>
+    </div>
+    <div class="dash-body">
+      <div class="dash-main">
+        <div class="dash-section">
+          <div class="dash-section-title">// Instruments</div>
+          <div class="price-grid">
+            <div class="price-card" id="card-GC"><div class="price-badge">FULL</div><div class="price-sym">GC</div><div class="price-name">Gold Futures</div><div class="price-val" id="pv-GC">3,085.40</div><div class="price-chg up" id="pc-GC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-GC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MGC"><div class="price-badge">MICRO</div><div class="price-sym">MGC</div><div class="price-name">Micro Gold</div><div class="price-val" id="pv-MGC">3,085.40</div><div class="price-chg up" id="pc-MGC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-MGC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-ES"><div class="price-badge">FULL</div><div class="price-sym">ES</div><div class="price-name">E-mini S&amp;P</div><div class="price-val" id="pv-ES">6,651.00</div><div class="price-chg up" id="pc-ES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-ES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MES"><div class="price-badge">MICRO</div><div class="price-sym">MES</div><div class="price-name">Micro S&amp;P</div><div class="price-val" id="pv-MES">6,651.00</div><div class="price-chg up" id="pc-MES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-MES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-NQ"><div class="price-badge">FULL</div><div class="price-sym">NQ</div><div class="price-name">E-mini Nasdaq</div><div class="price-val" id="pv-NQ">21,480.00</div><div class="price-chg up" id="pc-NQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-NQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MNQ"><div class="price-badge">MICRO</div><div class="price-sym">MNQ</div><div class="price-name">Micro Nasdaq</div><div class="price-val" id="pv-MNQ">21,480.00</div><div class="price-chg up" id="pc-MNQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-MNQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            </div>
+        </div>
+        <div class="dash-section">
+          <div class="dash-section-title">// Sessions (EST)</div>
+          <div class="sessions-grid">
+            <div class="sess-card"><div class="sess-bar" id="sb-asian"></div><div class="sess-name">Asian</div><div class="sess-hours">6PM-2AM</div><div class="sess-status closed" id="ss-asian">CLOSED</div></div>
+            <div class="sess-card"><div class="sess-bar" id="sb-london"></div><div class="sess-name">London</div><div class="sess-hours">2AM-8AM</div><div class="sess-status closed" id="ss-london">CLOSED</div></div>
+            <div class="sess-card"><div class="sess-bar" id="sb-pre"></div><div class="sess-name">Pre-Market</div><div class="sess-hours">8AM-9:30AM</div><div class="sess-status closed" id="ss-pre">CLOSED</div></div>
+            <div class="sess-card"><div class="sess-bar" id="sb-rth"></div><div class="sess-name">RTH New York</div><div class="sess-hours">9:30AM-4PM</div><div class="sess-status closed" id="ss-rth">CLOSED</div></div>
+          </div>
+        </div>
+        <div class="dash-section">
+          <div class="dash-section">
+  <div class="dash-section-title">// Key Levels</div>
+  <div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); margin-bottom:12px; letter-spacing:0.05em;">AUTO-UPDATED · This is the Valley.</div>
+
+  <!-- ES LEVELS -->
+  <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">ES &nbsp;/&nbsp; MES</div>
+  <div class="levels-grid" style="margin-bottom:20px;">
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-ES-PDH">--</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-ES-PDL">--</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-ES-ONH">--</div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-ES-ONL">--</div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-ES-WH">--</div></div>
+    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-ES-WL">--</div></div>
+    </div>
+
+  <!-- GC LEVELS -->
+  <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">GC &nbsp;/&nbsp; MGC</div>
+  <div class="levels-grid" style="margin-bottom:20px;">
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-GC-PDH">--</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-GC-PDL">--</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-GC-ONH">--</div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-GC-ONL">--</div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-GC-WH">--</div></div>
+    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-GC-WL">--</div></div>
+    </div>
+
+  <!-- NQ LEVELS -->
+  <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">NQ &nbsp;/&nbsp; MNQ</div>
+  <div class="levels-grid">
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-NQ-PDH">--</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-NQ-PDL">--</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-NQ-ONH">--</div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-NQ-ONL">--</div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-NQ-WH">--</div></div>
+    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-NQ-WL">--</div></div>
+    </div>
+</div>
+        </div>
+      </div>
+      <div class="dash-sidebar">
+        <div class="fg-wrap">
+          <div class="dash-section-title" style="padding:0;margin-bottom:10px;">// Fear &amp; Greed</div>
+          <div class="fg-num" id="fgNum">--</div>
+          <div class="fg-lbl" id="fgLbl">Loading...</div>
+          <div class="fg-bar"><div class="fg-needle" id="fgNeedle" style="left:50%"></div></div>
+          <div class="fg-tags"><span>Fear</span><span>Neutral</span><span>Greed</span></div>
+        </div>
+        <div class="orb-wrap">
+          <div class="dash-section-title" style="padding:0;margin-bottom:8px;">// 8AM ORB</div>
+          <div class="orb-count" id="orbCount">00:00:00</div>
+          <div class="orb-lbl" id="orbLbl">Loading...</div>
+        </div>
+        <div class="cal-wrap">
+          <div class="cal-wrap">
+          <div class="dash-section-title" style="padding:0;margin-bottom:12px;">// Economic Calendar</div>
+          <iframe 
+            src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&category=_employment,_economicActivity,_inflation,_credit,_centralBanks&importance=3&features=datepicker,timezone&countries=5&calType=week&timeZone=8&lang=1" 
+            width="100%" 
+            height="400" 
+            frameborder="0" 
+            allowtransparency="true" 
+            marginwidth="0" 
+            marginheight="0"
+            style="border:none; background:transparent;">
+          </iframe>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openDash(){document.getElementById('dashOverlay').classList.add('active');document.body.style.overflow='hidden';}
+  function closeDash(){document.getElementById('dashOverlay').classList.remove('active');document.body.style.overflow='';}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDash();});
+  function updateDashClock(){const est=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));const pad=n=>String(n).padStart(2,'0');const el=document.getElementById('dashTime');if(el)el.textContent=pad(est.getHours())+':'+pad(est.getMinutes())+':'+pad(est.getSeconds())+' EST';updateSessions(est);updateORB(est);}
+  setInterval(updateDashClock,1000);updateDashClock();
+  function updateSessions(est){const mins=est.getHours()*60+est.getMinutes();[{id:'asian',o:true,s:18*60,e:26*60},{id:'london',o:false,s:2*60,e:8*60},{id:'pre',o:false,s:8*60,e:9*60+30},{id:'rth',o:false,s:9*60+30,e:16*60}].forEach(x=>{const bar=document.getElementById('sb-'+x.id);const stat=document.getElementById('ss-'+x.id);if(!bar||!stat)return;const open=x.o?(mins>=18*60||mins<2*60):(mins>=x.s&&mins<x.e);const soon=!open&&(x.id==='asian'?mins>=17*60+30:x.id==='london'?(mins>=1*60+30&&mins<2*60):x.id==='pre'?(mins>=7*60+30&&mins<8*60):(mins>=9*60&&mins<9*60+30));if(open){bar.className='sess-bar open';stat.className='sess-status open';stat.textContent='OPEN';}else if(soon){bar.className='sess-bar soon';stat.className='sess-status soon';stat.textContent='OPENS SOON';}else{bar.className='sess-bar closed';stat.className='sess-status closed';stat.textContent='CLOSED';}});}
+  function updateORB(est){const t=est.getHours()*3600+est.getMinutes()*60+est.getSeconds();const c=document.getElementById('orbCount'),l=document.getElementById('orbLbl');if(!c||!l)return;const fmt=s=>String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(t<28800){c.textContent=fmt(28800-t);c.style.color='var(--gold)';l.textContent='until 8AM ORB opens';}else if(t<29700){c.textContent=fmt(29700-t);c.style.color='var(--cyan)';l.textContent='ORB ACTIVE';}else if(t<39600){c.textContent=fmt(39600-t);c.style.color='var(--green)';l.textContent='trading window open';}else{c.textContent='CLOSED';c.style.color='var(--muted)';l.textContent='session over';}}
+  // Real price data via Yahoo Finance (15min delayed)
+  const syms = ['GC','MGC','ES','MES','NQ','MNQ'];
+  const base = {GC:4521.2,MGC:4521.2,ES:6398.00,MES:6651.00,NQ:23254.25,MNQ:21480};
+  const spk = {};syms.forEach(s=>{spk[s]=Array.from({length:20},()=>base[s]+(Math.random()-.5)*base[s]*0.002);});
+
+  function dSpk(sym,d,up){
+    const svg=document.getElementById('sp-'+sym);
+    if(!svg)return;
+    const mn=Math.min(...d),mx=Math.max(...d),r=mx-mn||1;
+    svg.innerHTML='<polyline points="'+d.map((v,i)=>((i/(d.length-1))*100)+','+(24-((v-mn)/r)*20-2)).join(' ')+'" fill="none" stroke="'+(up?'#00FF88':'#FF4466')+'" stroke-width="1.5" opacity="0.6"/>';
+  }
+
+  function updateCard(sym, price, prevClose) {
+    const diff = price - prevClose;
+    const pct = (diff/prevClose*100).toFixed(2);
+    const up = diff >= 0;
+    spk[sym].push(price); spk[sym].shift();
+    const pv=document.getElementById('pv-'+sym);
+    const pc=document.getElementById('pc-'+sym);
+    const cd=document.getElementById('card-'+sym);
+    if(pv) pv.textContent = price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    if(pc){ pc.textContent=(up?'+':'')+diff.toFixed(2)+' ('+(up?'+':'')+pct+'%)'; pc.className='price-chg '+(up?'up':'down'); }
+    if(cd) cd.className='price-card '+(up?'up':'down');
+    dSpk(sym, spk[sym], up);
+  }
+
+  const TWELVE_KEY = '7acbb193a616465695011265638202ca';
+  async function fetchFearGreed() {
+    try {
+      const url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://production.dataviz.cnn.io/index/fearandgreed/graphdata');
+      const res = await fetch(url);
+      const data = await res.json();
+      const score = Math.round(data.fear_and_greed.score);
+      const rating = data.fear_and_greed.rating;
+
+      const num = document.getElementById('fgNum');
+      const lbl = document.getElementById('fgLbl');
+      const needle = document.getElementById('fgNeedle');
+
+      if(num) num.textContent = score;
+      if(needle) needle.style.left = score + '%';
+
+      if(lbl) {
+        lbl.textContent = rating.replace(/_/g,' ').toUpperCase();
+        if(score < 25) lbl.style.color = 'var(--red)';
+        else if(score < 45) lbl.style.color = '#FF8844';
+        else if(score < 55) lbl.style.color = 'var(--text)';
+        else if(score < 75) lbl.style.color = 'var(--gold)';
+        else lbl.style.color = 'var(--green)';
+      }
+
+      console.log('Fear & Greed updated:', score, rating);
+    } catch(err) {
+      console.log('Fear & Greed fetch failed:', err);
+    }
+  }
+
+  fetchFearGreed();
+  setInterval(fetchFearGreed, 3600000);
+function updateTicker(sym, price, prev) {
+    const diff = price - prev;
+    const pct = (diff/prev*100).toFixed(2);
+    const up = diff >= 0;
+    const sign = up ? '+' : '';
+    const cls = up ? 'ticker-up' : 'ticker-down';
+    const txt = `${sign}${pct}%`;
+    const fmt = n => n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    [sym, sym+'2'].forEach(id => {
+      const priceEl = document.getElementById(`tick-${id}`);
+      const chgEl = document.getElementById(`tick-${id}-chg`);
+      if(priceEl) priceEl.textContent = fmt(price);
+      if(chgEl) { chgEl.textContent = txt; chgEl.className = cls; }
+    });
+  }
+  async function fetchPrices() {
+    try {
+      const symbols = 'ES1!,GC1!,NQ1!,CL1!,SI1!,LE1!,RTY!,YM!,MBT/USD';
+      const url = `https://api.twelvedata.com/quote?symbol=${symbols}&apikey=${TWELVE_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      const symMap = {
+    'ES1!': ['ES','MES'],
+    'GC1!': ['GC','MGC'],
+    'NQ1!': ['NQ','MNQ'],
+    'CL1!': ['CL'],
+    'SI1!': ['SI'],
+    'LE1!': ['LE'],
+    'RTY!': ['RTY'],
+    'YM!': ['YM'],
+    'MBT/USD': ['MBT'],
+};
+
+      const klMap = {
+        'ES1!': 'ES',
+        'GC1!': 'GC',
+        'NQ1!': 'NQ',
+      };
+
+      const fmt = n => n ? parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '--';
+
+      for(const [sym, quote] of Object.entries(data)) {
+        if(quote.status === 'error') continue;
+
+        const price     = parseFloat(quote.close);
+        const prev      = parseFloat(quote.previous_close);
+        const dayHigh   = parseFloat(quote.high);
+        const dayLow    = parseFloat(quote.low);
+        const weekHigh  = parseFloat(quote.fifty_two_week?.high || quote.high);
+        const weekLow   = parseFloat(quote.fifty_two_week?.low  || quote.low);
+
+        // Update price cards
+        const cards = symMap[sym];
+        if(cards) cards.forEach(s => updateCard(s, price, prev));
+        if(cards) cards.forEach(s => updateTicker(s, price, prev));
+
+        // Update key levels
+        const kl = klMap[sym];
+        if(kl) {
+          const pdh = document.getElementById(`kl-${kl}-PDH`);
+          const pdl = document.getElementById(`kl-${kl}-PDL`);
+          const onh = document.getElementById(`kl-${kl}-ONH`);
+          const onl = document.getElementById(`kl-${kl}-ONL`);
+          const wh  = document.getElementById(`kl-${kl}-WH`);
+          const wl  = document.getElementById(`kl-${kl}-WL`);
+
+          if(pdh) pdh.textContent = fmt(dayHigh);
+          if(pdl) pdl.textContent = fmt(dayLow);
+          if(onh) onh.textContent = fmt(Math.max(price, parseFloat(quote.open)));
+          if(onl) onl.textContent = fmt(Math.min(price, parseFloat(quote.open)));
+          if(wh)  wh.textContent  = fmt(weekHigh);
+          if(wl)  wl.textContent  = fmt(weekLow);
+        }
+      }
+
+      console.log('Prices updated via Twelve Data');
+
+    } catch(err) {
+      console.log('Twelve Data fetch failed, using simulation:', err);
+      syms.forEach(sym => {
+        const last = spk[sym][spk[sym].length-1];
+        const np = last + (Math.random()-.48)*last*0.0003;
+        updateCard(sym, np, base[sym]);
+      });
+    }
+  }
+
+  syms.forEach(s=>dSpk(s,spk[s],true));
+  fetchPrices();
+  setInterval(fetchPrices, 120000);
+
+
+  // Draw initial sparklines
+  syms.forEach(s=>dSpk(s,spk[s],true));
+
+  // Fetch real prices immediately then every 30 seconds
+  fetchPrices();
+  setInterval(fetchPrices, 30000);
+</script>
+<script>
+  // Bible Verses
+  const verses = [
+    { text: "For the love of money is a root of all kinds of evil.", ref: "1 Timothy 6:10" },
+    { text: "Whoever is greedy for unjust gain troubles his own household.", ref: "Proverbs 15:27" },
+    { text: "Dishonest money dwindles away, but whoever gathers money little by little makes it grow.", ref: "Proverbs 13:11" },
+    { text: "Do not wear yourself out to get rich; do not trust your own cleverness.", ref: "Proverbs 23:4" },
+    { text: "Give, and it will be given to you — good measure, pressed down, shaken together.", ref: "Luke 6:38" },
+    { text: "The generous will themselves be blessed, for they share their food with the poor.", ref: "Proverbs 22:9" },
+    { text: "A good name is more desirable than great riches; to be esteemed is better than silver or gold.", ref: "Proverbs 22:1" },
+    { text: "Commit to the Lord whatever you do, and he will establish your plans.", ref: "Proverbs 16:3" },
+    { text: "Plans succeed through good counsel; don't go to war without wise advice.", ref: "Proverbs 20:18" },
+    { text: "Wealth gained hastily will dwindle, but whoever gathers little by little will increase it.", ref: "Proverbs 13:11" },
+  ];
+
+  let currentVerse = 0;
+  const verseText = document.getElementById('verseText');
+  const verseRef  = document.getElementById('verseRef');
+
+  function showVerse(idx) {
+    verseText.style.opacity = '0';
+    verseRef.style.opacity  = '0';
+    setTimeout(() => {
+      verseText.textContent = '"' + verses[idx].text + '"';
+      verseRef.textContent  = verses[idx].ref;
+      verseText.style.opacity = '1';
+      verseRef.style.opacity  = '1';
+    }, 600);
+  }
+
+  window.addEventListener('scroll', () => {
+    const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    const idx = Math.min(Math.floor(scrollPct * verses.length), verses.length - 1);
+    if (idx !== currentVerse) {
+      currentVerse = idx;
+      showVerse(currentVerse);
+    }
+  });
+
+  showVerse(0);
+
+  // Custom Cursor
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 4 + 'px';
+    cursor.style.top  = my - 4 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx - 16) * 0.12;
+    ry += (my - ry - 16) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2)';
+      ring.style.transform   = 'scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform   = 'scale(1)';
+    });
+  });
+
+  // Scroll Reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Active Nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
