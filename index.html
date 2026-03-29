@@ -1581,7 +1581,7 @@
 </div>
           <!-- POSITION SIZE CALCULATOR -->
 <div class="dash-section">
-  <div class="dash-section-title">// Position Size Calculator</div>
+  <div class="dash-section-title">// P&L Calculator</div>
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
     <div>
       <div class="level-label">Instrument</div>
@@ -1595,12 +1595,8 @@
       </select>
     </div>
     <div>
-      <div class="level-label">Account Size ($)</div>
-      <input id="calc-account" type="number" placeholder="50000" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
-    </div>
-    <div>
-      <div class="level-label">Risk % Per Trade</div>
-      <input id="calc-risk" type="number" placeholder="1" step="0.1" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
+      <div class="level-label">Contracts</div>
+      <input id="calc-contracts-in" type="number" placeholder="2" min="1" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
     </div>
     <div>
       <div class="level-label">Entry Price</div>
@@ -1610,23 +1606,38 @@
       <div class="level-label">Stop Loss Price</div>
       <input id="calc-stop" type="number" placeholder="5570.00" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
     </div>
+    <div>
+      <div class="level-label">Take Profit Price</div>
+      <input id="calc-tp" type="number" placeholder="5600.00" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
+    </div>
     <div style="display:flex; align-items:flex-end;">
-      <button onclick="calcPositionSize()" style="width:100%; background:var(--gold); border:none; color:var(--bg); font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:8px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;">Calculate</button>
+      <button onclick="calcPnL()" style="width:100%; background:var(--gold); border:none; color:var(--bg); font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:8px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition: opacity 0.2s;">CALCULATE</button>
     </div>
   </div>
+
   <div id="calc-result" style="display:none; background:var(--panel); border:1px solid rgba(201,168,76,0.2); padding:16px; margin-top:4px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+      <div style="background:#0A0E14; padding:12px;">
+        <div class="level-label" style="margin-bottom:6px;">If TP Hits 🟢</div>
+        <div id="calc-win" style="font-family:'Space Mono',monospace; font-size:20px; font-weight:700; color:var(--green);">--</div>
+      </div>
+      <div style="background:#0A0E14; padding:12px;">
+        <div class="level-label" style="margin-bottom:6px;">If SL Hits 🔴</div>
+        <div id="calc-loss" style="font-family:'Space Mono',monospace; font-size:20px; font-weight:700; color:var(--red);">--</div>
+      </div>
+    </div>
     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
-      <div>
-        <div class="level-label">Contracts</div>
-        <div class="level-val" id="calc-contracts" style="font-size:24px; color:var(--gold);">--</div>
+      <div style="background:#0A0E14; padding:12px;">
+        <div class="level-label" style="margin-bottom:6px;">R:R Ratio</div>
+        <div id="calc-rr" style="font-family:'Space Mono',monospace; font-size:14px; color:var(--gold);">--</div>
       </div>
-      <div>
-        <div class="level-label">$ At Risk</div>
-        <div class="level-val" id="calc-atrisk" style="font-size:16px; color:var(--red);">--</div>
+      <div style="background:#0A0E14; padding:12px;">
+        <div class="level-label" style="margin-bottom:6px;">Point Value</div>
+        <div id="calc-pointval" style="font-family:'Space Mono',monospace; font-size:14px; color:var(--text);">--</div>
       </div>
-      <div>
-        <div class="level-label">Tick Value</div>
-        <div class="level-val" id="calc-tick" style="font-size:16px; color:var(--text);">--</div>
+      <div style="background:#0A0E14; padding:12px;">
+        <div class="level-label" style="margin-bottom:6px;">Tick Value</div>
+        <div id="calc-tickval" style="font-family:'Space Mono',monospace; font-size:14px; color:var(--text);">--</div>
       </div>
     </div>
   </div>
@@ -1880,36 +1891,39 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
   // Fetch real prices immediately then every 30 seconds
   fetchPrices();
   setInterval(fetchPrices, 30000);
-  function calcPositionSize() {
+ function calcPnL() {
     const instrument = document.getElementById('calc-instrument').value;
-    const account    = parseFloat(document.getElementById('calc-account').value);
-    const riskPct    = parseFloat(document.getElementById('calc-risk').value);
+    const contracts  = parseFloat(document.getElementById('calc-contracts-in').value);
     const entry      = parseFloat(document.getElementById('calc-entry').value);
     const stop       = parseFloat(document.getElementById('calc-stop').value);
+    const tp         = parseFloat(document.getElementById('calc-tp').value);
 
-    if(!account || !riskPct || !entry || !stop) return;
+    if(!contracts || !entry || !stop || !tp) return;
 
-    // Tick sizes and values per instrument
     const specs = {
-      ES:  { tickSize: 0.25, tickValue: 12.50 },
-      MES: { tickSize: 0.25, tickValue: 1.25  },
-      GC:  { tickSize: 0.10, tickValue: 10.00 },
-      MGC: { tickSize: 0.10, tickValue: 1.00  },
-      NQ:  { tickSize: 0.25, tickValue: 5.00  },
-      MNQ: { tickSize: 0.25, tickValue: 0.50  },
+      ES:  { tickSize: 0.25, tickValue: 12.50,  pointValue: 50.00  },
+      MES: { tickSize: 0.25, tickValue: 1.25,   pointValue: 5.00   },
+      GC:  { tickSize: 0.10, tickValue: 10.00,  pointValue: 100.00 },
+      MGC: { tickSize: 0.10, tickValue: 1.00,   pointValue: 10.00  },
+      NQ:  { tickSize: 0.25, tickValue: 5.00,   pointValue: 20.00  },
+      MNQ: { tickSize: 0.25, tickValue: 0.50,   pointValue: 2.00   },
     };
 
-    const spec      = specs[instrument];
-    const riskDollar = account * (riskPct / 100);
-    const priceDiff  = Math.abs(entry - stop);
-    const ticks      = priceDiff / spec.tickSize;
-    const riskPerContract = ticks * spec.tickValue;
-    const contracts  = Math.floor(riskDollar / riskPerContract);
-    const actualRisk = contracts * riskPerContract;
+    const spec = specs[instrument];
+    const fmt  = n => '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
 
-    document.getElementById('calc-contracts').textContent = contracts || 0;
-    document.getElementById('calc-atrisk').textContent = '$' + actualRisk.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-    document.getElementById('calc-tick').textContent = '$' + spec.tickValue.toFixed(2) + '/tick';
+    const stopTicks   = Math.abs(entry - stop) / spec.tickSize;
+    const tpTicks     = Math.abs(tp - entry)   / spec.tickSize;
+
+    const potentialWin  = tpTicks  * spec.tickValue * contracts;
+    const potentialLoss = stopTicks * spec.tickValue * contracts;
+    const rr = (potentialWin / potentialLoss).toFixed(2);
+
+    document.getElementById('calc-win').textContent      = '+' + fmt(potentialWin);
+    document.getElementById('calc-loss').textContent     = '-' + fmt(potentialLoss);
+    document.getElementById('calc-rr').textContent       = '1 : ' + rr;
+    document.getElementById('calc-pointval').textContent = '$' + spec.pointValue.toFixed(2) + '/pt';
+    document.getElementById('calc-tickval').textContent  = '$' + spec.tickValue.toFixed(2) + '/tick';
     document.getElementById('calc-result').style.display = 'block';
   }
 </script>
