@@ -827,7 +827,7 @@
   .dashboard-overlay.active { opacity:1; pointer-events:all; }
   .dash-panel { width:100%; height:100%; display:flex; flex-direction:column; transform:translateY(24px); transition:transform 0.4s ease; overflow-y:auto: }
   .dashboard-overlay.active .dash-panel { transform:translateY(0); }
-  .dash-header { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid var(--border); background:rgba(8,12,18,0.9); flex-shrink:0; }
+  .dash-header { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid var(--border); background:rgba(8,12,18,0.9); flex-shrink:0; position:sticky; top:0; z-index:100; }
   .dash-header-left { display:flex; align-items:center; gap:14px; }
   .dash-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--white); }
   .dash-logo span { color:var(--gold); }
@@ -1504,7 +1504,7 @@
   <div class="dash-panel">
     <div class="dash-header">
       <div class="dash-header-left">
-        <div class="dash-logo">TOPTICK<span>GORILLA</span></div>
+        <div class="dash-logo" onclick="closeDash()" style="cursor:pointer;">TOPTICK<span>GORILLA</span></div>
         <div class="dash-subtitle">Market Dashboard</div>
       </div>
       <div class="dash-header-right">
