@@ -825,7 +825,7 @@
   .btn-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; position:relative; z-index:1; }
   .dashboard-overlay { position:fixed; inset:0; overflow:hidden; background:rgba(4,6,10,0.97); backdrop-filter:blur(24px); z-index:5000; display:flex; flex-direction:column; opacity:0; pointer-events:none; transition:opacity 0.4s ease; }
   .dashboard-overlay.active { opacity:1; pointer-events:all; }
-  .dash-panel { width:100%; height:100%; display:flex; flex-direction:column; transform:translateY(24px); transition:transform 0.4s ease; overflow-y:auto: }
+  .dash-panel { width:100%; height:100%; display:flex; flex-direction:column; transform:translateY(24px); transition:transform 0.4s ease; overflow:hidden; }
   .dashboard-overlay.active .dash-panel { transform:translateY(0); }
   .dash-header { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid var(--border); background:rgba(8,12,18,0.9); flex-shrink:0; }
   .dash-header-left { display:flex; align-items:center; gap:14px; }
@@ -838,8 +838,8 @@
   .dash-time { font-family:'Space Mono',monospace; font-size:13px; color:var(--white); }
   .close-btn { width:34px; height:34px; border:1px solid var(--border); background:transparent; color:var(--muted); font-size:16px; cursor:none; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
   .close-btn:hover { border-color:var(--red); color:var(--red); }
-  .dash-body { flex:1; display:grid; grid-template-columns:1fr 300px; overflow:hidden; }
-  .dash-main { display:flex; flex-direction:column; overflow-y:auto; }
+  .dash-body { flex:1; display:grid; grid-template-columns:1fr 300px; overflow:hidden; min-height:0; }
+  .dash-main { display:flex; flex-direction:column; overflow-y:auto; min-height:0; }
   .dash-sidebar { border-left:1px solid var(--border); display:flex; flex-direction:column; overflow-y:auto; }
   .dash-section { padding:20px 28px; border-bottom:1px solid var(--border); }
   .dash-section-title { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
