@@ -1579,6 +1579,58 @@
     <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--muted);">Loading...</div>
   </div>
 </div>
+          <!-- POSITION SIZE CALCULATOR -->
+<div class="dash-section">
+  <div class="dash-section-title">// Position Size Calculator</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+    <div>
+      <div class="level-label">Instrument</div>
+      <select id="calc-instrument" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;">
+        <option value="ES">ES — E-mini S&P</option>
+        <option value="MES">MES — Micro S&P</option>
+        <option value="GC">GC — Gold</option>
+        <option value="MGC">MGC — Micro Gold</option>
+        <option value="NQ">NQ — E-mini Nasdaq</option>
+        <option value="MNQ">MNQ — Micro Nasdaq</option>
+      </select>
+    </div>
+    <div>
+      <div class="level-label">Account Size ($)</div>
+      <input id="calc-account" type="number" placeholder="50000" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
+    </div>
+    <div>
+      <div class="level-label">Risk % Per Trade</div>
+      <input id="calc-risk" type="number" placeholder="1" step="0.1" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
+    </div>
+    <div>
+      <div class="level-label">Entry Price</div>
+      <input id="calc-entry" type="number" placeholder="5580.00" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
+    </div>
+    <div>
+      <div class="level-label">Stop Loss Price</div>
+      <input id="calc-stop" type="number" placeholder="5570.00" style="width:100%; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; padding:8px; outline:none;"/>
+    </div>
+    <div style="display:flex; align-items:flex-end;">
+      <button onclick="calcPositionSize()" style="width:100%; background:var(--gold); border:none; color:var(--bg); font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:8px; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;">Calculate</button>
+    </div>
+  </div>
+  <div id="calc-result" style="display:none; background:var(--panel); border:1px solid rgba(201,168,76,0.2); padding:16px; margin-top:4px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+      <div>
+        <div class="level-label">Contracts</div>
+        <div class="level-val" id="calc-contracts" style="font-size:24px; color:var(--gold);">--</div>
+      </div>
+      <div>
+        <div class="level-label">$ At Risk</div>
+        <div class="level-val" id="calc-atrisk" style="font-size:16px; color:var(--red);">--</div>
+      </div>
+      <div>
+        <div class="level-label">Tick Value</div>
+        <div class="level-val" id="calc-tick" style="font-size:16px; color:var(--text);">--</div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
       </div>
       <div class="dash-sidebar">
@@ -1828,6 +1880,38 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
   // Fetch real prices immediately then every 30 seconds
   fetchPrices();
   setInterval(fetchPrices, 30000);
+  function calcPositionSize() {
+    const instrument = document.getElementById('calc-instrument').value;
+    const account    = parseFloat(document.getElementById('calc-account').value);
+    const riskPct    = parseFloat(document.getElementById('calc-risk').value);
+    const entry      = parseFloat(document.getElementById('calc-entry').value);
+    const stop       = parseFloat(document.getElementById('calc-stop').value);
+
+    if(!account || !riskPct || !entry || !stop) return;
+
+    // Tick sizes and values per instrument
+    const specs = {
+      ES:  { tickSize: 0.25, tickValue: 12.50 },
+      MES: { tickSize: 0.25, tickValue: 1.25  },
+      GC:  { tickSize: 0.10, tickValue: 10.00 },
+      MGC: { tickSize: 0.10, tickValue: 1.00  },
+      NQ:  { tickSize: 0.25, tickValue: 5.00  },
+      MNQ: { tickSize: 0.25, tickValue: 0.50  },
+    };
+
+    const spec      = specs[instrument];
+    const riskDollar = account * (riskPct / 100);
+    const priceDiff  = Math.abs(entry - stop);
+    const ticks      = priceDiff / spec.tickSize;
+    const riskPerContract = ticks * spec.tickValue;
+    const contracts  = Math.floor(riskDollar / riskPerContract);
+    const actualRisk = contracts * riskPerContract;
+
+    document.getElementById('calc-contracts').textContent = contracts || 0;
+    document.getElementById('calc-atrisk').textContent = '$' + actualRisk.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('calc-tick').textContent = '$' + spec.tickValue.toFixed(2) + '/tick';
+    document.getElementById('calc-result').style.display = 'block';
+  }
 </script>
 <script>
   // Bible Verses
