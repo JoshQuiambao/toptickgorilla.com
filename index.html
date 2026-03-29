@@ -884,7 +884,7 @@
   .cal-impact { display:flex; gap:3px; }
   .idot { width:5px; height:5px; border-radius:50%; background:var(--border); }
   .idot.h { background:var(--red); } .idot.m { background:var(--gold); } .idot.l { background:var(--green); }
-  @media (max-width:900px) { .dash-body { grid-template-columns:1fr; } .price-grid { grid-template-columns:repeat(2,1fr); } .sessions-grid { grid-template-columns:repeat(2,1fr); } .levels-grid { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:900px) }
 
  @media (max-width: 768px) {
     nav { padding: 16px 24px; gap: 8px; }
@@ -916,14 +916,10 @@
     .dash-subtitle { display: none; }
     .dash-logo { font-size: 13px; }
     .dash-time { font-size: 11px; }
-    .dash-body { grid-template-columns: 1fr; }
-    .dash-panel { overflow-y: auto; }
-    .dash-main { overflow: visible; }
+    .dash-body { grid-template-columns: 1fr; overflow: visible; height: auto; }
+    .dash-panel { overflow-y: auto; height: 100%; }
     .dash-body { overflow: visible; height: auto; }
-    .dash-sidebar { border-left: none; border-top: 1px solid var(--border); overflow-y: visible; height: auto; }
-    .dash-main { overflow: visible; height: auto; }
-    .dash-body { overflow: visible; height: auto; }
-    .dash-panel { overflow-y: auto; }
+    .dash-sidebar { border-left: none; border-top: 1px solid var(--border); overflow-y: visible; height: auto; 
     .price-grid { grid-template-columns: repeat(2, 1fr); }
     .sessions-grid { grid-template-columns: repeat(2, 1fr); }
     .levels-grid { grid-template-columns: repeat(2, 1fr); }
