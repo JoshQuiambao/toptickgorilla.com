@@ -1535,6 +1535,75 @@
           <div class="orb-lbl" id="orbLbl">Loading...</div>
         </div>
         <div class="cal-wrap">
+            const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
+
+  async function fetchEarnings() {
+    try {
+      const today = new Date();
+      const fromDate = today.toISOString().split('T')[0];
+      const toDate = new Date(today.getTime() + 7*24*60*60*1000).toISOString().split('T')[0];
+
+      const url = `https://finnhub.io/api/v1/calendar/earnings?from=${fromDate}&to=${toDate}&token=${FINNHUB_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      const container = document.getElementById('earningsCalendar');
+      if(!container) return;
+
+      const earnings = data.earningsCalendar;
+
+      if(!earnings || earnings.length === 0) {
+        container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">No earnings this week</div>';
+        return;
+      }
+
+      // Filter for major companies only and sort by date
+      const major = earnings
+        .filter(e => e.symbol && e.revenueEstimate > 1000000000)
+        .sort((a,b) => new Date(a.date) - new Date(b.date))
+        .slice(0, 10);
+
+      container.innerHTML = major.map(e => {
+        const epsEst  = e.epsEstimate  ? '$'+parseFloat(e.epsEstimate).toFixed(2)  : '--';
+        const epsAct  = e.epsActual    ? '$'+parseFloat(e.epsActual).toFixed(2)    : '--';
+        const revEst  = e.revenueEstimate ? '$'+(e.revenueEstimate/1e9).toFixed(1)+'B' : '--';
+        const beat    = e.epsActual && e.epsEstimate && e.epsActual > e.epsEstimate;
+        const miss    = e.epsActual && e.epsEstimate && e.epsActual < e.epsEstimate;
+        const dateStr = new Date(e.date).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+
+        return `
+          <div class="earnings-item">
+            <div class="earnings-sym">${e.symbol}</div>
+            <div class="earnings-date">${dateStr} ${e.hour === 'bmo' ? '· Pre-Market' : e.hour === 'amc' ? '· After Close' : ''}</div>
+            <div class="earnings-grid">
+              <div class="earnings-stat">
+                <div class="earnings-stat-label">EPS Est</div>
+                <div class="earnings-stat-val">${epsEst}</div>
+              </div>
+              <div class="earnings-stat">
+                <div class="earnings-stat-label">EPS Actual</div>
+                <div class="earnings-stat-val ${beat?'beat':miss?'miss':''}">${epsAct}</div>
+              </div>
+              <div class="earnings-stat">
+                <div class="earnings-stat-label">Rev Est</div>
+                <div class="earnings-stat-val">${revEst}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      console.log('Earnings calendar updated');
+
+    } catch(err) {
+      console.log('Earnings fetch failed:', err);
+      const container = document.getElementById('earningsCalendar');
+      if(container) container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Earnings unavailable</div>';
+    }
+  }
+
+  fetchEarnings();
+  setInterval(fetchEarnings, 3600000);
           <div class="cal-wrap">
           <div class="dash-section-title" style="padding:0;margin-bottom:12px;">// Economic Calendar</div>
           <iframe 
@@ -1644,75 +1713,6 @@ function updateTicker(sym, price, prev) {
       if(chgEl) { chgEl.textContent = txt; chgEl.className = cls; }
     });
   }
-  const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
-
-  async function fetchEarnings() {
-    try {
-      const today = new Date();
-      const fromDate = today.toISOString().split('T')[0];
-      const toDate = new Date(today.getTime() + 7*24*60*60*1000).toISOString().split('T')[0];
-
-      const url = `https://finnhub.io/api/v1/calendar/earnings?from=${fromDate}&to=${toDate}&token=${FINNHUB_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      const container = document.getElementById('earningsCalendar');
-      if(!container) return;
-
-      const earnings = data.earningsCalendar;
-
-      if(!earnings || earnings.length === 0) {
-        container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">No earnings this week</div>';
-        return;
-      }
-
-      // Filter for major companies only and sort by date
-      const major = earnings
-        .filter(e => e.symbol && e.revenueEstimate > 1000000000)
-        .sort((a,b) => new Date(a.date) - new Date(b.date))
-        .slice(0, 10);
-
-      container.innerHTML = major.map(e => {
-        const epsEst  = e.epsEstimate  ? '$'+parseFloat(e.epsEstimate).toFixed(2)  : '--';
-        const epsAct  = e.epsActual    ? '$'+parseFloat(e.epsActual).toFixed(2)    : '--';
-        const revEst  = e.revenueEstimate ? '$'+(e.revenueEstimate/1e9).toFixed(1)+'B' : '--';
-        const beat    = e.epsActual && e.epsEstimate && e.epsActual > e.epsEstimate;
-        const miss    = e.epsActual && e.epsEstimate && e.epsActual < e.epsEstimate;
-        const dateStr = new Date(e.date).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-
-        return `
-          <div class="earnings-item">
-            <div class="earnings-sym">${e.symbol}</div>
-            <div class="earnings-date">${dateStr} ${e.hour === 'bmo' ? '· Pre-Market' : e.hour === 'amc' ? '· After Close' : ''}</div>
-            <div class="earnings-grid">
-              <div class="earnings-stat">
-                <div class="earnings-stat-label">EPS Est</div>
-                <div class="earnings-stat-val">${epsEst}</div>
-              </div>
-              <div class="earnings-stat">
-                <div class="earnings-stat-label">EPS Actual</div>
-                <div class="earnings-stat-val ${beat?'beat':miss?'miss':''}">${epsAct}</div>
-              </div>
-              <div class="earnings-stat">
-                <div class="earnings-stat-label">Rev Est</div>
-                <div class="earnings-stat-val">${revEst}</div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      console.log('Earnings calendar updated');
-
-    } catch(err) {
-      console.log('Earnings fetch failed:', err);
-      const container = document.getElementById('earningsCalendar');
-      if(container) container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Earnings unavailable</div>';
-    }
-  }
-
-  fetchEarnings();
-  setInterval(fetchEarnings, 3600000);
   async function fetchPrices() {
     try {
       const symbols = 'ES1!,GC1!,NQ1!,CL1!,SI1!,LE1!,RTY!,YM!,MBT/USD';
