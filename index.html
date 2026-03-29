@@ -1652,7 +1652,7 @@
   const TWELVE_KEY = '7acbb193a616465695011265638202ca';
   async function fetchFearGreed() {
     try {
-      const url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://production.dataviz.cnn.io/index/fearandgreed/graphdata');
+      const url = 'https://corsproxy.io/?' + encodeURIComponent('https://production.dataviz.cnn.io/index/fearandgreed/graphdata');
       const res = await fetch(url);
       const data = await res.json();
       const score = Math.round(data.fear_and_greed.score);
