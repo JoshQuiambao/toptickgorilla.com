@@ -1797,7 +1797,7 @@ function updateTicker(sym, price, prev) {
   }
   async function fetchPrices() {
     try {
-      const symbols = 'ES1!,GC1!,NQ1!,CL1!,SI1!,LE1!,RTY!,YM!,MBT/USD';
+      const symbols = 'ES1!,GC1!,NQ1!,CL1!,SI1!,LE1!,MBT/USD';
       const url = `https://api.twelvedata.com/quote?symbol=${symbols}&apikey=${TWELVE_KEY}`;
       const res = await fetch(url);
       const data = await res.json();
@@ -1809,8 +1809,6 @@ function updateTicker(sym, price, prev) {
     'CL1!': ['CL'],
     'SI1!': ['SI'],
     'LE1!': ['LE'],
-    'RTY!': ['RTY'],
-    'YM!': ['YM'],
     'MBT/USD': ['MBT'],
 };
 
