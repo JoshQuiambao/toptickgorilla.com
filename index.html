@@ -1750,37 +1750,22 @@
 
   const TWELVE_KEY = '7acbb193a616465695011265638202ca';
   async function fetchFearGreed() {
-    try {
-      
-     const url = `https://thingproxy.freeboard.io/fetch/https://production.dataviz.cnn.io/index/fearandgreed/graphdata`;      const res = await fetch(url);
-      const data = await res.json();
-      const score = Math.round(data.fear_and_greed.score);
-      const rating = data.fear_and_greed.rating;
-
-      const num = document.getElementById('fgNum');
-      const lbl = document.getElementById('fgLbl');
-      const needle = document.getElementById('fgNeedle');
-
-      if(num) num.textContent = score;
-      if(needle) needle.style.left = score + '%';
-
-      if(lbl) {
-        lbl.textContent = rating.replace(/_/g,' ').toUpperCase();
-        if(score < 25) lbl.style.color = 'var(--red)';
-        else if(score < 45) lbl.style.color = '#FF8844';
-        else if(score < 55) lbl.style.color = 'var(--text)';
-        else if(score < 75) lbl.style.color = 'var(--gold)';
-        else lbl.style.color = 'var(--green)';
-      }
-
-      console.log('Fear & Greed updated:', score, rating);
-    } catch(err) {
-      console.log('Fear & Greed fetch failed:', err);
+    // Update score daily — check: https://edition.cnn.com/markets/fear-and-greed
+    const score = 15;
+    const num    = document.getElementById('fgNum');
+    const lbl    = document.getElementById('fgLbl');
+    const needle = document.getElementById('fgNeedle');
+    if(num) num.textContent = score;
+    if(needle) needle.style.left = score + '%';
+    if(lbl) {
+      if(score < 25){ lbl.textContent='EXTREME FEAR'; lbl.style.color='var(--red)'; }
+      else if(score < 45){ lbl.textContent='FEAR'; lbl.style.color='#FF8844'; }
+      else if(score < 55){ lbl.textContent='NEUTRAL'; lbl.style.color='var(--text)'; }
+      else if(score < 75){ lbl.textContent='GREED'; lbl.style.color='var(--gold)'; }
+      else { lbl.textContent='EXTREME GREED'; lbl.style.color='var(--green)'; }
     }
   }
-
   fetchFearGreed();
-  setInterval(fetchFearGreed, 3600000);
 function updateTicker(sym, price, prev) {
     const diff = price - prev;
     const pct = (diff/prev*100).toFixed(2);
