@@ -1868,8 +1868,10 @@ function updateTicker(sym, price, prev) {
   }
 
   syms.forEach(s=>dSpk(s,spk[s],true));
-  fetchPrices();
-  setInterval(fetchPrices, 300000);
+  window.addEventListener('load', () => {
+    fetchPrices();
+    setInterval(fetchPrices, 300000);
+});
 
 
   // Draw initial sparklines
