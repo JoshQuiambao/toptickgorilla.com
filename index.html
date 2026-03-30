@@ -1048,6 +1048,40 @@
   }
 
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeChart(); });
+      .mag7-btn { font-family:'Space Mono',monospace; font-size:10px; padding:6px 12px; background:var(--panel); border:1px solid var(--border); color:var(--muted); letter-spacing:0.1em; cursor:pointer; transition:all 0.2s; }
+  .mag7-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .mag7-btn.active { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.08); }
+
+      function loadMag7(sym) {
+    document.querySelectorAll('.mag7-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('mag7-'+sym).classList.add('active');
+    document.getElementById('tv_mag7').innerHTML = '';
+    const widget = () => new TradingView.widget({
+      width: '100%',
+      height: 400,
+      symbol: 'NASDAQ:' + sym,
+      interval: '15',
+      timezone: 'America/New_York',
+      theme: 'dark',
+      style: '1',
+      locale: 'en',
+      toolbar_bg: '#080C12',
+      backgroundColor: '#080C12',
+      gridColor: 'rgba(201,168,76,0.05)',
+      enable_publishing: false,
+      save_image: false,
+      container_id: 'tv_mag7',
+    });
+    if(window.TradingView) { widget(); }
+    else {
+      const s = document.createElement('script');
+      s.src = 'https://s3.tradingview.com/tv.js';
+      s.onload = widget;
+      document.head.appendChild(s);
+    }
+  }
+
+  loadMag7('NVDA');
       
 </style>
 </head>
@@ -1645,31 +1679,20 @@
             <div class="sess-card"><div class="sess-bar" id="sb-rth"></div><div class="sess-name">RTH New York</div><div class="sess-hours">9:30AM-4PM</div><div class="sess-status closed" id="ss-rth">CLOSED</div></div>
           </div>
           <!-- TRADINGVIEW GOLD CHART -->
+<!-- MAG 7 CHART -->
 <div class="dash-section">
-  <div class="dash-section-title">// S&P 500 - 15M</div>
+  <div class="dash-section-title">// Mag 7</div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+    <button onclick="loadMag7('NVDA')" class="mag7-btn active" id="mag7-NVDA">NVDA</button>
+    <button onclick="loadMag7('AAPL')" class="mag7-btn" id="mag7-AAPL">AAPL</button>
+    <button onclick="loadMag7('META')" class="mag7-btn" id="mag7-META">META</button>
+    <button onclick="loadMag7('GOOGL')" class="mag7-btn" id="mag7-GOOGL">GOOGL</button>
+    <button onclick="loadMag7('MSFT')" class="mag7-btn" id="mag7-MSFT">MSFT</button>
+    <button onclick="loadMag7('TSLA')" class="mag7-btn" id="mag7-TSLA">TSLA</button>
+    <button onclick="loadMag7('AMZN')" class="mag7-btn" id="mag7-AMZN">AMZN</button>
+  </div>
   <div class="tradingview-widget-container">
-    <div id="tradingview_GOLD"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <script type="text/javascript">
-    new TradingView.widget({
-      "width": "100%",
-      "height": 400,
-      "symbol": "COMEX:GC1!",
-      "interval": "15",
-      "timezone": "America/New_York",
-      "theme": "dark",
-      "style": "1",
-      "locale": "en",
-      "toolbar_bg": "#080C12",
-      "enable_publishing": false,
-      "hide_top_toolbar": false,
-      "hide_legend": false,
-      "save_image": false,
-      "container_id": "tradingview_gold",
-      "backgroundColor": "#080C12",
-      "gridColor": "rgba(201, 168, 76, 0.05)"
-    });
-    </script>
+    <div id="tv_mag7" style="height:400px;"></div>
   </div>
 </div>
 
