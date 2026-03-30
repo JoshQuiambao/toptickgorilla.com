@@ -1750,8 +1750,7 @@
   async function fetchFearGreed() {
     try {
       
-     const url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://production.dataviz.cnn.io/index/fearandgreed/graphdata');
-      const res = await fetch(url);
+     const url = 'https://corsproxy.io/?' + 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata';      const res = await fetch(url);
       const data = await res.json();
       const score = Math.round(data.fear_and_greed.score);
       const rating = data.fear_and_greed.rating;
