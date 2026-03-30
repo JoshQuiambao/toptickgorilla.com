@@ -965,6 +965,90 @@
   .earnings-stat-val { font-family:'Space Mono',monospace; font-size:12px; color:var(--white); }
   .earnings-stat-val.beat { color:var(--green); }
   .earnings-stat-val.miss { color:var(--red); }
+
+.chart-overlay { position:fixed; inset:0; background:rgba(4,6,10,0.97); backdrop-filter:blur(24px); z-index:6000; display:flex; flex-direction:column; opacity:0; pointer-events:none; transition:opacity 0.4s ease; }
+  .chart-overlay.active { opacity:1; pointer-events:all; }
+  .chart-panel { width:100%; height:100%; display:flex; flex-direction:column; transform:translateY(24px); transition:transform 0.4s ease; }
+  .chart-overlay.active .chart-panel { transform:translateY(0); }
+  .chart-header { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid var(--border); background:rgba(8,12,18,0.9); flex-shrink:0; }
+  .chart-sym-title { font-family:'Syne',sans-serif; font-weight:800; font-size:20px; color:var(--white); }
+  .chart-sym-title span { color:var(--gold); }
+  .chart-body { flex:1; padding:0; overflow:hidden; }
+
+  const tvSymbols = {
+    GC:  { sym:'TVC:GOLD',    name:'Gold Futures',    interval:'15' },
+    MGC: { sym:'TVC:GOLD',    name:'Micro Gold',      interval:'15' },
+    ES:  { sym:'SP:SPX',      name:'E-mini S&P',      interval:'15' },
+    MES: { sym:'SP:SPX',      name:'Micro S&P',       interval:'15' },
+    NQ:  { sym:'NASDAQ:NDX',  name:'E-mini Nasdaq',   interval:'15' },
+    MNQ: { sym:'NASDAQ:NDX',  name:'Micro Nasdaq',    interval:'15' },
+    CL:  { sym:'TVC:USOIL',   name:'Crude Oil',       interval:'15' },
+    SI:  { sym:'TVC:SILVER',  name:'Silver',          interval:'15' },
+    LE:  { sym:'CME:LE1!',    name:'Live Cattle',     interval:'15' },
+    MBT: { sym:'BITSTAMP:BTCUSD', name:'Micro BTC',   interval:'15' },
+  };
+
+  let tvWidget = null;
+
+  function openChart(sym) {
+    const info = tvSymbols[sym];
+    if(!info) return;
+    document.getElementById('chartTitle').innerHTML = sym + ' <span>' + info.name + '</span>';
+    document.getElementById('chartOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('tv_chart').innerHTML = '';
+    const script = document.createElement('script');
+    script.src = 'https://s3.tradingview.com/tv.js';
+    script.onload = function() {
+      new TradingView.widget({
+        width: '100%',
+        height: '100%',
+        symbol: info.sym,
+        interval: info.interval,
+        timezone: 'America/New_York',
+        theme: 'dark',
+        style: '1',
+        locale: 'en',
+        toolbar_bg: '#080C12',
+        backgroundColor: '#080C12',
+        gridColor: 'rgba(201,168,76,0.05)',
+        enable_publishing: false,
+        hide_top_toolbar: false,
+        save_image: false,
+        container_id: 'tv_chart',
+      });
+    };
+    if(window.TradingView) {
+      new TradingView.widget({
+        width: '100%',
+        height: '100%',
+        symbol: info.sym,
+        interval: info.interval,
+        timezone: 'America/New_York',
+        theme: 'dark',
+        style: '1',
+        locale: 'en',
+        toolbar_bg: '#080C12',
+        backgroundColor: '#080C12',
+        gridColor: 'rgba(201,168,76,0.05)',
+        enable_publishing: false,
+        hide_top_toolbar: false,
+        save_image: false,
+        container_id: 'tv_chart',
+      });
+    } else {
+      document.head.appendChild(script);
+    }
+  }
+
+  function closeChart() {
+    document.getElementById('chartOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('tv_chart').innerHTML = '';
+  }
+
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeChart(); });
+      
 </style>
 </head>
 <body>
@@ -1544,12 +1628,12 @@
         <div class="dash-section">
           <div class="dash-section-title">// Instruments</div>
           <div class="price-grid">
-            <div class="price-card" id="card-GC"><div class="price-badge">FULL</div><div class="price-sym">GC</div><div class="price-name">Gold Futures</div><div class="price-val" id="pv-GC">3,085.40</div><div class="price-chg up" id="pc-GC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-GC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-MGC"><div class="price-badge">MICRO</div><div class="price-sym">MGC</div><div class="price-name">Micro Gold</div><div class="price-val" id="pv-MGC">3,085.40</div><div class="price-chg up" id="pc-MGC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-MGC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-ES"><div class="price-badge">FULL</div><div class="price-sym">ES</div><div class="price-name">E-mini S&amp;P</div><div class="price-val" id="pv-ES">6,651.00</div><div class="price-chg up" id="pc-ES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-ES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-MES"><div class="price-badge">MICRO</div><div class="price-sym">MES</div><div class="price-name">Micro S&amp;P</div><div class="price-val" id="pv-MES">6,651.00</div><div class="price-chg up" id="pc-MES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-MES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-NQ"><div class="price-badge">FULL</div><div class="price-sym">NQ</div><div class="price-name">E-mini Nasdaq</div><div class="price-val" id="pv-NQ">21,480.00</div><div class="price-chg up" id="pc-NQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-NQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-MNQ"><div class="price-badge">MICRO</div><div class="price-sym">MNQ</div><div class="price-name">Micro Nasdaq</div><div class="price-val" id="pv-MNQ">21,480.00</div><div class="price-chg up" id="pc-MNQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-MNQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-GC" onclick="openChart('GC')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">GC</div><div class="price-name">Gold Futures</div><div class="price-val" id="pv-GC">3,085.40</div><div class="price-chg up" id="pc-GC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-GC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MGC" onclick="openChart('MGC')" style="cursor:pointer;"><div class="price-badge">MICRO</div><div class="price-sym">MGC</div><div class="price-name">Micro Gold</div><div class="price-val" id="pv-MGC">3,085.40</div><div class="price-chg up" id="pc-MGC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-MGC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-ES" onclick="openChart('ES')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">ES</div><div class="price-name">E-mini S&amp;P</div><div class="price-val" id="pv-ES">6,651.00</div><div class="price-chg up" id="pc-ES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-ES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MES" onclick="openChart('MES')" style="cursor:pointer;"><div class="price-badge">MICRO</div><div class="price-sym">MES</div><div class="price-name">Micro S&amp;P</div><div class="price-val" id="pv-MES">6,651.00</div><div class="price-chg up" id="pc-MES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-MES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-NQ" onclick="openChart('NQ')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">NQ</div><div class="price-name">E-mini Nasdaq</div><div class="price-val" id="pv-NQ">21,480.00</div><div class="price-chg up" id="pc-NQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-NQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MNQ" onclick="openChart('MNQ')" style="cursor:pointer;"><div class="price-badge">MICRO</div><div class="price-sym">MNQ</div><div class="price-name">Micro Nasdaq</div><div class="price-val" id="pv-MNQ">21,480.00</div><div class="price-chg up" id="pc-MNQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-MNQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
             </div>
         </div>
         <div class="dash-section">
@@ -2074,5 +2158,20 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
     });
   });
 </script>
+<!-- CHART OVERLAY -->
+<div class="chart-overlay" id="chartOverlay">
+  <div class="chart-panel">
+    <div class="chart-header">
+      <div class="chart-sym-title" id="chartTitle">GC <span>Gold Futures</span></div>
+      <button class="close-btn" onclick="closeChart()">&#10005;</button>
+    </div>
+    <div class="chart-body">
+      <div class="tradingview-widget-container" style="height:100%;">
+        <div id="tv_chart" style="height:100%;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+        
 </body>
 </html>
