@@ -822,7 +822,7 @@
   .reveal {
     opacity: 0;
     transform: translateY(32px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
 
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -2015,7 +2015,7 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
     entries.forEach(e => {
       if (e.isIntersecting) e.target.classList.add('visible');
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
