@@ -1072,7 +1072,16 @@
   .chart-sym-title { font-family:'Syne',sans-serif; font-weight:800; font-size:20px; color:var(--white); }
   .chart-sym-title span { color:var(--gold); }
   .chart-body { flex:1; padding:0; overflow:hidden; }
-
+.earnings-item { padding:10px 0; border-bottom:1px solid var(--border); }
+  .earnings-item:last-child { border-bottom:none; }
+  .earnings-sym { font-family:'Syne',sans-serif; font-weight:800; font-size:14px; color:var(--white); margin-bottom:2px; }
+  .earnings-date { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); margin-bottom:8px; }
+  .earnings-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+  .earnings-stat { background:var(--panel); padding:8px; }
+  .earnings-stat-label { font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; }
+  .earnings-stat-val { font-family:'Space Mono',monospace; font-size:12px; color:var(--white); }
+  .earnings-stat-val.beat { color:var(--green); }
+  .earnings-stat-val.miss { color:var(--red); }
       
 </style>
 </head>
