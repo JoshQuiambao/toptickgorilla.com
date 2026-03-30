@@ -1713,7 +1713,9 @@
   }
   setInterval(updateNavTime, 1000);
   updateNavTime();
-  function openDash(){document.getElementById('dashOverlay').classList.add('active');document.body.style.overflow='hidden';}
+  function openDash(){document.getElementById('dashOverlay').classList.add('active');document.body.style.overflow='hidden';
+                     fetchPrices();
+                     }
   function closeDash(){document.getElementById('dashOverlay').classList.remove('active');document.body.style.overflow='';}
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDash();});
   function updateDashClock(){const est=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));const pad=n=>String(n).padStart(2,'0');const el=document.getElementById('dashTime');if(el)el.textContent=pad(est.getHours())+':'+pad(est.getMinutes())+':'+pad(est.getSeconds())+' EST';updateSessions(est);updateORB(est);}
@@ -1750,7 +1752,7 @@
   async function fetchFearGreed() {
     try {
       
-     const url = 'https://corsproxy.io/?' + 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata';      const res = await fetch(url);
+     const url = `https://thingproxy.freeboard.io/fetch/https://production.dataviz.cnn.io/index/fearandgreed/graphdata`;      const res = await fetch(url);
       const data = await res.json();
       const score = Math.round(data.fear_and_greed.score);
       const rating = data.fear_and_greed.rating;
@@ -1867,7 +1869,7 @@ function updateTicker(sym, price, prev) {
 
   syms.forEach(s=>dSpk(s,spk[s],true));
   fetchPrices();
-  setInterval(fetchPrices, 120000);
+  setInterval(fetchPrices, 300000);
 
 
   // Draw initial sparklines
