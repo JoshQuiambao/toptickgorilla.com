@@ -1826,9 +1826,9 @@ function updateTicker(sym, price, prev) {
         const prev      = parseFloat(quote.previous_close);
         const dayHigh   = parseFloat(quote.high);
         const dayLow    = parseFloat(quote.low);
-        const weekHigh  = parseFloat(quote.fifty_two_week?.high || quote.high);
-        const weekLow   = parseFloat(quote.fifty_two_week?.low  || quote.low);
-
+        const weekHigh  = parseFloat(quote.fifty_two_week_high || quote.high);
+        const weekLow   = parseFloat(quote.fifty_two_week_low  || quote.low);
+        
         // Update price cards
         const cards = symMap[sym];
         if(cards) cards.forEach(s => updateCard(s, price, prev));
