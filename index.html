@@ -1048,7 +1048,7 @@
   }
 
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeChart(); });
-      .mag7-btn { font-family:'Space Mono',monospace; font-size:10px; padding:6px 12px; background:var(--panel); border:1px solid var(--border); color:var(--muted); letter-spacing:0.1em; cursor:pointer; transition:all 0.2s; }
+      .mag7-btn { font-family:'Space Mono',monospace; font-size:10px; padding:6px 12px; background:var(--panel); border:1px solid var(--border); color:var(--muted); letter-spacing:0.1em; cursor:pointer; transition:all 0.2s; border-radius:0; -webkit-appearance:none; appearance:none; }
   .mag7-btn:hover { border-color:var(--gold); color:var(--gold); }
   .mag7-btn.active { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.08); }
 
@@ -1057,7 +1057,7 @@
     document.getElementById('mag7-'+sym).classList.add('active');
     document.getElementById('tv_mag7').innerHTML = '';
     const widget = () => new TradingView.widget({
-      width: '100%',
+      width: document.getElementById('tv_mag7').offsetWidth || 400,
       height: 400,
       symbol: 'NASDAQ:' + sym,
       interval: '15',
@@ -1692,7 +1692,7 @@
     <button onclick="loadMag7('AMZN')" class="mag7-btn" id="mag7-AMZN">AMZN</button>
   </div>
   <div class="tradingview-widget-container">
-    <div id="tv_mag7" style="height:400px;"></div>
+    <div id="tv_mag7" style="height:400px; width:100%;"></div>
   </div>
 </div>
 
