@@ -992,10 +992,7 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 <button class="open-dashboard-btn" onclick="openDash()"><div class="btn-dot"></div><span>Live Dashboard</span></button>
-  <div class="nav-status">
-    <div class="status-dot"></div>
-    FUNDED &nbsp;·&nbsp; LUCID TRADING &nbsp;·&nbsp; TOPSTEP &nbsp;·&nbsp; TRADEIFY
-  </div>
+  <div class="nav-status" id="navTime">--:-- EST</div>
 </nav>
 
 <!-- HERO -->
@@ -1706,6 +1703,16 @@
 </div>
 
 <script>
+    function updateNavTime() {
+    const est = new Date(new Date().toLocaleString('en-US', {timeZone:'America/New_York'}));
+    const h = String(est.getHours()).padStart(2,'0');
+    const m = String(est.getMinutes()).padStart(2,'0');
+    const s = String(est.getSeconds()).padStart(2,'0');
+    const el = document.getElementById('navTime');
+    if(el) el.textContent = h + ':' + m + ':' + s + ' EST';
+  }
+  setInterval(updateNavTime, 1000);
+  updateNavTime();
   function openDash(){document.getElementById('dashOverlay').classList.add('active');document.body.style.overflow='hidden';}
   function closeDash(){document.getElementById('dashOverlay').classList.remove('active');document.body.style.overflow='';}
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDash();});
