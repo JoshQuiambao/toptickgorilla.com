@@ -1029,7 +1029,7 @@
   }
 
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeChart(); });
-      
+      loadMag7('NVDA');
       function loadMag7(sym) {
     document.querySelectorAll('.mag7-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('mag7-'+sym).classList.add('active');
@@ -2182,6 +2182,19 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
     });
   });
 </script>
-        
+   <!-- CHART OVERLAY -->
+<div class="chart-overlay" id="chartOverlay">
+  <div class="chart-panel">
+    <div class="chart-header">
+      <div class="chart-sym-title" id="chartTitle">GC <span>Gold Futures</span></div>
+      <button class="close-btn" onclick="closeChart()">&#10005;</button>
+    </div>
+    <div class="chart-body">
+      <div class="tradingview-widget-container" style="height:100%;">
+        <div id="tv_chart" style="height:100%; width:100%;"></div>
+      </div>
+    </div>
+  </div>
+</div>     
 </body>
 </html>
