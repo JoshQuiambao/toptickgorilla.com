@@ -1038,7 +1038,7 @@
     document.getElementById('tv_mag7').innerHTML = '';
     const widget = () => new TradingView.widget({
       width: document.getElementById('tv_mag7').offsetWidth || 400,
-      height: 400,
+      height: 420,
       symbol: 'NASDAQ:' + sym,
       interval: '15',
       timezone: 'America/New_York',
@@ -1051,6 +1051,8 @@
       enable_publishing: false,
       save_image: false,
       container_id: 'tv_mag7',
+      hide_legend: false,
+container_id: 'tv_mag7'
     });
     if(window.TradingView) { widget(); }
     else {
@@ -1690,9 +1692,9 @@
     <button onclick="loadMag7('TSLA')" class="mag7-btn" id="mag7-TSLA">TSLA</button>
     <button onclick="loadMag7('AMZN')" class="mag7-btn" id="mag7-AMZN">AMZN</button>
   </div>
-  <div class="tradingview-widget-container">
+ <div class="tradingview-widget-container" style="background:#080C12; overflow:hidden;">
     <div id="tv_mag7" style="height:400px; width:100%;"></div>
-  </div>
+</div>
 </div>
 
              <!-- POSITION SIZE CALCULATOR -->
