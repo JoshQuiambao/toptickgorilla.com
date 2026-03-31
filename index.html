@@ -1914,10 +1914,9 @@ container_id: 'tv_mag7'
   }
   setInterval(updateNavTime, 1000);
   updateNavTime();
-  function openDash(){
+ function openDash(){
     document.getElementById('dashOverlay').classList.add('active');
     document.body.style.overflow='hidden';
-    fetchPrices();
     initMag7();
 }
   function closeDash(){document.getElementById('dashOverlay').classList.remove('active');document.body.style.overflow='';}
@@ -2245,7 +2244,9 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
     });
   });
 </script>
-    <!-- CHART OVERLAY -->
+   
+        
+        <!-- CHART OVERLAY -->
 <div class="chart-overlay" id="chartOverlay">
   <div class="chart-panel">
     <div class="chart-header">
