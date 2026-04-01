@@ -993,7 +993,7 @@
   function openChart(sym) {
     const info = tvSymbols[sym];
     if(!info) return;
-    document.getElementById('chartTitle').innerHTML = sym + ' <span>' + info.name + '</span>';
+    document.getElementById('chartTitle').innerHTML = ' <span>' + info.name + '</span>';
     document.getElementById('chartOverlay').classList.add('active');
     document.body.style.overflow = 'hidden';
     document.getElementById('tv_chart').innerHTML = '';
