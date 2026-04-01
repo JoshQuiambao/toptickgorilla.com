@@ -1950,21 +1950,72 @@ container_id: 'tv_mag7'
     dSpk(sym, spk[sym], up);
   }
 
-  const TWELVE_KEY = '7acbb193a616465695011265638202ca';
-  async function fetchFearGreed() {
-    // Update score daily — check: https://edition.cnn.com/markets/fear-and-greed
-    const score = 15;
-    const num    = document.getElementById('fgNum');
-    const lbl    = document.getElementById('fgLbl');
-    const needle = document.getElementById('fgNeedle');
-    if(num) num.textContent = score;
-    if(needle) needle.style.left = score + '%';
-    if(lbl) {
-      if(score < 25){ lbl.textContent='EXTREME FEAR'; lbl.style.color='var(--red)'; }
-      else if(score < 45){ lbl.textContent='FEAR'; lbl.style.color='#FF8844'; }
-      else if(score < 55){ lbl.textContent='NEUTRAL'; lbl.style.color='var(--text)'; }
-      else if(score < 75){ lbl.textContent='GREED'; lbl.style.color='var(--gold)'; }
-      else { lbl.textContent='EXTREME GREED'; lbl.style.color='var(--green)'; }
+  const POLYGON_KEY = 'v2kgQt15UrDqzipt7pq29k3j6eGJd4aK';
+
+  async function fetchPrices() {
+    try {
+      const symbols = {
+        'ES': '/ES',
+        'GC': '/GC',
+        'NQ': '/NQ',
+        'CL': '/CL',
+        'SI': '/SI',
+        'LE': '/LE',
+      };
+
+      const results = await Promise.all(
+        Object.entries(symbols).map(async ([sym, ticker]) => {
+          const url = `https://api.polygon.io/v2/snapshot/locale/us/markets/futures/tickers/${ticker}?apiKey=${POLYGON_KEY}`;
+          const res = await fetch(url);
+          const data = await res.json();
+          return { sym, data };
+        })
+      );
+
+      results.forEach(({ sym, data }) => {
+        if(!data.results) return;
+        const q = data.results;
+        const price = q.day?.close || q.prevDay?.close;
+        const prev  = q.prevDay?.close;
+        const high  = q.day?.high  || q.prevDay?.high;
+        const low   = q.day?.low   || q.prevDay?.low;
+        const open  = q.day?.open  || q.prevDay?.open;
+
+        if(!price || !prev) return;
+
+        // Update price cards
+        updateCard(sym, price, prev);
+        updateCard('M'+sym, price, prev);
+        updateTicker(sym, price, prev);
+
+        // Update key levels
+        const kl = ['ES','GC','NQ'].includes(sym) ? sym : null;
+        if(kl) {
+          const fmt = n => n ? parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '--';
+          const pdh = document.getElementById(`kl-${kl}-PDH`);
+          const pdl = document.getElementById(`kl-${kl}-PDL`);
+          const onh = document.getElementById(`kl-${kl}-ONH`);
+          const onl = document.getElementById(`kl-${kl}-ONL`);
+          const wh  = document.getElementById(`kl-${kl}-WH`);
+          const wl  = document.getElementById(`kl-${kl}-WL`);
+          if(pdh) pdh.textContent = fmt(q.prevDay?.high);
+          if(pdl) pdl.textContent = fmt(q.prevDay?.low);
+          if(onh) onh.textContent = fmt(high);
+          if(onl) onl.textContent = fmt(low);
+          if(wh)  wh.textContent  = fmt(q.prevDay?.high);
+          if(wl)  wl.textContent  = fmt(q.prevDay?.low);
+        }
+      });
+
+      console.log('Prices updated via Polygon');
+
+    } catch(err) {
+      console.log('Polygon fetch failed, using simulation:', err);
+      syms.forEach(sym => {
+        const last = spk[sym][spk[sym].length-1];
+        const np = last + (Math.random()-.48)*last*0.0003;
+        updateCard(sym, np, base[sym]);
+      });
     }
   }
   fetchFearGreed();
