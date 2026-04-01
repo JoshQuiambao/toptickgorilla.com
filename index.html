@@ -1918,7 +1918,7 @@ container_id: 'tv_mag7'
     document.body.style.overflow='hidden';
     initMag7();
 }
-  function closeDash(){document.getElementById('dashOverlay').classList.remove('active');document.body.style.overflow='';}
+  function closeDash(){document.getElementById('dashOverlay').classList.remove('active');document.body.style.overflow=''function closeDash(){document.getElementById('dashOverlay').classList.remove('active');document.body.style.overflow='';}
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDash();});
   function updateDashClock(){const est=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));const pad=n=>String(n).padStart(2,'0');const el=document.getElementById('dashTime');if(el)el.textContent=pad(est.getHours())+':'+pad(est.getMinutes())+':'+pad(est.getSeconds())+' EST';updateSessions(est);updateORB(est);}
   setInterval(updateDashClock,1000);updateDashClock();
