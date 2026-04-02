@@ -1954,18 +1954,18 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
 
   async function fetchPrices() {
     try {
-      const symbols = {
-        'ES': '/ES',
-        'GC': '/GC',
-        'NQ': '/NQ',
-        'CL': '/CL',
-        'SI': '/SI',
-        'LE': '/LE',
-      };
+const symbols = {
+  'ES': 'ES',
+  'GC': 'GC',
+  'NQ': 'NQ',
+  'CL': 'CL',
+  'SI': 'SI',
+  'LE': 'LE',
+};
 
       const results = await Promise.all(
         Object.entries(symbols).map(async ([sym, ticker]) => {
-          const url = `https://api.polygon.io/v2/snapshot/locale/us/markets/futures/tickers/${ticker}?apiKey=${POLYGON_KEY}`;
+          const url = `https://api.polygon.io/v3/snapshot?ticker.any_of=${ticker}&apiKey=${POLYGON_KEY}`;
           const res = await fetch(url);
           const data = await res.json();
           return { sym, data };
