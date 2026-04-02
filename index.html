@@ -2033,8 +2033,6 @@ function updateTicker(sym, price, prev) {
       if(priceEl) priceEl.textContent = fmt(price);
       if(chgEl) { chgEl.textContent = txt; chgEl.className = cls; }
 
-  }
-  }
 
   syms.forEach(s=>dSpk(s,spk[s],true));
   window.addEventListener('load', () => {
