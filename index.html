@@ -2039,7 +2039,24 @@ function updateTicker(sym, price, prev) {
     setInterval(fetchPrices, 900000);
 });
 
-
+function fetchFearGreed() {
+    // Update score daily — check: https://edition.cnn.com/markets/fear-and-greed
+    const score = 15;
+    const num    = document.getElementById('fgNum');
+    const lbl    = document.getElementById('fgLbl');
+    const needle = document.getElementById('fgNeedle');
+    if(num) num.textContent = score;
+    if(needle) needle.style.left = score + '%';
+    if(lbl) {
+      if(score < 25){ lbl.textContent='EXTREME FEAR'; lbl.style.color='var(--red)'; }
+      else if(score < 45){ lbl.textContent='FEAR'; lbl.style.color='#FF8844'; }
+      else if(score < 55){ lbl.textContent='NEUTRAL'; lbl.style.color='var(--text)'; }
+      else if(score < 75){ lbl.textContent='GREED'; lbl.style.color='var(--gold)'; }
+      else { lbl.textContent='EXTREME GREED'; lbl.style.color='var(--green)'; }
+    }
+  }
+  fetchFearGreed();
+  
   // Draw initial sparklines
   syms.forEach(s=>dSpk(s,spk[s],true));
 const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
@@ -2087,7 +2104,7 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
       if(container) container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Earnings unavailable</div>';
     }
   }
-
+fetchFearGreed();
  fetchEarnings();
   setInterval(fetchEarnings, 3600000);
 
