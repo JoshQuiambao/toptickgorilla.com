@@ -2089,9 +2089,13 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
     }
   }
 
-  fetchEarnings();
+ fetchEarnings();
   setInterval(fetchEarnings, 3600000);
-  // Fetch real prices immediately then every 30 seconds
+
+  window.addEventListener('load', () => {
+    fetchPrices();
+    setInterval(fetchPrices, 900000);
+  });
  function calcPnL() {
     const instrument = document.getElementById('calc-instrument').value;
     const contracts  = parseFloat(document.getElementById('calc-contracts-in').value);
