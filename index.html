@@ -2034,64 +2034,6 @@ function updateTicker(sym, price, prev) {
       if(chgEl) { chgEl.textContent = txt; chgEl.className = cls; }
     });
   }
-  async function fetchPrices() {
-    try {
-      const symbols = 'ES1!,GC1!,NQ1!,CL1!,SI1!,LE1!,MBT/USD';
-      const url = `https://api.twelvedata.com/quote?symbol=${symbols}&apikey=${TWELVE_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      const symMap = {
-    'ES1!': ['ES','MES'],
-    'GC1!': ['GC','MGC'],
-    'NQ1!': ['NQ','MNQ'],
-    'CL1!': ['CL'],
-    'SI1!': ['SI'],
-    'LE1!': ['LE'],
-    'MBT/USD': ['MBT'],
-};
-
-      const klMap = {
-        'ES1!': 'ES',
-        'GC1!': 'GC',
-        'NQ1!': 'NQ',
-      };
-
-      const fmt = n => n ? parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '--';
-
-      for(const [sym, quote] of Object.entries(data)) {
-        if(quote.status === 'error') continue;
-
-        const price     = parseFloat(quote.close);
-        const prev      = parseFloat(quote.previous_close);
-        const dayHigh   = parseFloat(quote.high);
-        const dayLow    = parseFloat(quote.low);
-        const weekHigh  = parseFloat(quote.fifty_two_week_high || quote.high);
-        const weekLow   = parseFloat(quote.fifty_two_week_low  || quote.low);
-        
-        // Update price cards
-        const cards = symMap[sym];
-        if(cards) cards.forEach(s => updateCard(s, price, prev));
-        if(cards) cards.forEach(s => updateTicker(s, price, prev));
-
-        // Update key levels
-        const kl = klMap[sym];
-        if(kl) {
-          const pdh = document.getElementById(`kl-${kl}-PDH`);
-          const pdl = document.getElementById(`kl-${kl}-PDL`);
-          const onh = document.getElementById(`kl-${kl}-ONH`);
-          const onl = document.getElementById(`kl-${kl}-ONL`);
-          const wh  = document.getElementById(`kl-${kl}-WH`);
-          const wl  = document.getElementById(`kl-${kl}-WL`);
-
-          if(pdh) pdh.textContent = fmt(dayHigh);
-          if(pdl) pdl.textContent = fmt(dayLow);
-          if(onh) onh.textContent = fmt(Math.max(price, parseFloat(quote.open)));
-          if(onl) onl.textContent = fmt(Math.min(price, parseFloat(quote.open)));
-          if(wh)  wh.textContent  = fmt(weekHigh);
-          if(wl)  wl.textContent  = fmt(weekLow);
-        }
-      }
 
       console.log('Prices updated via Twelve Data');
 
