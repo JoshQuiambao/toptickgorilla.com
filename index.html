@@ -961,7 +961,8 @@
    .tradingview-widget-container { height:100px !important; }
     .sessions-grid { grid-template-columns: repeat(2, 1fr); }
     .levels-grid { grid-template-columns: repeat(2, 1fr); }
-    .price-card { padding: 10px; }
+    .price-card { position: relative; }
+    .card-overlay { position:absolute; inset:0; z-index:10; cursor:pointer; }
     .price-val { font-size: 13px; }
     .price-sym { font-size: 12px; }
    .sparkline { height: 18px; }
@@ -1727,7 +1728,8 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
       <div class="price-grid">
 
   <!-- GC Gold -->
-  <div class="price-card" onclick="openChart('GC')" style="cursor:pointer;">
+<div class="price-card" style="cursor:pointer;">
+    <div class="card-overlay" onclick="openChart('GC')"></div>
     <div class="price-badge">FULL</div>
     <div class="price-sym">GC</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1739,7 +1741,8 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- MGC Silver -->
-  <div class="price-card" onclick="openChart('MGC')" style="cursor:pointer;">
+<div class="price-card" style="cursor:pointer;">
+    <div class="card-overlay" onclick="openChart('MGC')"></div>
     <div class="price-badge">MICRO</div>
     <div class="price-sym">SI</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1751,7 +1754,8 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- ES S&P -->
-  <div class="price-card" onclick="openChart('ES')" style="cursor:pointer;">
+ <div class="price-card" style="cursor:pointer;">
+    <div class="card-overlay" onclick="openChart('ES')"></div>
     <div class="price-badge">FULL</div>
     <div class="price-sym">ES</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1763,7 +1767,8 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- MES Crude Oil -->
-  <div class="price-card" onclick="openChart('MES')" style="cursor:pointer;">
+<div class="price-card" style="cursor:pointer;">
+    <div class="card-overlay" onclick="openChart('MES')"></div>
     <div class="price-badge">MICRO</div>
     <div class="price-sym">CL</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1775,7 +1780,8 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- NQ Nasdaq -->
-  <div class="price-card" onclick="openChart('NQ')" style="cursor:pointer;">
+<div class="price-card" style="cursor:pointer;">
+    <div class="card-overlay" onclick="openChart('NQ')"></div>
     <div class="price-badge">FULL</div>
     <div class="price-sym">NQ</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1787,7 +1793,8 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- MNQ Live Cattle -->
-  <div class="price-card" onclick="openChart('MNQ')" style="cursor:pointer;">
+<div class="price-card" style="cursor:pointer;">
+    <div class="card-overlay" onclick="openChart('MNQ')"></div>
     <div class="price-badge">MICRO</div>
     <div class="price-sym">LE</div>
     <div class="tradingview-widget-container" style="height:80px;">
