@@ -961,10 +961,7 @@
    .tradingview-widget-container { height:100px !important; }
     .sessions-grid { grid-template-columns: repeat(2, 1fr); }
     .levels-grid { grid-template-columns: repeat(2, 1fr); }
-    <div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('GC')"></div>
-    <div class="price-badge">FULL</div>
-    <div class="price-sym">GC</div>
+    .price-card { padding: 10px; }
     .price-val { font-size: 13px; }
     .price-sym { font-size: 12px; }
    .sparkline { height: 18px; }
@@ -989,7 +986,7 @@
      ES:  { sym:'CAPITALCOM:US500', name:'E-mini S&P',    interval:'15' },
     MES: { sym:'TVC:USOIL',       name:'Crude Oil',     interval:'15' },
     NQ:  { sym:'CAPITALCOM:US100', name:'E-mini Nasdaq', interval:'15' },
-    HG: { sym:'TVC:COPPER',   name:'Copper',   interval:'15' },
+    MNQ: { sym:'CME_MINI:LE1!',   name:'Live Cattle',   interval:'15' },
   };
 
   let tvWidget = null;
@@ -1730,8 +1727,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
       <div class="price-grid">
 
   <!-- GC Gold -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('GC')"></div>
+  <div class="price-card" onclick="openChart('GC')" style="cursor:pointer;">
     <div class="price-badge">FULL</div>
     <div class="price-sym">GC</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1743,8 +1739,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- MGC Silver -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('MGC')"></div>
+  <div class="price-card" onclick="openChart('MGC')" style="cursor:pointer;">
     <div class="price-badge">MICRO</div>
     <div class="price-sym">SI</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1756,8 +1751,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- ES S&P -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('ES')"></div>
+  <div class="price-card" onclick="openChart('ES')" style="cursor:pointer;">
     <div class="price-badge">FULL</div>
     <div class="price-sym">ES</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1769,8 +1763,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- MES Crude Oil -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('MES')"></div>
+  <div class="price-card" onclick="openChart('MES')" style="cursor:pointer;">
     <div class="price-badge">MICRO</div>
     <div class="price-sym">CL</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1782,8 +1775,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 
   <!-- NQ Nasdaq -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('NQ')"></div>
+  <div class="price-card" onclick="openChart('NQ')" style="cursor:pointer;">
     <div class="price-badge">FULL</div>
     <div class="price-sym">NQ</div>
     <div class="tradingview-widget-container" style="height:80px;">
@@ -1794,14 +1786,15 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     </div>
   </div>
 
-  <!-- MNQ Live Copper -->
-  <div class="card-overlay" onclick="openChart('HG')"></div>
+  <!-- MNQ Live Cattle -->
+  <div class="price-card" onclick="openChart('MNQ')" style="cursor:pointer;">
     <div class="price-badge">MICRO</div>
-    <div class="price-sym">HG</div>
+    <div class="price-sym">LE</div>
     <div class="tradingview-widget-container" style="height:80px;">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-     {"symbol":"TVC:COPPER","width":"100%","height":100,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}    </div>
+     {"symbol":"TVC:LIVESTOCK","width":"100%","height":100,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}      </script>
+    </div>
   </div>
 
 </div>
