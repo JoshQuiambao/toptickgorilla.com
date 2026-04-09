@@ -1723,15 +1723,80 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
           </div>
         <div class="dash-section">
           <div class="dash-section-title">// Instruments</div>
-          <div class="price-grid">
-          <div class="price-card" id="card-GC" onclick="openChart('GC')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">GC</div><div class="price-name">Gold Futures</div><div class="price-val" id="pv-GC">3,085.40</div><div class="price-chg up" id="pc-GC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-GC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-MGC" onclick="openChart('MGC')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">SI</div><div class="price-name">Silver</div><div class="price-val" id="pv-MGC">3,085.40</div><div class="price-chg up" id="pc-MGC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-MGC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-ES" onclick="openChart('ES')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">ES</div><div class="price-name">E-mini S&amp;P</div><div class="price-val" id="pv-ES">6,651.00</div><div class="price-chg up" id="pc-ES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-ES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-MES" onclick="openChart('MES')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">CL</div><div class="price-name">Crude Oil</div><div class="price-val" id="pv-MES">6,651.00</div><div class="price-chg up" id="pc-MES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-MES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-NQ" onclick="openChart('NQ')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">NQ</div><div class="price-name">E-mini Nasdaq</div><div class="price-val" id="pv-NQ">21,480.00</div><div class="price-chg up" id="pc-NQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-NQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            <div class="price-card" id="card-MNQ" onclick="openChart('MNQ')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">LE</div><div class="price-name">Live Cattle</div><div class="price-val" id="pv-MNQ">21,480.00</div><div class="price-chg up" id="pc-MNQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-MNQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
-            </div>
-        </div>
+      <div class="price-grid">
+
+  <!-- GC Gold -->
+  <div class="price-card" onclick="openChart('GC')" style="cursor:pointer;">
+    <div class="price-badge">FULL</div>
+    <div class="price-sym">GC</div>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {"symbol":"TVC:GOLD","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      </script>
+    </div>
+  </div>
+
+  <!-- MGC Silver -->
+  <div class="price-card" onclick="openChart('MGC')" style="cursor:pointer;">
+    <div class="price-badge">MICRO</div>
+    <div class="price-sym">SI</div>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {"symbol":"TVC:SILVER","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      </script>
+    </div>
+  </div>
+
+  <!-- ES S&P -->
+  <div class="price-card" onclick="openChart('ES')" style="cursor:pointer;">
+    <div class="price-badge">FULL</div>
+    <div class="price-sym">ES</div>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {"symbol":"CAPITALCOM:US500","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      </script>
+    </div>
+  </div>
+
+  <!-- MES Crude Oil -->
+  <div class="price-card" onclick="openChart('MES')" style="cursor:pointer;">
+    <div class="price-badge">MICRO</div>
+    <div class="price-sym">CL</div>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {"symbol":"TVC:USOIL","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      </script>
+    </div>
+  </div>
+
+  <!-- NQ Nasdaq -->
+  <div class="price-card" onclick="openChart('NQ')" style="cursor:pointer;">
+    <div class="price-badge">FULL</div>
+    <div class="price-sym">NQ</div>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {"symbol":"CAPITALCOM:US100","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      </script>
+    </div>
+  </div>
+
+  <!-- MNQ Live Cattle -->
+  <div class="price-card" onclick="openChart('MNQ')" style="cursor:pointer;">
+    <div class="price-badge">MICRO</div>
+    <div class="price-sym">LE</div>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+     {"symbol":"CME:LE1!","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}      </script>
+    </div>
+  </div>
+
+</div>
 
          
 <!-- MAG 7 CHART -->
