@@ -880,7 +880,7 @@
   .dash-section { padding:20px 28px; border-bottom:1px solid var(--border); }
   .dash-section-title { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
   .dash-section-title::after { content:''; flex:1; height:1px; background:var(--border); }
-  .price-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+  .price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
   .price-card { background:#0A0E14; border:1px solid var(--border); padding:14px; position:relative; transition:border-color 0.2s; }
   .price-card.up { border-bottom:2px solid var(--green); }
   .price-card.down { border-bottom:2px solid var(--red); }
@@ -957,7 +957,8 @@
     .dash-main { overflow: visible; }
     .dash-body { overflow: visible; height: auto; }
     .dash-sidebar { border-left: none; border-top: 1px solid var(--border); }
-    .price-grid { grid-template-columns: repeat(2, 1fr); }
+    .price-grid { grid-template-columns: repeat(2, 1fr); gap:8px; }
+   .tradingview-widget-container { height:70px !important; }
     .sessions-grid { grid-template-columns: repeat(2, 1fr); }
     .levels-grid { grid-template-columns: repeat(2, 1fr); }
     .price-card { padding: 10px; }
@@ -1732,7 +1733,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     <div class="tradingview-widget-container" style="height:80px;">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"TVC:GOLD","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      {"symbol":"TVC:GOLD","width":"100%","height":70,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
       </script>
     </div>
   </div>
@@ -1744,7 +1745,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     <div class="tradingview-widget-container" style="height:80px;">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"TVC:SILVER","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      {"symbol":"TVC:SILVER","width":"100%","height":70,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
       </script>
     </div>
   </div>
@@ -1756,7 +1757,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     <div class="tradingview-widget-container" style="height:80px;">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"CAPITALCOM:US500","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      {"symbol":"CAPITALCOM:US500","width":"100%","height":70,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
       </script>
     </div>
   </div>
@@ -1768,7 +1769,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     <div class="tradingview-widget-container" style="height:80px;">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"TVC:USOIL","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      {"symbol":"TVC:USOIL","width":"100%","height":70,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
       </script>
     </div>
   </div>
@@ -1780,7 +1781,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     <div class="tradingview-widget-container" style="height:80px;">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"CAPITALCOM:US100","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
+      {"symbol":"CAPITALCOM:US100","width":"100%","height":70,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
       </script>
     </div>
   </div>
@@ -1792,7 +1793,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     <div class="tradingview-widget-container" style="height:80px;">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-     {"symbol":"CME:LE1!","width":"100%","height":80,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}      </script>
+     {"symbol":"CME:LE1!","width":"100%","height":70,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}      </script>
     </div>
   </div>
 
