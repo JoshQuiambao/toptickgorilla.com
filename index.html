@@ -978,7 +978,7 @@
   .chart-sym-title { font-family:'Syne',sans-serif; font-weight:800; font-size:20px; color:var(--white); }
   .chart-sym-title span { color:var(--gold); }
   .chart-body { flex:1; padding:0; overflow:hidden; }
-  #tv_mag7 { height: 500px !important; min-height: 500px !important; }
+  #tv_mag7 { height: 600px !important; min-height: 600px !important; width: 100% !important; }
   
 </style>
 <script>
@@ -1058,7 +1058,7 @@
     document.getElementById('mag7-'+sym).classList.add('active');
     document.getElementById('tv_mag7').innerHTML = '';
  const widget = () => new TradingView.widget({
-      width: document.getElementById('tv_mag7').offsetWidth || 400,
+      width: '100%',
       height: 500,
       symbol: 'NASDAQ:' + sym,
       interval: '15',
