@@ -1053,13 +1053,9 @@
 
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeChart(); });
       
-      function loadMag7(sym) {
-    document.querySelectorAll('.mag7-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('mag7-'+sym).classList.add('active');
-    document.getElementById('tv_mag7').innerHTML = '';
-    const widget = () => new TradingView.widget({
+ const widget = () => new TradingView.widget({
       width: document.getElementById('tv_mag7').offsetWidth || 400,
-      height: 600,
+      height: 500,
       symbol: 'NASDAQ:' + sym,
       interval: '15',
       timezone: 'America/New_York',
@@ -1073,7 +1069,6 @@
       save_image: false,
       container_id: 'tv_mag7',
       hide_legend: false,
-container_id: 'tv_mag7'
     });
     if(window.TradingView) { widget(); }
     else {
