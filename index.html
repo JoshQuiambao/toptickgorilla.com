@@ -923,7 +923,7 @@
   @media (max-width:900px) { .dash-body { grid-template-columns:1fr; } .price-grid { grid-template-columns:repeat(2,1fr); } .sessions-grid { grid-template-columns:repeat(2,1fr); } .levels-grid { grid-template-columns:repeat(2,1fr); } }
 
  @media (max-width: 768px) {
-   #tv_mag7 { height: 350px !important; min-height: 350px !important; width: 100% !important; }
+   #tv_mag7 { height: 500px !important; min-height: 500px !important; width: 100% !important; }
     nav { padding: 16px 24px; gap: 8px; }
     .nav-links { display: none; }
     .nav-status { display: none; }
@@ -1060,7 +1060,7 @@
     document.getElementById('tv_mag7').innerHTML = '';
  const widget = () => new TradingView.widget({
       width: '100%',
-      height: 600,
+      height: window.innerWidth < 768 ? 400 : 600,
       symbol: 'NASDAQ:' + sym,
       interval: '15',
       timezone: 'America/New_York',
