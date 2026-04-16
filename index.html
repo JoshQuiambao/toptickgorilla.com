@@ -1723,7 +1723,6 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
             <div class="sess-card"><div class="sess-bar" id="sb-pre"></div><div class="sess-name">Pre-Market</div><div class="sess-hours">8AM-9:30AM</div><div class="sess-status closed" id="ss-pre">CLOSED</div></div>
             <div class="sess-card"><div class="sess-bar" id="sb-rth"></div><div class="sess-name">RTH New York</div><div class="sess-hours">9:30AM-4PM</div><div class="sess-status closed" id="ss-rth">CLOSED</div></div>
           </div>
-        </div>
         <div class="dash-section">
           <div class="dash-section-title">// Instruments</div>
       <div class="price-grid">
@@ -1896,37 +1895,37 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   <div class="dash-section-title">// Key Levels <span style="font-size:9px; color:var(--muted); font-family:'Space Mono',monospace;">INTRADAY</span></div>
   <div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); margin-bottom:12px; letter-spacing:0.05em;">Liquidity Hunt</div>
 
-   <!-- ES LEVELS -->
+  <!-- ES LEVELS -->
   <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">ES &nbsp;/&nbsp; MES</div>
   <div class="levels-grid" style="margin-bottom:20px;">
-    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-ES-PDH" contenteditable="true">7,064.50</div></div>
-    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-ES-PDL" contenteditable="true">7,004.50</div></div>
-    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-ES-ONH" contenteditable="true">7,017.25</div></div>
-    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-ES-ONL" contenteditable="true">6,992.00</div></div>
-    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-ES-WH" contenteditable="true">7,017.25</div></div>
-    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-ES-WL" contenteditable="true">6,767.50</div></div>
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-ES-PDH" contenteditable="true">6,889.75</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-ES-PDL" contenteditable="true">6,6846.75</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-ES-ONH" contenteditable="true">-</div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-ES-ONL" contenteditable="true">-</div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-ES-WH" contenteditable="true">6,889.75</div></div>
+    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-ES-WL" contenteditable="true">6,566.50</div></div>
   </div>
 
   <!-- GC LEVELS -->
   <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">GC &nbsp;/&nbsp; MGC</div>
   <div class="levels-grid" style="margin-bottom:20px;">
-    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-GC-PDH" contenteditable="true">4,895.50</div></div>
-    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-GC-PDL" contenteditable="true">4,809.20</div></div>
-    <div class="level-card"><div class="level-label">HTF Break & Retest</div><div class="level-val" id="kl-GC-ONH" contenteditable="true"> 4,823.10 </div></div>
-    <div class="level-card"><div class="level-label">Point of Control</div><div class="level-val" id="kl-GC-ONL" contenteditable="true"> 4,820.50</div></div>
-    <div class="level-card"><div class="level-label">Weekly Hig</div><div class="level-val" id="kl-GC-WH" contenteditable="true">4,895.50</div></div>
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-GC-PDH" contenteditable="true">4820.10</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-GC-PDL" contenteditable="true">4,754.00</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-GC-ONH" contenteditable="true"> - </div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-GC-ONL" contenteditable="true"> - </div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-GC-WH" contenteditable="true">4,887.60</div></div>
     <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-GC-WL" contenteditable="true">4,626.10</div></div>
   </div>
 
   <!-- NQ LEVELS -->
   <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">NQ &nbsp;/&nbsp; MNQ</div>
   <div class="levels-grid">
-    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-NQ-PDH" contenteditable="true">26,378.75</div></div>
-    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-NQ-PDL" contenteditable="true">25,982.75</div></div>
-    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-NQ-ONH" contenteditable="true"> 26,507.50 </div></div>
-    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-NQ-ONL" contenteditable="true"> 25,932.00</div></div>
-    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-NQ-WH" contenteditable="true">26,378.75</div></div>
-    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-NQ-WL" contenteditable="true">24,912.25</div></div>
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-NQ-PDH" contenteditable="true">25,292.75</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-NQ-PDL" contenteditable="true">25,222.50</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-NQ-ONH" contenteditable="true"> - </div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-NQ-ONL" contenteditable="true"> - </div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-NQ-WH" contenteditable="true">25,292.75</div></div>
+    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-NQ-WL" contenteditable="true">24,830.75</div></div>
   </div>
 </div>
           <!-- EARNINGS CALENDAR -->
@@ -2112,7 +2111,7 @@ function updateTicker(sym, price, prev) {
 
 function fetchFearGreed() {
     // Update score daily — check: https://edition.cnn.com/markets/fear-and-greed
-    const score = 56;
+    const score = 38;
     const num    = document.getElementById('fgNum');
     const lbl    = document.getElementById('fgLbl');
     const needle = document.getElementById('fgNeedle');
