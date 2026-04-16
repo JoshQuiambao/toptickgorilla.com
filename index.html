@@ -874,13 +874,13 @@
   .dash-time { font-family:'Space Mono',monospace; font-size:13px; color:var(--white); }
   .close-btn { width:34px; height:34px; border:1px solid var(--border); background:transparent; color:var(--muted); font-size:16px; cursor:none; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
   .close-btn:hover { border-color:var(--red); color:var(--red); }
-  .dash-body { flex:1; display:grid; grid-template-columns:1fr; overflow:hidden; min-height:0; }
+  .dash-body { flex:1; display:grid; grid-template-columns:1fr 300px; overflow:hidden; }
   .dash-main { display:flex; flex-direction:column; overflow-y:auto; }
   .dash-sidebar { border-left:1px solid var(--border); display:flex; flex-direction:column; overflow:visible; }
   .dash-section { padding:20px 28px; border-bottom:1px solid var(--border); }
   .dash-section-title { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
   .dash-section-title::after { content:''; flex:1; height:1px; background:var(--border); }
-  .price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
+  .price-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
   .price-card { background:#0A0E14; border:1px solid var(--border); padding:14px; position:relative; transition:border-color 0.2s; }
   .price-card.up { border-bottom:2px solid var(--green); }
   .price-card.down { border-bottom:2px solid var(--red); }
@@ -957,12 +957,10 @@
     .dash-main { overflow: visible; }
     .dash-body { overflow: visible; height: auto; }
     .dash-sidebar { border-left: none; border-top: 1px solid var(--border); }
-    .price-grid { grid-template-columns: 1fr; gap:8px; }
-   .tradingview-widget-container { height:100px !important; }
+    .price-grid { grid-template-columns: repeat(2, 1fr); }
     .sessions-grid { grid-template-columns: repeat(2, 1fr); }
     .levels-grid { grid-template-columns: repeat(2, 1fr); }
-    .price-card { position: relative; }
-    .card-overlay { position:absolute; inset:0; z-index:10; cursor:pointer; }
+    .price-card { padding: 10px; }
     .price-val { font-size: 13px; }
     .price-sym { font-size: 12px; }
    .sparkline { height: 18px; }
@@ -1187,11 +1185,12 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </svg>
 
   <div class="hero-content">
-    <div class="hero-tag">|| Futures Market Data Platform</div>
+    <div class="hero-tag">|| Futures Trader & Developer - 4+ Years in the Markets</div>
     <div class="hero-name">TOPTICK<span class="gold">GORILLA</span></div>
     <div class="hero-sub">Trader Hub.<br>Price Action Tools.</div>
     <p class="hero-desc">
-      A former Process Engineer turned full-time Futures trading cowboy; specializing in Equities & Commodities. Combining technical psychology & market structure
+      Funded Futures trader specializing in Equities & Commodities. 
+      Former process engineer turned full-time trading cowboy. Combining technical psychology & market structure
       to execute strictly high probability setups.
     </p>
    <p class="hero-desc-highlight">Welcome to a seamless central point for daily updated intraday <strong>Key Levels</strong>, 
@@ -1216,7 +1215,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
       <div class="stat-label">Primary Markets</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value"><span>14x</span></div>
+      <div class="stat-value"><span>8x</span></div>
       <div class="stat-label">Funded Accounts</div>
     </div>
   </div>
@@ -1365,35 +1364,34 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     or anything that makes this more useful, I want to hear it.</em></p>
       <p></p>
     <p>God Bless.</p>
-
-    <p>🦍</p>
+      <p>🦍</p>
     </div>
 
     <div class="about-cards reveal">
       <div class="about-card">
         <div class="card-icon">📊</div>
-        <div class="card-title">14x Funded Accounts</div>
-        <div class="card-desc">Lucid Trading, Apex, Alpha, TopStep, & Tradeify. Trading GC, ES, NQ | strictly scaling with micro contracts with disciplined risk management every session.</div>
+        <div class="card-title">8x Funded Accounts</div>
+        <div class="card-desc">Lucid Trading, TopStep, & Tradeify. Trading GC, ES, NQ & micro contracts with disciplined risk management every session.</div>
       </div>
       <div class="about-card">
         <div class="card-icon">📈</div>
         <div class="card-title">Options to Futures</div>
-        <div class="card-desc">Initially swinging SPY & QQQ options. The switch to futures after one conversation in lower Manhattan changed the trajectory.</div>
+        <div class="card-desc">Started with swinging SPY & QQQ options. Made the switch to futures after one conversation in lower Manhattan changed the trajectory.</div>
       </div>
       <div class="about-card">
         <div class="card-icon">⚙️</div>
         <div class="card-title">Former Careered Engineer</div>
-        <div class="card-desc">Process engineering at Salesforce, DevOp at GitHub, Engi at Equinox, Freelance Dev; Systems thinking & automation mindset applied directly to trading.</div>
+        <div class="card-desc">Process engineering at Salesforce, DevOp at GitHub. Systems thinking & automation mindset applied directly to trading.</div>
       </div>
       <div class="about-card">
         <div class="card-icon">🤖</div>
         <div class="card-title">Algo Developer</div>
-        <div class="card-desc">Built & building automated strategies in Python on Rithmic API for Live Accounts only. Combining proven manual edge with systematic execution.</div>
+        <div class="card-desc">Building an automated 8AM ORB strategy in Python on Rithmic API. Combining proven manual edge with systematic execution.</div>
       </div>
       <div class="about-card">
         <div class="card-icon">🌴</div>
         <div class="card-title">Based in Miami</div>
-        <div class="card-desc">Traded my way out of corporate America to South Beach. The markets don't care where you sit, results do the talking.</div>
+        <div class="card-desc">Traded my way out of corporate New York to South Beach. The markets don't care where you sit, results do the talking.</div>
       </div>
     </div>
   </div>
@@ -1725,86 +1723,15 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
           </div>
         <div class="dash-section">
           <div class="dash-section-title">// Instruments</div>
-      <div class="price-grid">
-
-  <!-- GC Gold -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('GC')"></div>
-    <div class="price-badge">FULL</div>
-    <div class="price-sym">GC</div>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"TVC:GOLD","width":"100%","height":100,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
-      </script>
-    </div>
-  </div>
-
-  <!-- MGC Silver -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('MGC')"></div>
-    <div class="price-badge">MICRO</div>
-    <div class="price-sym">SI</div>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"TVC:SILVER","width":"100%","height":100,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
-      </script>
-    </div>
-  </div>
-
-  <!-- ES S&P -->
- <div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('ES')"></div>
-    <div class="price-badge">FULL</div>
-    <div class="price-sym">ES</div>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"CAPITALCOM:US500","width":"100%","height":100,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
-      </script>
-    </div>
-  </div>
-
-  <!-- MES Crude Oil -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('MES')"></div>
-    <div class="price-badge">MICRO</div>
-    <div class="price-sym">CL</div>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"TVC:USOIL","width":"100%","height":100,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
-      </script>
-    </div>
-  </div>
-
-  <!-- NQ Nasdaq -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('NQ')"></div>
-    <div class="price-badge">FULL</div>
-    <div class="price-sym">NQ</div>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-      {"symbol":"CAPITALCOM:US100","width":"100%","height":100,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}
-      </script>
-    </div>
-  </div>
-
-  <!-- MNQ Live Cattle -->
-<div class="price-card" style="cursor:pointer;">
-    <div class="card-overlay" onclick="openChart('MNQ')"></div>
-    <div class="price-badge">MICRO</div>
-    <div class="price-sym">LE</div>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-     {"symbol":"TVC:LIVESTOCK","width":"100%","height":100,"locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false,"largeChartUrl":""}      </script>
-    </div>
-  </div>
-
-</div>
+          <div class="price-grid">
+          <div class="price-card" id="card-GC" onclick="openChart('GC')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">GC</div><div class="price-name">Gold Futures</div><div class="price-val" id="pv-GC">3,085.40</div><div class="price-chg up" id="pc-GC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-GC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MGC" onclick="openChart('MGC')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">SI</div><div class="price-name">Silver</div><div class="price-val" id="pv-MGC">3,085.40</div><div class="price-chg up" id="pc-MGC">+8.20 (+0.27%)</div><svg class="sparkline" id="sp-MGC" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-ES" onclick="openChart('ES')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">ES</div><div class="price-name">E-mini S&amp;P</div><div class="price-val" id="pv-ES">6,651.00</div><div class="price-chg up" id="pc-ES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-ES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MES" onclick="openChart('MES')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">CL</div><div class="price-name">Crude Oil</div><div class="price-val" id="pv-MES">6,651.00</div><div class="price-chg up" id="pc-MES">+16.50 (+0.25%)</div><svg class="sparkline" id="sp-MES" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-NQ" onclick="openChart('NQ')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">NQ</div><div class="price-name">E-mini Nasdaq</div><div class="price-val" id="pv-NQ">21,480.00</div><div class="price-chg up" id="pc-NQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-NQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            <div class="price-card" id="card-MNQ" onclick="openChart('MNQ')" style="cursor:pointer;"><div class="price-badge">FULL</div><div class="price-sym">LE</div><div class="price-name">Live Cattle</div><div class="price-val" id="pv-MNQ">21,480.00</div><div class="price-chg up" id="pc-MNQ">+102.50 (+0.48%)</div><svg class="sparkline" id="sp-MNQ" viewBox="0 0 100 24" preserveAspectRatio="none"></svg></div>
+            </div>
+        </div>
 
          
 <!-- MAG 7 CHART -->
@@ -1898,34 +1825,34 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   <!-- ES LEVELS -->
   <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">ES &nbsp;/&nbsp; MES</div>
   <div class="levels-grid" style="margin-bottom:20px;">
-    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-ES-PDH" contenteditable="true">6,889.75</div></div>
-    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-ES-PDL" contenteditable="true">6,6846.75</div></div>
-    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-ES-ONH" contenteditable="true">-</div></div>
-    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-ES-ONL" contenteditable="true">-</div></div>
-    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-ES-WH" contenteditable="true">6,889.75</div></div>
-    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-ES-WL" contenteditable="true">6,566.50</div></div>
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-ES-PDH" contenteditable="true">6,644.50</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-ES-PDL" contenteditable="true">6,514.50</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-ES-ONH" contenteditable="true">6,632.50</div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-ES-ONL" contenteditable="true">6,519.75</div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-ES-WH" contenteditable="true">6,654.25</div></div>
+    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-ES-WL" contenteditable="true">6,353.00</div></div>
   </div>
 
   <!-- GC LEVELS -->
   <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">GC &nbsp;/&nbsp; MGC</div>
   <div class="levels-grid" style="margin-bottom:20px;">
-    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-GC-PDH" contenteditable="true">4820.10</div></div>
-    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-GC-PDL" contenteditable="true">4,754.00</div></div>
-    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-GC-ONH" contenteditable="true"> - </div></div>
-    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-GC-ONL" contenteditable="true"> - </div></div>
-    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-GC-WH" contenteditable="true">4,887.60</div></div>
-    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-GC-WL" contenteditable="true">4,626.10</div></div>
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-GC-PDH" contenteditable="true">4,726.50</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-GC-PDL" contenteditable="true">4,605.60</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-GC-ONH" contenteditable="true">4,826.00</div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-GC-ONL" contenteditable="true">4,580.20</div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-GC-WH" contenteditable="true">4,826.00</div></div>
+    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-GC-WL" contenteditable="true">4,446.20</div></div>
   </div>
 
   <!-- NQ LEVELS -->
   <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">NQ &nbsp;/&nbsp; MNQ</div>
   <div class="levels-grid">
-    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-NQ-PDH" contenteditable="true">25,292.75</div></div>
-    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-NQ-PDL" contenteditable="true">25,222.50</div></div>
-    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-NQ-ONH" contenteditable="true"> - </div></div>
-    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-NQ-ONL" contenteditable="true"> - </div></div>
-    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-NQ-WH" contenteditable="true">25,292.75</div></div>
-    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-NQ-WL" contenteditable="true">24,830.75</div></div>
+    <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-NQ-PDH" contenteditable="true">24,269.00</div></div>
+    <div class="level-card"><div class="level-label">Prev Day Low</div><div class="level-val" id="kl-NQ-PDL" contenteditable="true">23,681.50</div></div>
+    <div class="level-card"><div class="level-label">Overnight High</div><div class="level-val" id="kl-NQ-ONH" contenteditable="true">24,246.25</div></div>
+    <div class="level-card"><div class="level-label">Overnight Low</div><div class="level-val" id="kl-NQ-ONL" contenteditable="true">23,667.25</div></div>
+    <div class="level-card"><div class="level-label">Weekly High</div><div class="level-val" id="kl-NQ-WH" contenteditable="true">24,350.75</div></div>
+    <div class="level-card"><div class="level-label">Weekly Low</div><div class="level-val" id="kl-NQ-WL" contenteditable="true">22,962.00</div></div>
   </div>
 </div>
           <!-- EARNINGS CALENDAR -->
@@ -2111,7 +2038,7 @@ function updateTicker(sym, price, prev) {
 
 function fetchFearGreed() {
     // Update score daily — check: https://edition.cnn.com/markets/fear-and-greed
-    const score = 38;
+    const score = 15;
     const num    = document.getElementById('fgNum');
     const lbl    = document.getElementById('fgLbl');
     const needle = document.getElementById('fgNeedle');
