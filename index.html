@@ -1049,9 +1049,15 @@
     document.getElementById('chartOverlay').classList.remove('active');
     document.body.style.overflow = '';
     document.getElementById('tv_chart').innerHTML = '';
-  }
+}
 
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeChart(); });
+  
+  function loadMag7(sym) {
+    document.querySelectorAll('.mag7-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('mag7-'+sym).classList.add('active');
+    document.getElementById('tv_mag7').innerHTML = '';
+    const widget = () => new TradingView.widget({
       
       function loadMag7(sym) {
     document.querySelectorAll('.mag7-btn').forEach(b => b.classList.remove('active'));
