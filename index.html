@@ -1080,6 +1080,14 @@
       s.onload = widget;
       document.head.appendChild(s);
     }
+  });
+    if(window.TradingView) { widget(); }
+    else {
+      const s = document.createElement('script');
+      s.src = 'https://s3.tradingview.com/tv.js';
+      s.onload = widget;
+      document.head.appendChild(s);
+    }
   }
 
 
@@ -1926,11 +1934,26 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
 
         </div>
         </div>
+           
         <div class="orb-wrap">
           <div class="dash-section-title" style="padding:0;margin-bottom:8px;">// ORB KILLZONE</div>
           <div class="orb-count" id="orbCount">00:00:00</div>
           <div class="orb-lbl" id="orbLbl">Loading...</div>
         </div>
+            <!-- FEAR & GREED -->
+<div class="dash-section">
+  <div class="dash-section-title">// Fear & Greed</div>
+  <div style="text-align:center; padding:10px 0;">
+    <div id="fgNum" style="font-family:'Syne',sans-serif; font-size:48px; font-weight:800; color:var(--gold); line-height:1;">--</div>
+    <div id="fgLbl" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.15em; color:var(--muted); margin:6px 0 16px;">--</div>
+    <div style="position:relative; height:10px; background:linear-gradient(90deg,#e74c3c,#e67e22,#f1c40f,#2ecc71); border-radius:5px; margin-bottom:8px;">
+      <div id="fgNeedle" style="position:absolute; top:-4px; width:4px; height:18px; background:var(--white); border-radius:2px; transform:translateX(-50%); left:50%; transition:left 0.5s;"></div>
+    </div>
+    <div style="display:flex; justify-content:space-between; font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:0.1em;">
+      <span>FEAR</span><span>NEUTRAL</span><span>GREED</span>
+    </div>
+  </div>
+</div>
         <div class="cal-wrap">
           <div class="cal-wrap">
           <div class="dash-section-title" style="padding:0;margin-bottom:12px;">// Economic Calendar</div>
