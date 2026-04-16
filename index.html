@@ -874,7 +874,7 @@
   .dash-time { font-family:'Space Mono',monospace; font-size:13px; color:var(--white); }
   .close-btn { width:34px; height:34px; border:1px solid var(--border); background:transparent; color:var(--muted); font-size:16px; cursor:none; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
   .close-btn:hover { border-color:var(--red); color:var(--red); }
-  .dash-body { flex:1; display:grid; grid-template-columns:1fr 300px; overflow:hidden; }
+  .dash-body { flex:1; display:grid; grid-template-columns:1fr; overflow:hidden; min-height:0; }
   .dash-main { display:flex; flex-direction:column; overflow-y:auto; }
   .dash-section { padding:20px 28px; border-bottom:1px solid var(--border); }
   .dash-section-title { font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
@@ -1937,14 +1937,6 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
 </div>
 
         </div>
-      </div>
-      <div class="dash-sidebar">
-        <div class="fg-wrap">
-          <div class="dash-section-title" style="padding:0;margin-bottom:10px;">// Fear &amp; Greed</div>
-          <div class="fg-num" id="fgNum">--</div>
-          <div class="fg-lbl" id="fgLbl">Loading...</div>
-          <div class="fg-bar"><div class="fg-needle" id="fgNeedle" style="left:50%"></div></div>
-          <div class="fg-tags"><span>Fear</span><span>Neutral</span><span>Greed</span></div>
         </div>
         <div class="orb-wrap">
           <div class="dash-section-title" style="padding:0;margin-bottom:8px;">// ORB KILLZONE</div>
