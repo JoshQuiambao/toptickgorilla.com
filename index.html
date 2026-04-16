@@ -1080,16 +1080,7 @@
       s.onload = widget;
       document.head.appendChild(s);
     }
-  });
-    if(window.TradingView) { widget(); }
-    else {
-      const s = document.createElement('script');
-      s.src = 'https://s3.tradingview.com/tv.js';
-      s.onload = widget;
-      document.head.appendChild(s);
-    }
   }
-
 
   function openChart(sym) {
     const info = tvSymbols[sym];
