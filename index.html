@@ -985,7 +985,7 @@
      ES:  { sym:'CAPITALCOM:US500', name:'E-mini S&P',    interval:'15' },
     MES: { sym:'TVC:USOIL',       name:'Crude Oil',     interval:'15' },
     NQ:  { sym:'CAPITALCOM:US100', name:'E-mini Nasdaq', interval:'15' },
-    MNQ: { sym:'TVC:LIVESTOCK',   name:'Live Cattle',   interval:'15' },
+    MNQ: { sym:'CME_MINI:LE1!',   name:'Live Cattle',   interval:'15' },
   };
 
   let tvWidget = null;
@@ -1084,7 +1084,7 @@ container_id: 'tv_mag7'
   function openChart(sym) {
     const info = tvSymbols[sym];
     if(!info) return;
-    document.getElementById('chartTitle').innerHTML = sym + ' <span>' + info.name + '</span>';
+document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span>';
     document.getElementById('chartOverlay').classList.add('active');
     document.body.style.overflow = 'hidden';
     document.getElementById('tv_chart').innerHTML = '';
@@ -1184,13 +1184,12 @@ container_id: 'tv_mag7'
     <line x1="0" y1="300" x2="800" y2="300" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4,8"/>
   </svg>
 
-  <div class="hero-content">
-    <div class="hero-tag">|| Futures Trader & Developer - 4+ Years in the Markets</div>
+ <div class="hero-content">
+    <div class="hero-tag">|| Futures Market Data Platform</div>
     <div class="hero-name">TOPTICK<span class="gold">GORILLA</span></div>
     <div class="hero-sub">Trader Hub.<br>Price Action Tools.</div>
     <p class="hero-desc">
-      Funded Futures trader specializing in Equities & Commodities. 
-      Former process engineer turned full-time trading cowboy. Combining technical psychology & market structure
+      A former Process Engineer turned full-time Futures trading cowboy; specializing in Equities & Commodities. Combining technical psychology & market structure
       to execute strictly high probability setups.
     </p>
    <p class="hero-desc-highlight">Welcome to a seamless central point for daily updated intraday <strong>Key Levels</strong>, 
@@ -1215,43 +1214,39 @@ container_id: 'tv_mag7'
       <div class="stat-label">Primary Markets</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value"><span>8x</span></div>
+      <div class="stat-value"><span>14x</span></div>
       <div class="stat-label">Funded Accounts</div>
     </div>
   </div>
 </section>
 
 <!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner" id="tickerInner">
-    <div class="ticker-item"><span class="ticker-sym">GC</span><span class="ticker-price" id="tick-GC">--</span><span class="ticker-up" id="tick-GC-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">ES</span><span class="ticker-price" id="tick-ES">--</span><span class="ticker-up" id="tick-ES-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">NQ</span><span class="ticker-price" id="tick-NQ">--</span><span class="ticker-up" id="tick-NQ-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">CL</span><span class="ticker-price" id="tick-CL">--</span><span class="ticker-up" id="tick-CL-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">SI</span><span class="ticker-price" id="tick-SI">--</span><span class="ticker-up" id="tick-SI-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">LE</span><span class="ticker-price" id="tick-LE">--</span><span class="ticker-up" id="tick-LE-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">MBT</span><span class="ticker-price" id="tick-MBT">--</span><span class="ticker-up" id="tick-MBT-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">GC</span><span class="ticker-price" id="tick-GC2">--</span><span class="ticker-up" id="tick-GC2-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">ES</span><span class="ticker-price" id="tick-ES2">--</span><span class="ticker-up" id="tick-ES2-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">NQ</span><span class="ticker-price" id="tick-NQ2">--</span><span class="ticker-up" id="tick-NQ2-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">CL</span><span class="ticker-price" id="tick-CL2">--</span><span class="ticker-up" id="tick-CL2-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">SI</span><span class="ticker-price" id="tick-SI2">--</span><span class="ticker-up" id="tick-SI2-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">LE</span><span class="ticker-price" id="tick-LE2">--</span><span class="ticker-up" id="tick-LE2-chg">--</span></div>
-    <div class="ticker-dot">///</div>
-    <div class="ticker-item"><span class="ticker-sym">MBT</span><span class="ticker-price" id="tick-MBT2">--</span><span class="ticker-up" id="tick-MBT2-chg">--</span></div>
-</div>
+<!-- TRADINGVIEW TICKER -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+"symbols": [
+    {"proName": "CAPITALCOM:US500","title": "S&P 500"},
+    {"proName": "CAPITALCOM:US100","title": "Nasdaq 100"},
+    {"proName": "TVC:GOLD","title": "Gold"},
+    {"proName": "TVC:USOIL","title": "Crude Oil"},
+    {"proName": "TVC:SILVER","title": "Silver"},
+    {"proName": "CAPITALCOM:DXY","title": "Dollar Index"},
+    {"proName": "BITSTAMP:BTCUSD","title": "Bitcoin"},
+  {"proName": "BITSTAMP:ETHUSD","title": "Ethereum"},
+    {"proName": "FX:EURUSD","title": "EUR/USD"},
+    {"proName": "FX:USDJPY","title": "USD/JPY"},
+    {"proName": "AMEX:SPY","title": "SPY"},
+    {"proName": "NASDAQ:QQQ","title": "QQQ"}
+  ],
+  "showSymbolLogo": false,
+  "isTransparent": true,
+  "displayMode": "adaptive",
+  "colorTheme": "dark",
+  "locale": "en"
+  }
+  </script>
 </div>
 
 <!-- ABOUT -->
@@ -1364,8 +1359,8 @@ container_id: 'tv_mag7'
 
      <p>This is for the love of the game.</p>
   <p></p>
-    <p></p>My lines are open on the bottom of this page. If you have ideas on better data integrations, UI improvements, 
-    or anything that makes this more useful, I want to hear it.
+    <p><em>My lines are open on the bottom of this page. If you have ideas on better data integrations, UI improvements, 
+    or anything that makes this more useful, I want to hear it.</em></p>
       <p></p>
     <p>God Bless.</p>
       <p>🦍</p>
@@ -1374,7 +1369,7 @@ container_id: 'tv_mag7'
     <div class="about-cards reveal">
       <div class="about-card">
         <div class="card-icon">📊</div>
-        <div class="card-title">8x Funded Accounts</div>
+        <div class="card-title">14x Funded Accounts</div>
         <div class="card-desc">Lucid Trading, TopStep, & Tradeify. Trading GC, ES, NQ & micro contracts with disciplined risk management every session.</div>
       </div>
       <div class="about-card">
@@ -1615,11 +1610,11 @@ container_id: 'tv_mag7'
 <div class="journal-banner reveal">
   <div class="journal-banner-text">
     <div class="journal-label">|| You want it, you got it.</div>
-    <div class="journal-title">Download my Trading Journal & Futures Beginner's Guide</div>
+    <div class="journal-title">Trading Journal System & Futures Beginner's Guide</div>
     <div class="journal-desc">
-      I don't want your money. The same journal system I use every day, & a beginners trading guide that you should keep on your desk if you were just getting into the markets. Covers GC, ES, NQ, all micros, BTC & more.
-      Auto-calculated & formulated P&L, R-multiple, tick & point values, performance dashboard, mindset tracker,
-      edge library, & rules checklist. As well as a Futures guide that may be handy. Yours completely free. No email required.
+      Download the same journal system I use every trade, session & day. Also, a free foundational beginners futures trading guide you should keep on your desk if you were just getting into the markets. Covers GC, ES, NQ, all micros, BTC & more.
+      Journal has auto-calculated & formulated P&L, R-multiple, tick & point values, performance dashboard, mindset tracker,
+      & edge library. I don't want your money. No email required.
     </div>
   </div>
   <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
@@ -1655,8 +1650,7 @@ container_id: 'tv_mag7'
     <p class="contact-desc">
       Whether you're a trader wanting to talk shop, a developer interested in the bot,
       or just someone starting out who wants to learn; reach out.
-      No lifestyle. No BS. Not selling anything. This is for the love of the game.
-      Just real trading conversation.
+      No lifestyle. No BS. Just real trading conversation.
     </p>
 
     <div class="social-links">
@@ -1823,9 +1817,11 @@ container_id: 'tv_mag7'
         </div>
         <div class="dash-section">
           <div class="dash-section">
-  <div class="dash-section-title">// Key Levels</div>
+  <div class="dash-section">
+  <div class="dash-section-title">// Key Levels <span style="font-size:9px; color:var(--muted); font-family:'Space Mono',monospace;">INTRADAY</span></div>
   <div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); margin-bottom:12px; letter-spacing:0.05em;">Liquidity Hunt</div>
- <!-- ES LEVELS -->
+
+<!-- ES LEVELS -->
   <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin:0 0 10px;">ES &nbsp;/&nbsp; MES</div>
   <div class="levels-grid" style="margin-bottom:20px;">
     <div class="level-card"><div class="level-label">Prev Day High</div><div class="level-val" id="kl-ES-PDH" contenteditable="true">7,064.50</div></div>
@@ -1954,18 +1950,18 @@ container_id: 'tv_mag7'
 
   async function fetchPrices() {
     try {
-      const symbols = {
-        'ES': '/ES',
-        'GC': '/GC',
-        'NQ': '/NQ',
-        'CL': '/CL',
-        'SI': '/SI',
-        'LE': '/LE',
-      };
+const symbols = {
+  'ES': 'ES',
+  'GC': 'GC',
+  'NQ': 'NQ',
+  'CL': 'CL',
+  'SI': 'SI',
+  'LE': 'LE',
+};
 
       const results = await Promise.all(
         Object.entries(symbols).map(async ([sym, ticker]) => {
-          const url = `https://api.polygon.io/v2/snapshot/locale/us/markets/futures/tickers/${ticker}?apiKey=${POLYGON_KEY}`;
+          const url = `https://api.polygon.io/v3/snapshot?ticker.any_of=${ticker}&apiKey=${POLYGON_KEY}`;
           const res = await fetch(url);
           const data = await res.json();
           return { sym, data };
@@ -2018,7 +2014,6 @@ container_id: 'tv_mag7'
       });
     }
   }
-  fetchFearGreed();
 function updateTicker(sym, price, prev) {
     const diff = price - prev;
     const pct = (diff/prev*100).toFixed(2);
@@ -2032,86 +2027,32 @@ function updateTicker(sym, price, prev) {
       const chgEl = document.getElementById(`tick-${id}-chg`);
       if(priceEl) priceEl.textContent = fmt(price);
       if(chgEl) { chgEl.textContent = txt; chgEl.className = cls; }
-    });
-  }
-  async function fetchPrices() {
-    try {
-      const symbols = 'ES1!,GC1!,NQ1!,CL1!,SI1!,LE1!,MBT/USD';
-      const url = `https://api.twelvedata.com/quote?symbol=${symbols}&apikey=${TWELVE_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      const symMap = {
-    'ES1!': ['ES','MES'],
-    'GC1!': ['GC','MGC'],
-    'NQ1!': ['NQ','MNQ'],
-    'CL1!': ['CL'],
-    'SI1!': ['SI'],
-    'LE1!': ['LE'],
-    'MBT/USD': ['MBT'],
-};
-
-      const klMap = {
-        'ES1!': 'ES',
-        'GC1!': 'GC',
-        'NQ1!': 'NQ',
-      };
-
-      const fmt = n => n ? parseFloat(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '--';
-
-      for(const [sym, quote] of Object.entries(data)) {
-        if(quote.status === 'error') continue;
-
-        const price     = parseFloat(quote.close);
-        const prev      = parseFloat(quote.previous_close);
-        const dayHigh   = parseFloat(quote.high);
-        const dayLow    = parseFloat(quote.low);
-        const weekHigh  = parseFloat(quote.fifty_two_week_high || quote.high);
-        const weekLow   = parseFloat(quote.fifty_two_week_low  || quote.low);
-        
-        // Update price cards
-        const cards = symMap[sym];
-        if(cards) cards.forEach(s => updateCard(s, price, prev));
-        if(cards) cards.forEach(s => updateTicker(s, price, prev));
-
-        // Update key levels
-        const kl = klMap[sym];
-        if(kl) {
-          const pdh = document.getElementById(`kl-${kl}-PDH`);
-          const pdl = document.getElementById(`kl-${kl}-PDL`);
-          const onh = document.getElementById(`kl-${kl}-ONH`);
-          const onl = document.getElementById(`kl-${kl}-ONL`);
-          const wh  = document.getElementById(`kl-${kl}-WH`);
-          const wl  = document.getElementById(`kl-${kl}-WL`);
-
-          if(pdh) pdh.textContent = fmt(dayHigh);
-          if(pdl) pdl.textContent = fmt(dayLow);
-          if(onh) onh.textContent = fmt(Math.max(price, parseFloat(quote.open)));
-          if(onl) onl.textContent = fmt(Math.min(price, parseFloat(quote.open)));
-          if(wh)  wh.textContent  = fmt(weekHigh);
-          if(wl)  wl.textContent  = fmt(weekLow);
-        }
-      }
-
-      console.log('Prices updated via Twelve Data');
-
-    } catch(err) {
-      console.log('Twelve Data fetch failed, using simulation:', err);
-      syms.forEach(sym => {
-        const last = spk[sym][spk[sym].length-1];
-        const np = last + (Math.random()-.48)*last*0.0003;
-        updateCard(sym, np, base[sym]);
-      });
-    }
+   });
   }
 
-  syms.forEach(s=>dSpk(s,spk[s],true));
   window.addEventListener('load', () => {
     fetchPrices();
     setInterval(fetchPrices, 900000);
 });
 
-
+function fetchFearGreed() {
+    // Update score daily — check: https://edition.cnn.com/markets/fear-and-greed
+    const score = 56;
+    const num    = document.getElementById('fgNum');
+    const lbl    = document.getElementById('fgLbl');
+    const needle = document.getElementById('fgNeedle');
+    if(num) num.textContent = score;
+    if(needle) needle.style.left = score + '%';
+    if(lbl) {
+      if(score < 25){ lbl.textContent='EXTREME FEAR'; lbl.style.color='var(--red)'; }
+      else if(score < 45){ lbl.textContent='FEAR'; lbl.style.color='#FF8844'; }
+      else if(score < 55){ lbl.textContent='NEUTRAL'; lbl.style.color='var(--text)'; }
+      else if(score < 75){ lbl.textContent='GREED'; lbl.style.color='var(--gold)'; }
+      else { lbl.textContent='EXTREME GREED'; lbl.style.color='var(--green)'; }
+    }
+  }
+  fetchFearGreed();
+  
   // Draw initial sparklines
   syms.forEach(s=>dSpk(s,spk[s],true));
 const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
@@ -2159,10 +2100,14 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
       if(container) container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Earnings unavailable</div>';
     }
   }
-
-  fetchEarnings();
+fetchFearGreed();
+ fetchEarnings();
   setInterval(fetchEarnings, 3600000);
-  // Fetch real prices immediately then every 30 seconds
+
+  window.addEventListener('load', () => {
+    fetchPrices();
+    setInterval(fetchPrices, 900000);
+  });
  function calcPnL() {
     const instrument = document.getElementById('calc-instrument').value;
     const contracts  = parseFloat(document.getElementById('calc-contracts-in').value);
