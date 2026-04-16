@@ -1057,13 +1057,7 @@
     document.querySelectorAll('.mag7-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('mag7-'+sym).classList.add('active');
     document.getElementById('tv_mag7').innerHTML = '';
-    const widget = () => new TradingView.widget({
-      
-      function loadMag7(sym) {
-    document.querySelectorAll('.mag7-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('mag7-'+sym).classList.add('active');
-    document.getElementById('tv_mag7').innerHTML = '';
-    const widget = () => new TradingView.widget({
+ const widget = () => new TradingView.widget({
       width: document.getElementById('tv_mag7').offsetWidth || 400,
       height: 400,
       symbol: 'NASDAQ:' + sym,
