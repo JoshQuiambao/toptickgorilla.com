@@ -1247,24 +1247,15 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   "colorTheme": "dark",
   "locale": "en"
   }
-
-    function toggleStory() {
-  const body = document.getElementById('storyBody');
-  const arrow = document.getElementById('storyToggle');
-  const isOpen = body.style.display !== 'none';
-  body.style.display = isOpen ? 'none' : 'grid';
-  arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-}
-    
   </script>
 </div>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="section-label">01 Joshua Macaraeg Quiambao</div>
-  <h2 class="section-title">The Story<span>.</span></h2>   <button onclick="toggleStory()" id="storyToggle" style="background:none;border:none;cursor:pointer;display:block;margin:12px auto 0;color:var(--gold);font-size:24px;transition:transform 0.3s;">▼</button>
+  <h2 class="section-title">The Story<span>.</span></h2>
 
-  <div class="about-grid" id="storyBody" style="display:none;">
+  <div class="about-grid">
     <div class="about-text reveal">
       <p>
         I didn't come from Wall Street, I'm a Bay Area gentleman with a tech & legal background; debugging internal systems as a <strong>Process Q3 Engineer</strong> at <strong>Salesforce</strong> while 
