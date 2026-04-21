@@ -979,6 +979,37 @@
   .chart-sym-title span { color:var(--gold); }
   .chart-body { flex:1; padding:0; overflow:hidden; }
 
+  /* GLITCH BORDER BUTTONS */
+.btn-primary {
+  position: relative;
+  z-index: 0;
+  box-shadow: 3px 3px 0px var(--gold), -1px -1px 0px rgba(201,168,76,0.3);
+}
+
+.btn-secondary {
+  position: relative;
+  box-shadow: 3px 3px 0px rgba(201,168,76,0.4), -1px -1px 0px rgba(201,168,76,0.15);
+}
+
+.btn-journal {
+  position: relative;
+  box-shadow: 3px 3px 0px rgba(201,168,76,0.4), -1px -1px 0px rgba(201,168,76,0.15);
+}
+
+.open-dashboard-btn {
+  box-shadow: 3px 3px 0px var(--gold), -1px -1px 0px rgba(201,168,76,0.3);
+}
+
+.btn-primary:hover, .open-dashboard-btn:hover {
+  box-shadow: 4px 4px 0px var(--gold), -2px -2px 0px rgba(201,168,76,0.4);
+  transform: translate(-1px, -1px);
+}
+
+.btn-secondary:hover, .btn-journal:hover {
+  box-shadow: 4px 4px 0px rgba(201,168,76,0.5), -2px -2px 0px rgba(201,168,76,0.2);
+  transform: translate(-1px, -1px);
+}
+
 </style>
 <script>
 
