@@ -1808,7 +1808,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 <div class="tradingview-widget-container" style="position:relative;">
     <div id="tv_mag7" style="height:600px; width:100%; min-height:600px;"></div>
-    <div class="card-overlay" onclick="openChart('NQ')" style="position:absolute;inset:0;z-index:10;cursor:pointer;"></div>
+    <div class="card-overlay" onclick="const active=document.querySelector('.mag7-btn.active'); if(active) openChart(active.id.replace('mag7-',''));" style="position:absolute;inset:0;z-index:10;cursor:pointer;"></div>
 </div>
 </div>
 
