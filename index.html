@@ -1249,8 +1249,255 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   }
   </script>
 </div>
+  
 
-<!-- ABOUT -->
+<!-- TECH -->
+<section id="tech">
+  <div class="section-label">03 Tech</div>
+  <h2 class="section-title">The Bot<span>.</span></h2>
+
+  <div class="tech-layout">
+    <div class="tech-content reveal">
+      <p>
+        The engineering background never left. While a lot of "traders" are drawing triangles on their charts,
+        I'm automating the edges that's already proven manually by myself & actual <strong>TRADERS</strong>.
+      </p>
+      <p>
+        The <strong>8AM ORB Strategy Bot</strong> is a fully automated trading system
+        built from scratch, connecting directly to Rithmic via API,
+        watching every tick from 8:00 AM, locking the opening range at 8:15,
+        & firing bracket orders the moment a breakout is confirmed.
+      </p>
+      <p>
+        Every trade is automatically logged to CSV & synced with a custom
+        trading journal. Risk management is hardcoded bitch; the bot cannot revenge trade,
+        cannot overtrade, and shuts itself down when the daily loss limit is hit.
+      </p>
+      <p>
+        The full source code is open to the public on my GitHub linked on the bottom of this page. 
+    Feel free to fork it, build on it, or use it as a foundation for your own strategy. 
+    The only ask, don't call it lucky. Put in the work.</p>
+      
+
+      <div class="tech-stack">
+        <div class="stack-item">
+          <div class="stack-icon">🐍</div>
+          <div class="stack-info">
+            <div class="stack-name">Python 3.11</div>
+            <div class="stack-detail">async_rithmic · pandas · asyncio · aiohttp</div>
+          </div>
+          <div class="stack-status">ACTIVE</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-icon">⚡</div>
+          <div class="stack-info">
+            <div class="stack-name">Rithmic API</div>
+            <div class="stack-detail">Direct market access · Protocol Buffers · WebSocket</div>
+          </div>
+          <div class="stack-status">CONNECTING</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-icon">📱</div>
+          <div class="stack-info">
+            <div class="stack-name">Alerts</div>
+            <div class="stack-detail">Real time trade notifications · Entry and exit alerts</div>
+          </div>
+          <div class="stack-status">BUILT</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-icon">📊</div>
+          <div class="stack-info">
+            <div class="stack-name">Auto Trade Journal</div>
+            <div class="stack-detail">CSV logging · Google Sheets compatible</div>
+          </div>
+          <div class="stack-status">ACTIVE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal reveal">
+      <div class="terminal-bar">
+        <div class="terminal-dot t-red"></div>
+        <div class="terminal-dot t-yellow"></div>
+        <div class="terminal-dot t-green-dot"></div>
+        <span class="terminal-title">orb_strategy.py - trading_bot</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-comment"># Jet Quiambao's 8AM ORB Strategy</span></div>
+        <div><span class="t-comment"># MES - Lucid Trading / Rithmic</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-muted">════════════════════════════</span></div>
+        <div><span class="t-info">🚀 STRATEGY STARTING</span></div>
+        <div><span class="t-key">   Symbol    </span><span class="t-val">: MESM6</span></div>
+        <div><span class="t-key">   ORB Window </span><span class="t-val">: 08:00 - 08:15</span></div>
+        <div><span class="t-key">   Stop       </span><span class="t-val">: 15 points ($150)</span></div>
+        <div><span class="t-key">   Target     </span><span class="t-val">: 23 points ($230)</span></div>
+        <div><span class="t-key">   Max Loss   </span><span class="t-val">: $350</span></div>
+        <div><span class="t-muted">════════════════════════════</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-info">✅ Connected to Rithmic</span></div>
+        <div><span class="t-info">📡 Subscribed to MESM6</span></div>
+        <div><span class="t-info">⏳ Waiting for 8:00 AM...</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-key">ORB High </span><span class="t-str">: 6,660.25</span></div>
+        <div><span class="t-key">ORB Low  </span><span class="t-str">: 6,642.75</span></div>
+        <div><span class="t-info">✅ ORB LOCKED — 17.5 pts</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-info">🟢 LONG BREAKOUT at 6,660.50</span></div>
+        <div><span class="t-key">Stop     </span><span class="t-warn">: 6,645.50</span></div>
+        <div><span class="t-key">Target   </span><span class="t-val">: 6,683.50</span></div>
+        <div>&nbsp;</div>
+        <div><span class="t-info">✅ TRADE CLOSED — WIN</span></div>
+        <div><span class="t-key">Net P&L  </span><span class="t-val">: +$221.00</span></div>
+        <div><span class="t-muted">════════════════════════════</span></div>
+        <div><span class="t-comment">$ </span><span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+<section id="journal">
+
+  
+<!-- FREE RESOURCE BIZTCH -->
+<div class="journal-banner reveal">
+  <div class="journal-banner-text">
+    <div class="journal-label">|| You want it, you got it.</div>
+    <div class="journal-title">Trading Journal System & Futures Beginner's Guide</div>
+    <div class="journal-desc">
+      Download the same journal system I use every trade, session & day. Also, a free foundational beginners futures trading guide you should keep on your desk if you were just getting into the markets. Covers GC, ES, NQ, all micros, BTC & more.
+      Journal has auto-calculated & formulated P&L, R-multiple, tick & point values, performance dashboard, mindset tracker,
+      & edge library. I don't want your money. No email required.
+    </div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+  <a href="/Beginners_Futures_Guide.pdf" class="btn-journal" target="_blank">↓ Trading Guide</a>
+  <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+  <a href="/Trading_&_Mindset_Journal.xlsx" class="btn-journal" target="_blank">↓ Trading Journal</a>
+  <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+  <a href="https://www.youtube.com/watch?v=01YtlF94Ttw" class="btn-journal" target="_blank">▶ What are Futures?</a>
+     <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+  <a href="https://www.youtube.com/watch?v=I2QHb8_hIyo" class="btn-journal" target="_blank">▶ What are Prop Firms?</a> 
+       <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+  <a href="https://www.youtube.com/watch?v=JMObz0Dgq7M" class="btn-journal" target="_blank">▶ History of Gold</a> 
+       <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+  <a href="https://www.youtube.com/watch?v=ErXqLgV_ToI" class="btn-journal" target="_blank">▶ Market Psychology</a>
+    <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+  <a href="https://www.youtube.com/watch?v=ialr7YxrBTU" class="btn-journal" target="_blank">▶ Involving Yahweh</a>
+    </div>
+  </div>    
+         </div>
+    </div>  
+</div>
+</div>
+</section>
+
+<div style="height: 80px;"></div>
+<div class="divider"></div>
+
+    <!-- SETUPS -->
+<section id="setups">
+  <div class="section-label">02 Setups</div>
+  <h2 class="section-title">The Playbook<span>.</span></h2>
+
+  <div class="setups-grid reveal">
+    <div class="setup-card">
+      <div class="setup-number">// 01</div>
+      <div class="setup-name">Dead Cat Bounce Short</div>
+      <div class="setup-desc">Price drops hard, bounces weakly into a previous breakdown zone, gets rejected, & continues lower. Trap the trapped longs.</div>
+      <div class="setup-tags">
+        <span class="tag gold">SHORT</span>
+        <span class="tag">15m Entry</span>
+        <span class="tag cyan">4H Bias</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 02</div>
+      <div class="setup-name">8AM ORB Breakout</div>
+      <div class="setup-desc">Mark the 8:00-8:15 AM range. Trade the first clean break above or below with confirmation. One trade, disciplined execution.</div>
+      <div class="setup-tags">
+        <span class="tag">LONG / SHORT</span>
+        <span class="tag cyan">Automated</span>
+        <span class="tag">15m</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 03</div>
+      <div class="setup-name">Liquidity Sweep Reversal</div>
+      <div class="setup-desc">Price sweeps equal highs or lows, triggering stop losses, then immediately reverses. The classic smart money move.</div>
+      <div class="setup-tags">
+        <span class="tag gold">SMC</span>
+        <span class="tag">1H / 15m</span>
+        <span class="tag cyan">HIGH PROB</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 04</div>
+      <div class="setup-name">Fair Value Gap Entry</div>
+      <div class="setup-desc">Price creates an imbalance gap during a strong impulse move. Enter on the retest of that gap in the direction of the trend.</div>
+      <div class="setup-tags">
+        <span class="tag">LONG / SHORT</span>
+        <span class="tag gold">ICT</span>
+        <span class="tag">15m / 1H</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 05</div>
+      <div class="setup-name">London Killzone Reversal</div>
+      <div class="setup-desc">2-5 AM EST. Price sweeps the Asian session high or low then reverses. One of the cleanest institutional setups available.</div>
+      <div class="setup-tags">
+        <span class="tag gold">GOLD</span>
+        <span class="tag">NQ</span>
+        <span class="tag cyan">OVERNIGHT</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 06</div>
+      <div class="setup-name">Supply Zone Retest</div>
+      <div class="setup-desc">Previous resistance zone retested after a breakdown. Sellers reload, buyers who missed the first move get trapped again.</div>
+      <div class="setup-tags">
+        <span class="tag gold">SHORT</span>
+        <span class="tag">S&D</span>
+        <span class="tag">4H / 1H</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 07</div>
+      <div class="setup-name">Silver Bullet</div>
+      <div class="setup-desc">The 10AM-11AM killzone setup. Price sweeps liquidity, creates a Fair Value Gap, & reverses with institutional precision. The trade that changed everything.</div>
+      <div class="setup-tags">
+        <span class="tag gold">ICT</span>
+        <span class="tag green">10AM KZ</span>
+        <span class="tag">5m / 15m</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 08</div>
+      <div class="setup-name">The Strat - Rob Smith</div>
+      <div class="setup-desc">Price action framework using candle relationships: inside bars, outside bars, and directional candles. Timeframe continuity drives the bias. No indicators required.</div>
+      <div class="setup-tags">
+        <span class="tag green">THE STRAT</span>
+        <span class="tag">MULTI-TF</span>
+        <span class="tag cyan">PRICE ACTION</span>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-number">// 09</div>
+      <div class="setup-name">Order Block Entry</div>
+      <div class="setup-desc">The last opposing candle before a significant impulse move. Institutions leave their fingerprints here. Enter on the retest with confluence from HTF bias and FVG overlap.</div>
+      <div class="setup-tags">
+        <span class="tag gold">ICT</span>
+        <span class="tag">4H / 15m</span>
+        <span class="tag cyan">HIGH PROB</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+    <!-- ABOUT -->
 <section id="about">
   <div class="section-label">01 Joshua Macaraeg Quiambao</div>
   <h2 class="section-title">The Story<span>.</span></h2>
@@ -1397,250 +1644,6 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- SETUPS -->
-<section id="setups">
-  <div class="section-label">02 Setups</div>
-  <h2 class="section-title">The Playbook<span>.</span></h2>
-
-  <div class="setups-grid reveal">
-    <div class="setup-card">
-      <div class="setup-number">// 01</div>
-      <div class="setup-name">Dead Cat Bounce Short</div>
-      <div class="setup-desc">Price drops hard, bounces weakly into a previous breakdown zone, gets rejected, & continues lower. Trap the trapped longs.</div>
-      <div class="setup-tags">
-        <span class="tag gold">SHORT</span>
-        <span class="tag">15m Entry</span>
-        <span class="tag cyan">4H Bias</span>
-      </div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-number">// 02</div>
-      <div class="setup-name">8AM ORB Breakout</div>
-      <div class="setup-desc">Mark the 8:00-8:15 AM range. Trade the first clean break above or below with confirmation. One trade, disciplined execution.</div>
-      <div class="setup-tags">
-        <span class="tag">LONG / SHORT</span>
-        <span class="tag cyan">Automated</span>
-        <span class="tag">15m</span>
-      </div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-number">// 03</div>
-      <div class="setup-name">Liquidity Sweep Reversal</div>
-      <div class="setup-desc">Price sweeps equal highs or lows, triggering stop losses, then immediately reverses. The classic smart money move.</div>
-      <div class="setup-tags">
-        <span class="tag gold">SMC</span>
-        <span class="tag">1H / 15m</span>
-        <span class="tag cyan">HIGH PROB</span>
-      </div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-number">// 04</div>
-      <div class="setup-name">Fair Value Gap Entry</div>
-      <div class="setup-desc">Price creates an imbalance gap during a strong impulse move. Enter on the retest of that gap in the direction of the trend.</div>
-      <div class="setup-tags">
-        <span class="tag">LONG / SHORT</span>
-        <span class="tag gold">ICT</span>
-        <span class="tag">15m / 1H</span>
-      </div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-number">// 05</div>
-      <div class="setup-name">London Killzone Reversal</div>
-      <div class="setup-desc">2-5 AM EST. Price sweeps the Asian session high or low then reverses. One of the cleanest institutional setups available.</div>
-      <div class="setup-tags">
-        <span class="tag gold">GOLD</span>
-        <span class="tag">NQ</span>
-        <span class="tag cyan">OVERNIGHT</span>
-      </div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-number">// 06</div>
-      <div class="setup-name">Supply Zone Retest</div>
-      <div class="setup-desc">Previous resistance zone retested after a breakdown. Sellers reload, buyers who missed the first move get trapped again.</div>
-      <div class="setup-tags">
-        <span class="tag gold">SHORT</span>
-        <span class="tag">S&D</span>
-        <span class="tag">4H / 1H</span>
-      </div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-number">// 07</div>
-      <div class="setup-name">Silver Bullet</div>
-      <div class="setup-desc">The 10AM-11AM killzone setup. Price sweeps liquidity, creates a Fair Value Gap, & reverses with institutional precision. The trade that changed everything.</div>
-      <div class="setup-tags">
-        <span class="tag gold">ICT</span>
-        <span class="tag green">10AM KZ</span>
-        <span class="tag">5m / 15m</span>
-      </div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-number">// 08</div>
-      <div class="setup-name">The Strat - Rob Smith</div>
-      <div class="setup-desc">Price action framework using candle relationships: inside bars, outside bars, and directional candles. Timeframe continuity drives the bias. No indicators required.</div>
-      <div class="setup-tags">
-        <span class="tag green">THE STRAT</span>
-        <span class="tag">MULTI-TF</span>
-        <span class="tag cyan">PRICE ACTION</span>
-      </div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-number">// 09</div>
-      <div class="setup-name">Order Block Entry</div>
-      <div class="setup-desc">The last opposing candle before a significant impulse move. Institutions leave their fingerprints here. Enter on the retest with confluence from HTF bias and FVG overlap.</div>
-      <div class="setup-tags">
-        <span class="tag gold">ICT</span>
-        <span class="tag">4H / 15m</span>
-        <span class="tag cyan">HIGH PROB</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- TECH -->
-<section id="tech">
-  <div class="section-label">03 Tech</div>
-  <h2 class="section-title">The Bot<span>.</span></h2>
-
-  <div class="tech-layout">
-    <div class="tech-content reveal">
-      <p>
-        The engineering background never left. While a lot of "traders" are drawing triangles on their charts,
-        I'm automating the edges that's already proven manually by myself & actual <strong>TRADERS</strong>.
-      </p>
-      <p>
-        The <strong>8AM ORB Strategy Bot</strong> is a fully automated trading system
-        built from scratch, connecting directly to Rithmic via API,
-        watching every tick from 8:00 AM, locking the opening range at 8:15,
-        & firing bracket orders the moment a breakout is confirmed.
-      </p>
-      <p>
-        Every trade is automatically logged to CSV & synced with a custom
-        trading journal. Risk management is hardcoded bitch; the bot cannot revenge trade,
-        cannot overtrade, and shuts itself down when the daily loss limit is hit.
-      </p>
-      <p>
-        The full source code is open to the public on my GitHub linked on the bottom of this page. 
-    Feel free to fork it, build on it, or use it as a foundation for your own strategy. 
-    The only ask, don't call it lucky. Put in the work.</p>
-      
-
-      <div class="tech-stack">
-        <div class="stack-item">
-          <div class="stack-icon">🐍</div>
-          <div class="stack-info">
-            <div class="stack-name">Python 3.11</div>
-            <div class="stack-detail">async_rithmic · pandas · asyncio · aiohttp</div>
-          </div>
-          <div class="stack-status">ACTIVE</div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-icon">⚡</div>
-          <div class="stack-info">
-            <div class="stack-name">Rithmic API</div>
-            <div class="stack-detail">Direct market access · Protocol Buffers · WebSocket</div>
-          </div>
-          <div class="stack-status">CONNECTING</div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-icon">📱</div>
-          <div class="stack-info">
-            <div class="stack-name">Alerts</div>
-            <div class="stack-detail">Real time trade notifications · Entry and exit alerts</div>
-          </div>
-          <div class="stack-status">BUILT</div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-icon">📊</div>
-          <div class="stack-info">
-            <div class="stack-name">Auto Trade Journal</div>
-            <div class="stack-detail">CSV logging · Google Sheets compatible</div>
-          </div>
-          <div class="stack-status">ACTIVE</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="terminal reveal">
-      <div class="terminal-bar">
-        <div class="terminal-dot t-red"></div>
-        <div class="terminal-dot t-yellow"></div>
-        <div class="terminal-dot t-green-dot"></div>
-        <span class="terminal-title">orb_strategy.py - trading_bot</span>
-      </div>
-      <div class="terminal-body">
-        <div><span class="t-comment"># Jet Quiambao's 8AM ORB Strategy</span></div>
-        <div><span class="t-comment"># MES - Lucid Trading / Rithmic</span></div>
-        <div>&nbsp;</div>
-        <div><span class="t-muted">════════════════════════════</span></div>
-        <div><span class="t-info">🚀 STRATEGY STARTING</span></div>
-        <div><span class="t-key">   Symbol    </span><span class="t-val">: MESM6</span></div>
-        <div><span class="t-key">   ORB Window </span><span class="t-val">: 08:00 - 08:15</span></div>
-        <div><span class="t-key">   Stop       </span><span class="t-val">: 15 points ($150)</span></div>
-        <div><span class="t-key">   Target     </span><span class="t-val">: 23 points ($230)</span></div>
-        <div><span class="t-key">   Max Loss   </span><span class="t-val">: $350</span></div>
-        <div><span class="t-muted">════════════════════════════</span></div>
-        <div>&nbsp;</div>
-        <div><span class="t-info">✅ Connected to Rithmic</span></div>
-        <div><span class="t-info">📡 Subscribed to MESM6</span></div>
-        <div><span class="t-info">⏳ Waiting for 8:00 AM...</span></div>
-        <div>&nbsp;</div>
-        <div><span class="t-key">ORB High </span><span class="t-str">: 6,660.25</span></div>
-        <div><span class="t-key">ORB Low  </span><span class="t-str">: 6,642.75</span></div>
-        <div><span class="t-info">✅ ORB LOCKED — 17.5 pts</span></div>
-        <div>&nbsp;</div>
-        <div><span class="t-info">🟢 LONG BREAKOUT at 6,660.50</span></div>
-        <div><span class="t-key">Stop     </span><span class="t-warn">: 6,645.50</span></div>
-        <div><span class="t-key">Target   </span><span class="t-val">: 6,683.50</span></div>
-        <div>&nbsp;</div>
-        <div><span class="t-info">✅ TRADE CLOSED — WIN</span></div>
-        <div><span class="t-key">Net P&L  </span><span class="t-val">: +$221.00</span></div>
-        <div><span class="t-muted">════════════════════════════</span></div>
-        <div><span class="t-comment">$ </span><span class="t-cursor"></span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-<section id="journal">
-<!-- FREE JOURNAL BANNER -->
-<div class="journal-banner reveal">
-  <div class="journal-banner-text">
-    <div class="journal-label">|| You want it, you got it.</div>
-    <div class="journal-title">Trading Journal System & Futures Beginner's Guide</div>
-    <div class="journal-desc">
-      Download the same journal system I use every trade, session & day. Also, a free foundational beginners futures trading guide you should keep on your desk if you were just getting into the markets. Covers GC, ES, NQ, all micros, BTC & more.
-      Journal has auto-calculated & formulated P&L, R-multiple, tick & point values, performance dashboard, mindset tracker,
-      & edge library. I don't want your money. No email required.
-    </div>
-  </div>
-  <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-  <a href="/Beginners_Futures_Guide.pdf" class="btn-journal" target="_blank">↓ Trading Guide</a>
-  <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-  <a href="/Trading_&_Mindset_Journal.xlsx" class="btn-journal" target="_blank">↓ Trading Journal</a>
-  <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-  <a href="https://www.youtube.com/watch?v=01YtlF94Ttw" class="btn-journal" target="_blank">▶ What are Futures?</a>
-     <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-  <a href="https://www.youtube.com/watch?v=I2QHb8_hIyo" class="btn-journal" target="_blank">▶ What are Prop Firms?</a> 
-       <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-  <a href="https://www.youtube.com/watch?v=JMObz0Dgq7M" class="btn-journal" target="_blank">▶ History of Gold</a> 
-       <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-  <a href="https://www.youtube.com/watch?v=ErXqLgV_ToI" class="btn-journal" target="_blank">▶ Market Psychology</a>
-    <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-  <a href="https://www.youtube.com/watch?v=ialr7YxrBTU" class="btn-journal" target="_blank">▶ Involving Yahweh</a>
-    </div>
-  </div>    
-         </div>
-    </div>  
-</div>
-</div>
-</section>
-
-<div style="height: 80px;"></div>
 <div class="divider"></div>
 
 <!-- CONTACT -->
