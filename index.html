@@ -2221,19 +2221,19 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
   }
 fetchFearGreed();
   async function fetchNews() {
-    const sources = [
-      'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.reuters.com/reuters/businessNews&api_key=free&count=5',
-      'https://api.rss2json.com/v1/api.json?rss_url=https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01%26id=100003114&api_key=free&count=5',
-      'https://api.rss2json.com/v1/api.json?rss_url=https://www.aljazeera.com/xml/rss/all.xml&api_key=free&count=5',
+ const sources = [
+      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC,^DJI&region=US&lang=en-US&count=5', name: 'Yahoo Finance' },
+      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.marketwatch.com/marketwatch/topstories&count=5', name: 'MarketWatch' },
+      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.investing.com/rss/news.rss&count=5', name: 'Investing.com' },
     ];
     const container = document.getElementById('newsFeed');
     if(!container) return;
     try {
-      const results = await Promise.allSettled(sources.map(url => fetch(url).then(r => r.json())));
+      const results = await Promise.allSettled(sources.map(s => fetch(s.url).then(r => r.json())));
       let items = [];
       results.forEach((result, i) => {
         if(result.status === 'fulfilled' && result.value.items) {
-          const source = ['Reuters', 'CNBC', 'Al Jazeera'][i];
+          const source = sources[i].name;
           result.value.items.forEach(item => {
             items.push({ title: item.title, link: item.link, source, pubDate: item.pubDate });
           });
