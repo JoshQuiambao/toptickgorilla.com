@@ -2216,10 +2216,11 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
     } catch(err) {
       console.log('Earnings failed:', err);
       const container = document.getElementById('earningsCalendar');
-      if(container) container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Earnings unavailable</div>';
-    }
+if(container) container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Earnings unavailable</div>';
+}
   }
-fetchFearGreed();
+  }
+  fetchFearGreed();
 async function fetchNews() {
     const container = document.getElementById('newsFeed');
     if(!container) return;
