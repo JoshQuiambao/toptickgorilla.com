@@ -2246,10 +2246,6 @@ fetchFearGreed();
       container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Headlines unavailable</div>';
     }
   }
-    const container = document.getElementById('newsFeed');
-    if(!container) return;
-    try {
-      const results = await Promise.allSettled(sources.map(s => fetch(s.url).then(r => r.json())));
       let items = [];
       results.forEach((result, i) => {
         if(result.status === 'fulfilled' && result.value.items) {
