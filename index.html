@@ -1837,9 +1837,9 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     <button onclick="loadMag7('TSLA')" class="mag7-btn" id="mag7-TSLA">TSLA</button>
     <button onclick="loadMag7('AMZN')" class="mag7-btn" id="mag7-AMZN">AMZN</button>
   </div>
-<div class="tradingview-widget-container" style="position:relative;">
+<div class="tradingview-widget-container" style="position:relative;overflow:hidden;">
     <div id="tv_mag7" style="height:600px; width:100%; min-height:600px;"></div>
-    <div class="card-overlay" onclick="const active=document.querySelector('.mag7-btn.active'); if(active) openChart(active.id.replace('mag7-',''));" style="position:absolute;inset:0;z-index:10;cursor:pointer;"></div>
+    <div class="card-overlay" onclick="const active=document.querySelector('.mag7-btn.active'); if(active) openChart(active.id.replace('mag7-',''));" style="position:absolute;inset:0;z-index:1;cursor:pointer;"></div>
 </div>
 </div>
 
