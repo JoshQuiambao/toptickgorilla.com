@@ -2246,35 +2246,6 @@ fetchFearGreed();
       container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Headlines unavailable</div>';
     }
   }
-      let items = [];
-      results.forEach((result, i) => {
-        if(result.status === 'fulfilled' && result.value.items) {
-          const source = sources[i].name;
-          result.value.items.forEach(item => {
-            items.push({ title: item.title, link: item.link, source, pubDate: item.pubDate });
-          });
-        }
-      });
-      items.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
-      if(items.length === 0) {
-        container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">No headlines available</div>';
-        return;
-      }
-      container.innerHTML = items.slice(0,15).map(item => {
-        const time = new Date(item.pubDate).toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'});
-        return `<a href="${item.link}" target="_blank" style="text-decoration:none; display:block; padding:10px; border-bottom:1px solid var(--border); transition:background 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.05)'" onmouseout="this.style.background='transparent'">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-family:'Space Mono',monospace; font-size:9px; color:var(--gold); letter-spacing:0.15em;">${item.source}</span>
-            <span style="font-family:'Space Mono',monospace; font-size:9px; color:var(--muted);">${time} EST</span>
-          </div>
-          <div style="font-family:'Space Mono',monospace; font-size:11px; color:var(--white); line-height:1.5;">${item.title}</div>
-        </a>`;
-      }).join('');
-    } catch(err) {
-      console.log('News fetch failed:', err);
-      container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Headlines unavailable</div>';
-    }
-  }
   fetchNews();
   setInterval(fetchNews, 300000);
  fetchEarnings();
