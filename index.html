@@ -2220,12 +2220,32 @@ const FINNHUB_KEY = 'd74colpr01qno4q19e5gd74colpr01qno4q19e60';
     }
   }
 fetchFearGreed();
-  async function fetchNews() {
- const sources = [
-      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC,^DJI&region=US&lang=en-US&count=5', name: 'Yahoo Finance' },
-      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.marketwatch.com/marketwatch/topstories&count=5', name: 'MarketWatch' },
-      { url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.investing.com/rss/news.rss&count=5', name: 'Investing.com' },
-    ];
+async function fetchNews() {
+    const container = document.getElementById('newsFeed');
+    if(!container) return;
+    try {
+      const url = `https://finnhub.io/api/v1/news?category=general&token=${FINNHUB_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if(!data || data.length === 0) {
+        container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">No headlines available</div>';
+        return;
+      }
+      container.innerHTML = data.slice(0,15).map(item => {
+        const time = new Date(item.datetime * 1000).toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'});
+        return `<a href="${item.url}" target="_blank" style="text-decoration:none; display:block; padding:10px; border-bottom:1px solid var(--border); transition:background 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.05)'" onmouseout="this.style.background='transparent'">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-family:'Space Mono',monospace; font-size:9px; color:var(--gold); letter-spacing:0.15em;">${item.source}</span>
+            <span style="font-family:'Space Mono',monospace; font-size:9px; color:var(--muted);">${time} EST</span>
+          </div>
+          <div style="font-family:'Space Mono',monospace; font-size:11px; color:var(--white); line-height:1.5;">${item.headline}</div>
+        </a>`;
+      }).join('');
+    } catch(err) {
+      console.log('News fetch failed:', err);
+      container.innerHTML = '<div style="font-family:\'Space Mono\',monospace; font-size:10px; color:var(--muted);">Headlines unavailable</div>';
+    }
+  }
     const container = document.getElementById('newsFeed');
     if(!container) return;
     try {
