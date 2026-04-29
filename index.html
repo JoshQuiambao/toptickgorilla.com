@@ -255,16 +255,20 @@
     animation: fadeUp 0.8s ease 0.2s forwards;
   }
 
-  .hero-name {
+.hero-name {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: clamp(28px, 4.5vw, 60px);
     line-height: 0.95;
-    color: var(--white);
     letter-spacing: -3px;
     margin-bottom: 8px;
     opacity: 0;
-    animation: fadeUp 0.8s ease 0.4s forwards;
+    animation: fadeUp 0.8s ease 0.4s forwards, shimmer 4s linear infinite;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 25%, #FFFFFF 50%, var(--gold-light) 75%, var(--gold) 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .hero-name .gold { color: var(--gold); }
@@ -1010,6 +1014,11 @@
   transform: translate(-1px, -1px);
 }
 
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+  
 </style>
 <script>
 
