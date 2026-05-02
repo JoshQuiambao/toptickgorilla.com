@@ -1161,7 +1161,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
 }
 
   // Animated candles in nav
-(function() {
+window.addEventListener('load', function() {
   const canvas = document.getElementById('candleAnim');
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
@@ -1199,8 +1199,8 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
     requestAnimationFrame(draw);
   }
 
-  draw();
-})();
+draw();
+});
 </script>
 <style>
   .earnings-item { padding:10px 0; border-bottom:1px solid var(--border); }
