@@ -1161,18 +1161,16 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
 }
 
   // Animated candles in nav
-window.addEventListener('load', function() {
+document.addEventListener('DOMContentLoaded', function() {
   const canvas = document.getElementById('candleAnim');
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
-  const gold = '#C9A84C';
-  const green = '#22C55E';
 
-  const candles = [
-    { x: 4,  baseH: 18, h: 8,  wick: 4, color: gold },
-    { x: 12, baseH: 12, h: 12, wick: 5, color: gold },
-    { x: 20, baseH: 6,  h: 14, wick: 6, color: green },
-    { x: 28, baseH: 2,  h: 18, wick: 7, color: green },
+const candles = [
+    { x: 4,  baseH: 18, h: 8,  wick: 4, color: '#F97316' },
+    { x: 12, baseH: 12, h: 12, wick: 5, color: '#A855F7' },
+    { x: 20, baseH: 6,  h: 14, wick: 6, color: '#A855F7' },
+    { x: 28, baseH: 2,  h: 18, wick: 7, color: '#A855F7' },
   ];
 
   let tick = 0;
