@@ -1010,48 +1010,6 @@
   transform: translate(-1px, -1px);
 }
 
-
-(function() {
-  const canvas = document.getElementById('candleAnim');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const gold = '#C9A84C';
-  const green = '#22C55E';
-
-  const candles = [
-    { x: 4,  baseH: 18, h: 8,  wick: 4, color: gold },
-    { x: 12, baseH: 12, h: 12, wick: 5, color: gold },
-    { x: 20, baseH: 6,  h: 14, wick: 6, color: green },
-    { x: 28, baseH: 2,  h: 18, wick: 7, color: green },
-  ];
-
-  let tick = 0;
-
-  function draw() {
-    ctx.clearRect(0, 0, 32, 28);
-    candles.forEach((c, i) => {
-      const bounce = Math.sin(tick * 0.05 + i * 0.8) * 1.5;
-      const top = c.baseH + bounce;
-
-      // Wick
-      ctx.strokeStyle = c.color;
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(c.x, top - c.wick);
-      ctx.lineTo(c.x, top + c.h + 2);
-      ctx.stroke();
-
-      // Body
-      ctx.fillStyle = c.color;
-      ctx.fillRect(c.x - 2, top, 4, c.h);
-    });
-    tick++;
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-})();
-
 </style>
 <script>
 
@@ -1202,6 +1160,47 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   }
 }
 
+  // Animated candles in nav
+(function() {
+  const canvas = document.getElementById('candleAnim');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const gold = '#C9A84C';
+  const green = '#22C55E';
+
+  const candles = [
+    { x: 4,  baseH: 18, h: 8,  wick: 4, color: gold },
+    { x: 12, baseH: 12, h: 12, wick: 5, color: gold },
+    { x: 20, baseH: 6,  h: 14, wick: 6, color: green },
+    { x: 28, baseH: 2,  h: 18, wick: 7, color: green },
+  ];
+
+  let tick = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, 32, 28);
+    candles.forEach((c, i) => {
+      const bounce = Math.sin(tick * 0.05 + i * 0.8) * 1.5;
+      const top = c.baseH + bounce;
+
+      // Wick
+      ctx.strokeStyle = c.color;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(c.x, top - c.wick);
+      ctx.lineTo(c.x, top + c.h + 2);
+      ctx.stroke();
+
+      // Body
+      ctx.fillStyle = c.color;
+      ctx.fillRect(c.x - 2, top, 4, c.h);
+    });
+    tick++;
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
 </script>
 <style>
   .earnings-item { padding:10px 0; border-bottom:1px solid var(--border); }
@@ -1217,6 +1216,7 @@ document.getElementById('chartTitle').innerHTML = '<span>' + info.name + '</span
   .mag7-btn { font-family:'Space Mono',monospace; font-size:10px; padding:6px 12px; background:var(--panel); border:1px solid var(--border); color:var(--muted); letter-spacing:0.1em; cursor:pointer; transition:all 0.2s; border-radius:0; -webkit-appearance:none; appearance:none; }
   .mag7-btn:hover { border-color:var(--gold); color:var(--gold); }
   .mag7-btn.active { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.08); }
+
 </style>
 </head>
 <body>
